@@ -1,0 +1,1 @@
+job portal management built on top of django and bootstrap

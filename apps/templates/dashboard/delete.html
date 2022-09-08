@@ -1,0 +1,25 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load hitcount_tags %}
+{% block dashboard_content %}
+<div class="card">
+    <div class="card-body">
+        <div class="main text-center"> 
+            <!-- Create a Form -->
+            <div class="text-center my-5">
+                <form method="POST"> 
+                    <!-- Security token by Django -->
+                    {% csrf_token %} 
+                    <h3>Are you sure, want to delete the job ?</h3> 
+                    <h4 class="text-warning my-5">Once confirmed, cannot be undone !!!</h4> 
+                    <input type="submit" class="btn btn-sm btn-danger me-5" value="Confirm" /> 
+                    <a href="{% url 'dashboard:job_list' %}" class="btn btn-primary btn-sm ms-5">Not now </a> 
+                </form> 
+            </div>
+        </div> 
+    </div>
+</div>
+{% endblock dashboard_content %}
+
+
+
+

@@ -1,0 +1,254 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load hitcount_tags humanize %}
+{% block dashboard_content %}
+{% block dashboard_css %}
+<style>
+.fabutton {
+    background: none;
+    padding: 0px;
+    border: none;
+}
+</style>
+{% endblock dashboard_css %}
+<form action=".">
+    <div class="d-flex flex-row justify-content">
+        <div class="pb-2"><input type="text" name="name" class="form-control" required></div>
+        <div class="pb-2"><input type="submit" value="Search" class="btn btn-primary"></div>
+    </div>
+</form>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='job_title'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                      
+                    </form>
+                </div>
+                <div>
+                    Job title
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-job_title'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                      
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th scope="col">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='skills'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                      
+                    </form>
+                </div>
+                <div>
+                    Skills
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-skills'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                      
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th scope="col">
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <form action="">
+                    <input type='hidden' name='sorting_value' value='state'>
+                    <button type="submit" class="fabutton">
+                        <i class="fa-sharp fa-solid fa-up-long"></i>
+                    </button>
+                </form>
+            </div>
+            <div>
+                State
+            </div>
+            <div>
+                <form action=".">
+                    <input type='hidden' name='sorting_value' value='-state'>
+                    <button type="submit" class="fabutton">
+                        <i class="fa-sharp fa-solid fa-down-long"></i>
+                    </button>
+                </form>
+            </div>
+        </th>
+        <th scope="col">
+            </div>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='city'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    city
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-city'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th scope="col">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='uploaded_at'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    Uploaded at
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-uploaded_at'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th scope="col">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='published_at'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    Published at
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-published_at'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th scope="col">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='publish'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    Publish
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-publish'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th scope="col">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='job_applied_count'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    applicants
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-job_applied_count'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th scope="col" class="text-center">
+            Views
+        </th>
+        <th scope="col" class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for job in job %}
+        <tr>
+        <th scope="row">{{ page_obj.start_index|add:forloop.counter0 }}</th>
+        <td>{{job.job_title|truncatechars:20}}</td>
+        <td>{{job.skills|truncatechars:20}}</td>
+        <td>{{job.state|truncatechars:20}}</td>
+        <td>{{job.city|truncatechars:20}}</td>
+        <td>{{job.uploaded_at|naturaltime|truncatechars:20}}</td>
+        <td>{{job.published_at|naturaltime|truncatechars:20}}</td>
+        <td>
+            <div class="form-check form-switch">
+                {% if job.publish %}
+                <a href="{% url 'dashboard:unpublish_job' job.slug %}"><i class="fa-solid fa-toggle-on"></i></a>
+                {% else %}
+                <a href="{% url 'dashboard:publish_job' job.slug %}"><i class="fa-solid fa-toggle-off text-secondary"></i></i></a>
+                {% endif %}
+            </div>
+        </td>
+        <td><i class="fa-sharp fa-solid fa-file-import text-primary me-2"></i>{{job.job_applied_count}}</td>
+        <td><i class="fa-regular fa-eye text-info me-2"></i>{% get_hit_count for job %}</td>
+        <td>
+            <table >
+                <tr>
+                    <td><a href="{{job.get_absolute_url}}"><i class="fa-brands fa-readme mx-2"></i></a></td>
+                    <td><a href="{{job.get_absolute_update_url}}"><i class="fa-solid fa-pen mx-2 text-info"></i></a></td>
+                    <td><a href="{{job.get_absolute_delete_url}}"><i class="fa-solid fa-trash mx-2 text-danger"></i></a></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% include 'common/pagination.html' %}
+{% endblock dashboard_content %}
