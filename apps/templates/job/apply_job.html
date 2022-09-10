@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card text-left ">
+                <div class="card-body">
+                    <h3 class="text-center">Apply job</h3>
+                    <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">your name</label>
+                            <input type="text" name="name" id="id_name" value="{{applicant.user.name}}" class="form-control"value="{{job.job_title}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_mobile" class="form-label">your mobile no</label>
+                            <input type="text" name="mobile" id="id_mobile" class="form-control" value="{{applicant.user.mobile}}"required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_job_title" class="form-label">your notice period</label>
+                            <input type="text" name="notice_period" id="id_notice_period" class="form-control"value="{{applicant.notice_period}}" required>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="id_resume" class="form-label">Upload your resume</label>
+                            <input class="form-control" accept="application/pdf" type="file" name="resume" value="{{applicant.resume.url}}" id="id_resume" required>
+                        </div>
+                        <input type="submit"class="btn btn-primary w-100">
+                    </form>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

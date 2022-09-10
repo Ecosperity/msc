@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField, SmallIntegerField
+from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -23,10 +23,11 @@ class User(AbstractUser):
         (EMPLOYEE, 'Employee'),
         (APPLICANT_USER, 'Applicant User')
     )
-    name = CharField(_("Name of User"), blank=True, max_length=255)
+    name = models.CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
-    role = SmallIntegerField(choices=ROLE_CHOICES, default=APPLICANT_USER)
+    mobile = models.CharField(max_length=15, blank=True, null=True)
+    role = models.SmallIntegerField(choices=ROLE_CHOICES, default=APPLICANT_USER)
 
 
     def get_absolute_url(self):

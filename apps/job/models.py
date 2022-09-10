@@ -106,6 +106,7 @@ class Job(models.Model):
     skills = models.CharField(max_length=50)
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     publish = models.BooleanField(default=False)
+    is_applied = models.BooleanField(default=False)
     # dates
     uploaded_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(null=True, blank=True)
@@ -137,4 +138,14 @@ class Job(models.Model):
 
     def get_absolute_delete_url(self):
             return reverse("dashboard:delete_job", kwargs={"slug": self.slug}) 
+
+class JobApplicant(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="applicant_user")
+    job = models.ManyToManyField(Job)
+    is_applied = models.BooleanField(default=False)
+    notice_period = models.CharField(max_length=20)
+    resume = models.FileField(upload_to="resumes/%Y/%m/%d/")
+
+    def __str__(self):
+        return f'Applicantt ==> {self.user}'
 
