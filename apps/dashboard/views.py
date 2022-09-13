@@ -30,7 +30,7 @@ def create_job(request):
             if publish:
                 form.published_at=timezone.now()
             form.save()
-            messages.success(request, "job uploaded successfully")
+            messages.success(request, "Job uploaded successfully")
             return redirect(".")
         else:
             messages.warning(request, "No valid data")
@@ -63,23 +63,42 @@ def job_detail(request, slug):
 @allow_access_to([User.ADMIN, User.MANAGER])
 def update_job(request, slug):
     job = get_object_or_404(Job, slug=slug)
+    # if request.method == "POST":
+    #     data=request.POST
+    #     job.job_title=data['job_title']
+    #     job.job_description=data['job_description']
+    #     job.skills=data['skills']
+    #     job.experience=data['experience']
+    #     job.no_of_openings=data['no_of_openings']
+    #     job.state=data['state']
+    #     job.city=data['city']
+    #     if data.get('publish', None)=='on':
+    #         job.publish=True
+    #     else:
+    #         job.publish=False
+    #     job.save()
+    #     messages.success(request, "job updated successfully")
+    #     return redirect(job.get_absolute_update_url())
+    # return render(request, 'dashboard/update_job.html', {'job': job})
     if request.method == "POST":
-        data=request.POST
-        job.job_title=data['job_title']
-        job.job_description=data['job_description']
-        job.skills=data['skills']
-        job.experience=data['experience']
-        job.no_of_openings=data['no_of_openings']
-        job.state=data['state']
-        job.city=data['city']
-        if data.get('publish', None)=='on':
-            job.publish=True
+        form = CreateJobForm(request.POST, instance=job)
+        print(form.data)
+        if form.is_valid():
+            publish = form.cleaned_data.get('publish')
+            user=request.user
+            form=form.save(commit=False)
+            form.uploaded_by=user
+            form.uploaded_at=timezone.now()
+            if publish:
+                form.published_at=timezone.now()
+            form.save()
+            messages.success(request, "Job updated successfully")
+            return redirect(job.get_absolute_update_url())
         else:
-            job.publish=False
-        job.save()
-        messages.success(request, "job updated successfully")
-        return redirect(job.get_absolute_update_url())
-    return render(request, 'dashboard/update_job.html', {'job': job})
+            messages.warning(request, "No valid data")
+    else:
+        form = CreateJobForm(instance=job)
+    return render(request, 'dashboard/update_job.html', {'form': form})
 
 class DeleteJob(DeleteView):
     model = Job
@@ -93,7 +112,7 @@ def publish_job(request, slug):
     job.publish=True
     job.published_at=timezone.now()
     job.save()
-    messages.success(request, "published successfully")
+    messages.success(request, "Published successfully")
     return redirect(request.META.get('HTTP_REFERER'))
 
 @allow_access_to([User.ADMIN, User.MANAGER])
@@ -102,5 +121,5 @@ def unpublish_job(request, slug):
     job.publish=False
     job.published_at=None
     job.save()
-    messages.success(request, "unpublished successfully")
+    messages.success(request, "Unpublished successfully")
     return redirect(request.META.get('HTTP_REFERER'))

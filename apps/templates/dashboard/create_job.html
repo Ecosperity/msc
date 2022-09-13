@@ -10,97 +10,24 @@
 {% block dashboard_content %}
 <h3 class="text-center">Upload job</h3>
 <div class="col-md-8 offset-md-2 mb-4">
-    <div class="card px-4">
-        <div class="title mt-4">
-            <div class="text">
-            <form action="{% url 'dashboard:create_job' %}" method="post"id="job_form">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="id_job_title" class="form-label">Job title</label>
-                    {{ form.job_title }}
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Job Description</label>
-                <textarea name="job_description" class="form-control" id="id_job_description" cols="30" rows="10"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Skills</label>
-                    <!-- {{ form.skills }} -->
-                    <input type="text" name="skills" id="" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Experience</label>
-                    {{ form.experience }}
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">No of openings</label>
-                    {{ form.no_of_openings }}
-                </div>
-
-                <div class="form-group">
-                    <label for="id_state">State</label>
-                    <select class="form-control mt-2" name="state" id="id_state"onchange="showfield(undefined)">
-                        <option value="SelectState">Select State</option>
-                        <option value="Andra Pradesh">Andra Pradesh</option>
-                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                        <option value="Assam">Assam</option>
-                        <option value="Bihar">Bihar</option>
-                        <option value="Chhattisgarh">Chhattisgarh</option>
-                        <option value="Goa">Goa</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                        <option value="Jharkhand">Jharkhand</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Kerala">Kerala</option>
-                        <option value="Madya Pradesh">Madya Pradesh</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Manipur">Manipur</option>
-                        <option value="Meghalaya">Meghalaya</option>
-                        <option value="Mizoram">Mizoram</option>
-                        <option value="Nagaland">Nagaland</option>
-                        <option value="Orissa">Orissa</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Rajasthan">Rajasthan</option>
-                        <option value="Sikkim">Sikkim</option>
-                        <option value="Tamil Nadu">Tamil Nadu</option>
-                        <option value="Telangana">Telangana</option>
-                        <option value="Tripura">Tripura</option>
-                        <option value="Uttaranchal">Uttaranchal</option>
-                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                        <option value="West Bengal">West Bengal</option>
-                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
-                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                        <option value="Chandigarh">Chandigarh</option>
-                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                        <option value="Daman and Diu">Daman and Diu</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Lakshadeep">Lakshadeep</option>
-                        <option value="Puducherry">Puducherry</option>
-                    </select>
-                </div>
-                <div class="form-group mt-3" id="togle_city">
-                    <label for="id_city">City</label>
-                    <select class="form-control mt-2"name="city" id="id_city" onchange="showfield(this.options[this.selectedIndex].value)">
-                        <option value="">-- select one -- </option>
-                    </select>
-                </div>
-
-                <div class="mt-3" id="div1"></div>
-
-                <div class="my-3">
-                    <label for="exampleFormControlInput1" class="form-label">Publish</label>
-                    {{ form.publish }}
-                </div>
-                <input type="submit" class="btn btn-primary w-100" style="margin-bottom:80px;">
-            </form>
-            </div>
-        </div>
-    </div>
+    
+    <form action="." method="post" id="job_form">
+        {% csrf_token %}
+        {{form.as_p|safe}}{{form.media}}
+        <input type="submit" class="btn btn-primary w-100">
+    </form>
 </div>
 {% endblock dashboard_content %}
 {% block dashboard_inline_javascript %}
+<!-- <script src="https://cdn.tiny.cloud/1/4mnqx60ufc926moh608ov9fu4ufdzjcqcdo59ph5th6llnin/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+      selector: '#id_job_description',
+      menubar: false,
+    plugins: "link image code",
+    toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | code'
+    });
+</script> -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{% static 'js/dashboard/state_city.js' %}"></script>

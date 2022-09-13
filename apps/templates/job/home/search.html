@@ -1,0 +1,25 @@
+{% block css %}
+<style>
+  #id_search{
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+  }
+  #id_submit{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+</style>
+{% endblock %}
+<form action="">
+  <div class="d-flex">
+    <div class="mb-3 w-100">
+      <input type="text" class="form-control" id="id_search" placeholder="Type your skill"autocomplete="off">
+    </div>
+    <div class="mb-3 w-100">
+      <input type="text" class="form-control" id="id_location" placeholder="Type location, Locality"autocomplete="off">
+    </div>
+    <div class="mb-3 w-25">
+      <input type="submit" class="btn btn-secondary w-100" id="id_submit">
+    </div>
+  </div>
+</form>

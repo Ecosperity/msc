@@ -3,9 +3,8 @@
 .<div class="card text-left">
   <div class="card-body">
     <h4 class="card-title">{{job.job_title}}</h4>
-    <p class="card-text">{{job.job_description}}</p>
-    <p>{% if 1 in job.jobapplicant_set.all %}ssdds{% endif %}</p>
+    <p class="card-text">{{job.job_description|safe}}{{job.media}}</p>
   </div>
-  <a href="{% url 'job:apply_job' job.slug %}"class="btn btn-primary w-100 {% if check_applied_condition %}disabled{% endif %}">{% if job.check_applied_condition%}you have applied for this job{% else %}Apply{% endif %}</a>
+  <a href="{% url 'job:apply_job' job.slug %}"class="btn btn-primary w-100 {% if check_applied_condition %}disabled{% endif %}">{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</a>
 </div>
 {% endblock content %}

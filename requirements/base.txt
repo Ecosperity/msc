@@ -16,3 +16,5 @@ crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstra
 django-compressor==4.0  # https://github.com/django-compressor/django-compressor
 
 django-hitcount==1.3.5 # https://django-hitcount.readthedocs.io/en/latest/
+django-tinymce = 3.5.0
+django-cleanup = 6.0.0

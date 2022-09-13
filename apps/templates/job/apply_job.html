@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<style>
+.error{
+    color:red;
+}
+</style>
+{% endblock %}
 {% block content %}
 <div class="container mt-4">
     <div class="row">
@@ -6,26 +14,26 @@
             <div class="card text-left ">
                 <div class="card-body">
                     <h3 class="text-center">Apply job</h3>
-                    <form action="." method="post" enctype="multipart/form-data">
+                    <form action="." method="post" id="id_apply_job" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="id_name" class="form-label">your name</label>
-                            <input type="text" name="name" id="id_name" value="{{applicant.user.name}}" class="form-control"value="{{job.job_title}}" required>
+                            <label for="id_name" class="form-label">Your name</label>
+                            {{user_form.name}}
                         </div>
 
                         <div class="mb-3">
-                            <label for="id_mobile" class="form-label">your mobile no</label>
-                            <input type="text" name="mobile" id="id_mobile" class="form-control" value="{{applicant.user.mobile}}"required>
+                            <label for="id_mobile" class="form-label">Your mobile no</label>
+                            {{user_form.mobile}}
                         </div>
 
                         <div class="mb-3">
-                            <label for="id_job_title" class="form-label">your notice period</label>
-                            <input type="text" name="notice_period" id="id_notice_period" class="form-control"value="{{applicant.notice_period}}" required>
+                            <label for="id_job_title" class="form-label">Your notice period</label>
+                            {{applicant_form.notice_period}}
                         </div>
     
                         <div class="mb-3">
-                            <label for="id_resume" class="form-label">Upload your resume</label>
-                            <input class="form-control" accept="application/pdf" type="file" name="resume" value="{{applicant.resume.url}}" id="id_resume" required>
+                            <label for="id_resume" class="form-label">Upload your resume</label><br>
+                            {{applicant_form.resume}}
                         </div>
                         <input type="submit"class="btn btn-primary w-100">
                     </form>
@@ -35,3 +43,8 @@
     </div>
 </div>
 {% endblock content %}
+{% block inline_javascript %}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/dashboard/validation.js' %}"></script>
+{% endblock inline_javascript %}

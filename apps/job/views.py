@@ -1,14 +1,34 @@
+from urllib import response
 from django.contrib import messages
 from hitcount.views import HitCountDetailView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+from django.http import JsonResponse
 from django.views.generic import ListView
+from apps.job.forms import JobApplicantForm, JobApplicantUserForm
 from job.models import Job, JobApplicant
 User = get_user_model()
 
+@csrf_exempt
+def search(request):
+    if request.is_ajax and request.method == "GET":
+        if 'term' in request.GET:
+            term = request.GET.get("term")
+            queryset = Job.objects.filter(Q(job_title__icontains=term)|
+                                        Q(skills__icontains=term)|
+                                        Q(role__icontains=term)|
+                                        Q(country__icontains=term)|
+                                        Q(state__icontains=term)|
+                                        Q(city__icontains=term))
+            list_queryset = [query.job_title for query in queryset]
+            return JsonResponse(list_queryset, safe=False)
+    return redirect("job:job_list")
+    
 class JobList(ListView):
     model = Job
     template_name = 'job/job_list.html'
@@ -50,37 +70,47 @@ def apply_job(request, slug):
         applicant = JobApplicant.objects.get(user=user)
     except:
         applicant=None
+
     if request.method=="POST":
+        user_form = JobApplicantUserForm(request.POST, request.FILES, instance=user)
+        applicant_form = JobApplicantForm(request.POST, request.FILES, instance=applicant)
+        if user_form.is_valid() and applicant_form.is_valid():
+            notice_period=applicant_form.cleaned_data.get('notice_period')
+            resume=applicant_form.cleaned_data.get('resume')
+            name=user_form.cleaned_data.get('name')
+            mobile=user_form.cleaned_data.get('mobile')
+            
+            user.name=name
+            user.mobile=mobile
+            user.save()
+            try:
+                applicant = JobApplicant.objects.get(user=user)
+                applicant.notice_period=notice_period
+                applicant.resume=resume
+            except:
+                applicant = JobApplicant(
+                            user=user,
+                            notice_period=notice_period,
+                            is_applied=1,
+                            resume=resume,
+                        )
+            applicant.save()
+            applicant.job.add(job)
+            job.job_applied_count=job.job_applied_count + 1 if job.job_applied_count else 1
+            job.save()
+            applicant.save()
 
-        notice_period=request.POST.get('notice_period')
-        resume=request.FILES['resume']
-        name=request.POST['name']
-        mobile=request.POST['mobile'
-        ]
-        user.name=name
-        user.mobile=mobile
-        user.save()
-        try:
-            applicant = JobApplicant.objects.get(user=user)
-            applicant.notice_period=notice_period
-            applicant.resume=resume
-        except:
-            applicant = JobApplicant(
-                        user=user,
-                        notice_period=notice_period,
-                        is_applied=1,
-                        resume=resume,
-                    )
-        applicant.save()
-        applicant.job.add(job)
-        job.job_applied_count=job.job_applied_count + 1 if job.job_applied_count else 1
-        job.save()
-        applicant.save()
-
-        messages.success(request, "you have succesfully applied for the job")
-        return redirect("job:job_detail", slug=job.slug)
+            messages.success(request, "You have succesfully applied for the job")
+            return redirect("job:job_detail", slug=job.slug)
     context = {
         'check_applied_condition':check_applied_condition,
         'applicant':applicant
+    }
+
+    user_form = JobApplicantUserForm(instance=user)
+    applicant_form = JobApplicantForm(instance=applicant)
+    context = {
+        'user_form': user_form,
+        'applicant_form':applicant_form,
     }
     return render(request, 'job/apply_job.html', context)

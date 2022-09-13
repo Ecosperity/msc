@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
         
 urlpatterns = [
     path("", include("apps.job.urls", namespace="job")),
+    path('tinymce/', include('tinymce.urls')),
     path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     path('hitcount/', include('hitcount.urls', namespace='hitcount')),
     path(settings.ADMIN_URL, admin.site.urls),

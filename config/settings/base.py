@@ -75,6 +75,8 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "hitcount",
+    "tinymce",
+    "django_cleanup"
 ]
 
 LOCAL_APPS = [
