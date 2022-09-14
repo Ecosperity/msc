@@ -5,6 +5,67 @@
     <h4 class="card-title">{{job.job_title}}</h4>
     <p class="card-text">{{job.job_description|safe}}{{job.media}}</p>
   </div>
-  <a href="{% url 'job:apply_job' job.slug %}"class="btn btn-primary w-100 {% if check_applied_condition %}disabled{% endif %}">{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</a>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob">Apply </a>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="collapseApplyJob">
+      <div class="container mt-4">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card text-left ">
+                    <div class="card-body">
+                        <form action="{% url 'job:apply_job' job.slug %}" method="post" id="id_apply_job" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_name" class="form-label">Your name</label>
+                                {{user_form.name}}
+                            </div>
+    
+                            <div class="mb-3">
+                                <label for="id_mobile" class="form-label">Your mobile no</label>
+                                {{user_form.mobile}}
+                            </div>
+    
+                            <div class="mb-3">
+                                <label for="id_job_title" class="form-label">Your notice period</label>
+                                {{applicant_form.notice_period}}
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="id_linkedin_link" class="form-label">Your linkedin link</label><br>
+                              {{applicant_form.linkedin_link}}
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="id_qualitative_skills" class="form-label">Your qualitative skills</label><br>
+                              {{applicant_form.qualitative_skills}}
+                            </div>
+                            
+                            <div class="mb-3">
+                              <label for="id_subject" class="form-label">Subject (Please mention the Role you are applying)</label><br>
+                              {{applicant_form.subject}}
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="id_message" class="form-label">Message</label>
+                              {{applicant_form.message}}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="id_resume" class="form-label">Upload your resume</label><br>
+                                {{applicant_form.resume}}
+                            </div>
+
+                            <button type="submit"class="btn btn-primary w-100" {% if check_applied_condition %}disabled{% endif %}>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

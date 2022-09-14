@@ -42,12 +42,20 @@ class JobApplicantUserForm(forms.ModelForm):
 
 class JobApplicantForm(forms.ModelForm):
     notice_period = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    linkedin_link = forms.CharField(widget=forms.URLInput(attrs={'class': 'form-control'}))
+    qualitative_skills = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    subject = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows':3}))
     resume = forms.FileField(widget=forms.widgets.ClearableFileInput(attrs={'class': 'form-control', 'accept':'application/pdf'}))
 
     class Meta:
         model=JobApplicant
         fields = (
             'notice_period',
+            'linkedin_link',
+            'qualitative_skills',
+            'subject',
+            'message',
             'resume',
         )
 

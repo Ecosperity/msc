@@ -56,6 +56,12 @@ class JobDetail(HitCountDetailView):
         context = super().get_context_data(**kwargs)
         user=self.request.user
         context['check_applied_condition'] = 1 in [job.is_applied for job in Job.objects.get(slug=self.kwargs.get('slug')).jobapplicant_set.all().filter(user=user)]
+        try:
+            applicant = JobApplicant.objects.get(user=user)
+        except:
+            applicant=None
+        context['user_form'] = JobApplicantUserForm(instance=user)
+        context['applicant_form'] = JobApplicantForm(instance=applicant)
         return context
 job_detail = JobDetail.as_view()
 
@@ -70,7 +76,6 @@ def apply_job(request, slug):
         applicant = JobApplicant.objects.get(user=user)
     except:
         applicant=None
-
     if request.method=="POST":
         user_form = JobApplicantUserForm(request.POST, request.FILES, instance=user)
         applicant_form = JobApplicantForm(request.POST, request.FILES, instance=applicant)
@@ -79,7 +84,12 @@ def apply_job(request, slug):
             resume=applicant_form.cleaned_data.get('resume')
             name=user_form.cleaned_data.get('name')
             mobile=user_form.cleaned_data.get('mobile')
-            
+
+            linkedin_link=applicant_form.cleaned_data.get('linkedin_link')
+            qualitative_skills=applicant_form.cleaned_data.get('qualitative_skills')
+            subject=applicant_form.cleaned_data.get('subject')
+            message=applicant_form.cleaned_data.get('message')
+
             user.name=name
             user.mobile=mobile
             user.save()
@@ -87,12 +97,20 @@ def apply_job(request, slug):
                 applicant = JobApplicant.objects.get(user=user)
                 applicant.notice_period=notice_period
                 applicant.resume=resume
+                applicant.linkedin_link=linkedin_link
+                applicant.qualitative_skills=qualitative_skills
+                applicant.subject=subject
+                applicant.message=message
             except:
                 applicant = JobApplicant(
                             user=user,
                             notice_period=notice_period,
                             is_applied=1,
                             resume=resume,
+                            linkedin_link=linkedin_link,
+                            qualitative_skills=qualitative_skills,
+                            subject=subject,
+                            message=message,
                         )
             applicant.save()
             applicant.job.add(job)
@@ -102,15 +120,3 @@ def apply_job(request, slug):
 
             messages.success(request, "You have succesfully applied for the job")
             return redirect("job:job_detail", slug=job.slug)
-    context = {
-        'check_applied_condition':check_applied_condition,
-        'applicant':applicant
-    }
-
-    user_form = JobApplicantUserForm(instance=user)
-    applicant_form = JobApplicantForm(instance=applicant)
-    context = {
-        'user_form': user_form,
-        'applicant_form':applicant_form,
-    }
-    return render(request, 'job/apply_job.html', context)

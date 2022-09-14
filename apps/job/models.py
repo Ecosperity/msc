@@ -9,6 +9,13 @@ from django.db.models.functions import Cast
 from tinymce.models import HTMLField
 User=get_user_model()
 
+class Skill(models.Model):
+    name = models.CharField(max_length=50)
+    added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
 class Job(models.Model):
     EMPLOYEMENT_TYPE_FULL_TIME = 'Full time'
     EMPLOYEMENT_TYPE_PART_TIME = 'Part time'
@@ -35,12 +42,13 @@ class Job(models.Model):
     )
     slug = models.SlugField(max_length=100, blank=True, null=True)
     job_title = models.CharField(max_length=100)
-    job_description = HTMLField()
+    role = models.CharField(max_length=100, blank=True)
+    job_description = HTMLField()   
     skills = models.CharField(max_length=100)
     experience = models.CharField(max_length=50)
-    role = models.CharField(max_length=100, blank=True)
-    role_category = models.CharField(max_length=100)
-    Keyskills = models.CharField(max_length=100)
+    # role_category = models.CharField(max_length=100)
+    functional_area = models.CharField(max_length=100)
+    # Keyskills = models.CharField(max_length=100)
     industry = models.CharField(max_length=100)
     no_of_openings = models.PositiveSmallIntegerField()
     salary = models.CharField(max_length=50, blank=True)
@@ -82,6 +90,9 @@ class Job(models.Model):
     
     def get_absolute_url(self):
         return reverse("dashboard:job_detail", kwargs={"slug": self.slug}) 
+    
+    def get_applicant_absolute_url(self):
+        return reverse("job:job_detail", kwargs={"slug": self.slug}) 
 
     def get_absolute_update_url(self):
         return reverse("dashboard:update_job", kwargs={"slug": self.slug}) 
@@ -94,7 +105,11 @@ class JobApplicant(models.Model):
     job = models.ManyToManyField(Job)
     is_applied = models.BooleanField(default=False)
     notice_period = models.CharField(max_length=20)
+    linkedin_link = models.URLField(max_length=100)
+    qualitative_skills = models.CharField(max_length=100)
     resume = models.FileField(upload_to="resumes/%Y/%m/%d/")
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
 
     def __str__(self):
         return f'Applicantt ==> {self.user}'
