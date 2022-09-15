@@ -5,18 +5,19 @@ from job.models import Job, JobApplicant, User
 
 class CreateJobForm(forms.ModelForm):
     job_title = forms.CharField(widget=forms.TextInput( attrs={'class': 'form-control'}))
+    role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     job_description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
-    skills = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    skillset_required = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    experience = forms.CharField(widget=forms.TextInput( attrs={'class': 'form-control'}))
     no_of_openings = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     country = forms.CharField(widget=forms.Select(choices=Job.COUNTRY_CHOICES, attrs={'class': 'form-control'}))
-    experience = forms.CharField(widget=forms.TextInput( attrs={'class': 'form-control'}))
+    place = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     salary = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    state = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    city = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    role_category = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    Keyskills = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    functional_area = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     industry = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # minimum = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Type minimum salary'}))
+    # maximum = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Type maximum salary'}))
+    
     class Meta:
         model = Job
         fields = "__all__"
@@ -62,4 +63,4 @@ class JobApplicantForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['resume'].widget.initial_text = "previously uploaded resume"
-        self.fields['resume'].widget.input_text = "update your resume"
+        self.fields['resume'].widget.input_text = "update your resume(pdf format)"

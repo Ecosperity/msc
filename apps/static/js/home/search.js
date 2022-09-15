@@ -10,3 +10,10 @@ $( function() {
     source: '/search/'
   });
 } );
+
+$( function() {
+  $("input").keypress(function(){});
+  $( ".m-input" ).autocomplete({
+    source: '/search/'
+  });
+} );

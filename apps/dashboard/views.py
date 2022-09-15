@@ -19,10 +19,8 @@ def dashboard(request):
 def create_job(request):
     if request.method == "POST":
         form = CreateJobForm(request.POST)
-        print(form.data)
         if form.is_valid():
             publish = form.cleaned_data.get('publish')
-            print(form.cleaned_data)
             user=request.user
             form=form.save(commit=False)
             form.uploaded_by=user

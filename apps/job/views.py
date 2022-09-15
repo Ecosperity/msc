@@ -20,12 +20,12 @@ def search(request):
         if 'term' in request.GET:
             term = request.GET.get("term")
             queryset = Job.objects.filter(Q(job_title__icontains=term)|
-                                        Q(skills__icontains=term)|
+                                        Q(skillset_required__icontains=term)|
                                         Q(role__icontains=term)|
-                                        Q(country__icontains=term)|
-                                        Q(state__icontains=term)|
-                                        Q(city__icontains=term))
+                                        Q(country__icontains=term)
+                                        )
             list_queryset = [query.job_title for query in queryset]
+            print(list_queryset)
             return JsonResponse(list_queryset, safe=False)
     return redirect("job:job_list")
     

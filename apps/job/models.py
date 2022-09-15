@@ -40,25 +40,28 @@ class Job(models.Model):
         (SWITZERLAND, SWITZERLAND),
         (USA, USA),
     )
+
     slug = models.SlugField(max_length=100, blank=True, null=True)
     job_title = models.CharField(max_length=100)
     role = models.CharField(max_length=100, blank=True)
     job_description = HTMLField()   
-    skills = models.CharField(max_length=100)
+    skillset_required = models.CharField(max_length=100)
     experience = models.CharField(max_length=50)
+    salary = models.CharField(max_length=50, blank=True)
+    no_of_openings = models.PositiveSmallIntegerField()
     # role_category = models.CharField(max_length=100)
+    industry = models.CharField(max_length=100)
     functional_area = models.CharField(max_length=100)
     # Keyskills = models.CharField(max_length=100)
-    industry = models.CharField(max_length=100)
-    no_of_openings = models.PositiveSmallIntegerField()
-    salary = models.CharField(max_length=50, blank=True)
     employement_type = models.CharField(max_length=50, 
                                         choices=EMPLOYEMENT_TYPE_CHOICES, 
                                         default=EMPLOYEMENT_TYPE_FULL_TIME
                                         )
     country = models.CharField(max_length=50, choices=COUNTRY_CHOICES)
-    state = models.CharField(max_length=50, null=True, blank=True)
-    city = models.CharField(max_length=50, blank=True)
+    # state = models.CharField(max_length=50, null=True, blank=True)
+    place = models.CharField(max_length=50, blank=True)
+
+
 
     visit_count = models.PositiveIntegerField(default=0)
     job_applied_count = models.PositiveIntegerField(default=0)
