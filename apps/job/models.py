@@ -45,7 +45,7 @@ class Job(models.Model):
     job_title = models.CharField(max_length=100)
     role = models.CharField(max_length=100, blank=True)
     job_description = HTMLField()   
-    skillset_required = models.CharField(max_length=100)
+    skillset_required = models.ForeignKey(Skill, on_delete=models.CASCADE)
     experience = models.CharField(max_length=50)
     salary = models.CharField(max_length=50, blank=True)
     no_of_openings = models.PositiveSmallIntegerField()
