@@ -7,7 +7,6 @@ class CreateJobForm(forms.ModelForm):
     job_title = forms.CharField(widget=forms.TextInput( attrs={'class': 'form-control'}))
     role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     job_description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
-    skillset_required = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     experience = forms.CharField(widget=forms.TextInput( attrs={'class': 'form-control'}))
     no_of_openings = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     country = forms.CharField(widget=forms.Select(choices=Job.COUNTRY_CHOICES, attrs={'class': 'form-control'}))
@@ -15,8 +14,6 @@ class CreateJobForm(forms.ModelForm):
     salary = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     functional_area = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     industry = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    # minimum = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Type minimum salary'}))
-    # maximum = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Type maximum salary'}))
     
     class Meta:
         model = Job
@@ -27,7 +24,7 @@ class CreateJobForm(forms.ModelForm):
                    'employement_type', 
                    'visit_count', 
                    'updated_at', 
-                   'job_applied_count'
+                   'job_applied_count',
                    )
 
 class JobApplicantUserForm(forms.ModelForm):

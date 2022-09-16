@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.urls import reverse_lazy
 from apps.functions import allow_access_to
-from job.models import Job
+from job.models import Job, Skill
 from job.forms import CreateJobForm
 
 User = get_user_model()
@@ -19,6 +19,7 @@ def dashboard(request):
 def create_job(request):
     if request.method == "POST":
         form = CreateJobForm(request.POST)
+        skills = request.POST.getlist("skills")
         if form.is_valid():
             publish = form.cleaned_data.get('publish')
             user=request.user
@@ -28,6 +29,9 @@ def create_job(request):
             if publish:
                 form.published_at=timezone.now()
             form.save()
+            job = Job.objects.last()
+            for skill in skills:
+                Skill.objects.create(name=skill, job=job)
             messages.success(request, "Job uploaded successfully")
             return redirect(".")
         else:
@@ -96,7 +100,7 @@ def update_job(request, slug):
             messages.warning(request, "No valid data")
     else:
         form = CreateJobForm(instance=job)
-    return render(request, 'dashboard/update_job.html', {'form': form})
+    return render(request, 'dashboard/update_job.html', {'form': form, 'job':job})
 
 class DeleteJob(DeleteView):
     model = Job

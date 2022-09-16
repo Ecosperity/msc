@@ -35,7 +35,7 @@ function search_skills()
                 if(inp.value !=''){                    
                   let fid = inp.value;
                   let wrapper1 = $('.field_wrapper1'); //Input field wrapper
-                  let fieldHTML1 = `<div><input type="text" name="field_name[]" id="${fid}" value="${inp.value}" disabled/><a href="javascript:void(0);" class="remove_button">Remove</a></div>`; //New input field html 
+                  let fieldHTML1 = `<div><input type="text" name="skills" id="${fid}" value="${inp.value}" readonly><a href="javascript:void(0);" class="remove_button">Remove</a></div>`; //New input field html 
                   $(wrapper1).prepend(fieldHTML1); //Add field html 
                   document.getElementById("id_skills1").value='';
                    $(wrapper1).on('click', '.remove_button', function(e){

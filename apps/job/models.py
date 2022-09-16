@@ -9,13 +9,6 @@ from django.db.models.functions import Cast
 from tinymce.models import HTMLField
 User=get_user_model()
 
-class Skill(models.Model):
-    name = models.CharField(max_length=50)
-    added = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
 class Job(models.Model):
     EMPLOYEMENT_TYPE_FULL_TIME = 'Full time'
     EMPLOYEMENT_TYPE_PART_TIME = 'Part time'
@@ -45,7 +38,6 @@ class Job(models.Model):
     job_title = models.CharField(max_length=100)
     role = models.CharField(max_length=100, blank=True)
     job_description = HTMLField()   
-    skillset_required = models.ForeignKey(Skill, on_delete=models.CASCADE)
     experience = models.CharField(max_length=50)
     salary = models.CharField(max_length=50, blank=True)
     no_of_openings = models.PositiveSmallIntegerField()
@@ -78,8 +70,7 @@ class Job(models.Model):
     class Meta:
         verbose_name = _('Job Post')
         verbose_name_plural = _('Job Posts')
-        ordering = ["-publish", "-published_at", Cast("visit_count", output_field=models.IntegerField()),]
-
+        
     def save(self, *args, **kwargs):
         if self.slug:
             if slugify(self.job_title) != self.slug:
@@ -103,6 +94,13 @@ class Job(models.Model):
     def get_absolute_delete_url(self):
             return reverse("dashboard:delete_job", kwargs={"slug": self.slug}) 
 
+class Skill(models.Model):
+    name = models.CharField(max_length=50)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+        
 class JobApplicant(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="applicant_user")
     job = models.ManyToManyField(Job)

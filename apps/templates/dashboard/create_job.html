@@ -16,8 +16,12 @@
         {{form.as_p|safe}}{{form.media}}
         <p>
         <div class="field_wrapper1"> </div>
-        <input type="search" class="form-control" id="id_skills1" name="id_skills1" placeholder="Enter Skill" oninput="search_skills()">
-        </p>
+       
+        <div class="mb-3">
+          <label for="id_skills1" class="form-label">Skillset required</label>
+          <input type="search" class="form-control" id="id_skills1" name="id_skills1" placeholder="Enter Skill" oninput="search_skills()">
+        </div>
+      </p>
         <button type="button" id="btnjobPreview" class="btn btn-secondary my-2" data-bs-toggle="modal" data-bs-target="#jobPrevModal">Preview</button>
         <input type="submit" class="btn btn-primary w-100">
     </form>
