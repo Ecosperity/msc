@@ -70,7 +70,7 @@ class Job(models.Model):
     class Meta:
         verbose_name = _('Job Post')
         verbose_name_plural = _('Job Posts')
-        
+
     def save(self, *args, **kwargs):
         if self.slug:
             if slugify(self.job_title) != self.slug:
