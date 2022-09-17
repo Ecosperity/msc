@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.views.generic import ListView
 from apps.job.forms import JobApplicantForm, JobApplicantUserForm
 from job.models import Job, JobApplicant
+from dashboard.models import SkillSet
 User = get_user_model()
 
 @csrf_exempt
@@ -120,3 +121,12 @@ def apply_job(request, slug):
 
             messages.success(request, "You have succesfully applied for the job")
             return redirect("job:job_detail", slug=job.slug)
+
+@csrf_exempt
+def skill_search(request):
+    if request.is_ajax and request.method == "GET":
+        if 'term' in request.GET:
+            term = request.GET.get("term")           
+            list_queryset = SkillSet.objects.filter(name__icontains=term)
+            list_queryset = [query.name for query in list_queryset]
+            return JsonResponse(list_queryset, safe=False)
