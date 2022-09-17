@@ -10,4 +10,5 @@ urlpatterns=[
     path("delete-job/<slug>/", views.delete_job, name='delete_job'),
     path("publish-job/<slug>/", views.publish_job, name='publish_job'),
     path("unpublish-job/<slug>/", views.unpublish_job, name='unpublish_job'),
+    path("applicant-list/", views.applicant_list, name='applicant_list'),
 ]

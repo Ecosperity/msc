@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.urls import reverse_lazy
 from apps.functions import allow_access_to
-from job.models import Job, Skill
+from job.models import Job, JobApplicant, Skill
 from job.forms import CreateJobForm
 
 User = get_user_model()
@@ -22,8 +22,23 @@ def create_job(request):
         skills = request.POST.getlist("skills")
         if form.is_valid():
             publish = form.cleaned_data.get('publish')
+            salary = form.cleaned_data.get('salary')
+            experience = form.cleaned_data.get('experience')
+            if not salary:
+                minimum_salary = request.POST.get('minimum_salary')
+                maximum_salary = request.POST.get('maximum_salary')
+                salary_measurement = request.POST.get('salary_measurement')
+                salary_currency = request.POST.get('salary_currency')
+                duration = request.POST.get('duration')
+                salary = f'{minimum_salary} to {maximum_salary} {salary_measurement} {salary_currency} {duration}'
+            if not experience:
+                minimum_experience_years = request.POST.get('minimum_experience_years')
+                maximum_experience_years = request.POST.get('maximum_experience_years')
+                experience = f'{minimum_experience_years} to {maximum_experience_years} Years'
             user=request.user
             form=form.save(commit=False)
+            form.salary=salary
+            form.experience=experience
             form.uploaded_by=user
             form.uploaded_at=timezone.now()
             if publish:
@@ -125,3 +140,13 @@ def unpublish_job(request, slug):
     job.save()
     messages.success(request, "Unpublished successfully")
     return redirect(request.META.get('HTTP_REFERER'))
+
+@method_decorator(allow_access_to([User.ADMIN, User.MANAGER]), name="dispatch")
+class ApplicantList(ListView):
+    model= JobApplicant
+    template_name= 'dashboard/applicant_list.html'
+    context_object_name = 'applicant_list'
+    paginate_by = 10
+    # queryset= JobApplicant.objects.all()
+
+applicant_list = ApplicantList.as_view()

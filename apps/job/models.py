@@ -37,24 +37,18 @@ class Job(models.Model):
     slug = models.SlugField(max_length=100, blank=True, null=True)
     job_title = models.CharField(max_length=100)
     role = models.CharField(max_length=100, blank=True)
-    job_description = HTMLField()   
+    job_description = HTMLField() 
     experience = models.CharField(max_length=50)
-    salary = models.CharField(max_length=50, blank=True)
+    salary = models.CharField(max_length=50, blank=True, null=True)
     no_of_openings = models.PositiveSmallIntegerField()
-    # role_category = models.CharField(max_length=100)
     industry = models.CharField(max_length=100)
     functional_area = models.CharField(max_length=100)
-    # Keyskills = models.CharField(max_length=100)
     employement_type = models.CharField(max_length=50, 
                                         choices=EMPLOYEMENT_TYPE_CHOICES, 
                                         default=EMPLOYEMENT_TYPE_FULL_TIME
                                         )
     country = models.CharField(max_length=50, choices=COUNTRY_CHOICES)
-    # state = models.CharField(max_length=50, null=True, blank=True)
     place = models.CharField(max_length=50, blank=True)
-
-
-
     visit_count = models.PositiveIntegerField(default=0)
     job_applied_count = models.PositiveIntegerField(default=0)
 
@@ -93,6 +87,7 @@ class Job(models.Model):
 
     def get_absolute_delete_url(self):
             return reverse("dashboard:delete_job", kwargs={"slug": self.slug}) 
+
 
 class Skill(models.Model):
     name = models.CharField(max_length=50)
