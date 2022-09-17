@@ -9,6 +9,16 @@
   display: none;
 }
 </style>
+<style>
+.ui-autocomplete {
+  max-height: 110px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+  padding-right: 20px;
+} 
+</style>
 {% endblock dashboard_css %}
 {% block dashboard_content %}
 <h3 class="text-center">Upload job</h3>
@@ -152,16 +162,17 @@
           <!-- <input type="text" class="form-control" id="id_place" placeholder="Place"> -->
           {{form.place}}
         </div>
-
-        {{form.publish}}
-        <p>
-        <div class="field_wrapper1"> </div>
-       
         <div class="mb-3">
-          <label for="id_skills1" class="form-label">Skillset required</label>
-          <input type="search" class="form-control" id="id_skills1" name="id_skills1" placeholder="Enter Skill" oninput="search_skills()">
+        Publish: {{form.publish}}
         </div>
-      </p>
+
+        <div class="mb-3">
+        <label for="id_skills1" class="form-label">Skillset required: </label>
+        <ul class="list-group my-1 list-group-horizontal field_wrapper1">                 
+        </ul>
+          <input type="search" class="form-control" id="id_skills1" name="id_skills1" placeholder="Enter Skill">
+        </div>
+      
         <button type="button" id="btnjobPreview" class="btn btn-secondary my-2" data-bs-toggle="modal" data-bs-target="#jobPrevModal">Preview</button>
         <input type="submit" class="btn btn-primary w-100">
     </form>
@@ -194,6 +205,8 @@
 <script src="{% static 'js/dashboard/state_city.js' %}"></script>
 <script src="{% static 'js/dashboard/validation.js' %}"></script>
 <script src="{% static 'js/dashboard/job_preview.js' %}"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="{% static 'js/dashboard/skills_add.js' %}"></script>
 <script>
   $("#id_text").click(function(){
