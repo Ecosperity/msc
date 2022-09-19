@@ -1,0 +1,21 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% block dashboard_content %}
+<div class="div container">
+  <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">added</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{skillset.name}}</th>
+          <td>{{skillset.added}}</td>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock dashboard_content %}

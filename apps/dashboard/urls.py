@@ -11,4 +11,9 @@ urlpatterns=[
     path("publish-job/<slug>/", views.publish_job, name='publish_job'),
     path("unpublish-job/<slug>/", views.unpublish_job, name='unpublish_job'),
     path("applicant-list/", views.applicant_list, name='applicant_list'),
+    path("create-skillset/", views.create_skillset, name='create_skillset'),
+    path("skillset-list/", views.skillset_list, name='skillset_list'),
+    path("skillset-detail/<int:pk>/", views.skillset_detail, name='skillset_detail'),
+    path("update-skillset/<int:pk>/", views.update_skillset, name='update_skillset'),
+    path("delete-skillset/<int:pk>/", views.delete_skillset, name='delete_skillset'),
 ]

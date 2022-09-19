@@ -1,4 +1,3 @@
-from urllib import response
 from django.contrib import messages
 from hitcount.views import HitCountDetailView
 from django.contrib.auth.decorators import login_required
@@ -11,7 +10,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.generic import ListView
 from apps.job.forms import JobApplicantForm, JobApplicantUserForm
-from job.models import Job, JobApplicant
+from job.models import Job, JobApplicant, Skill
 from dashboard.models import SkillSet
 User = get_user_model()
 
@@ -20,13 +19,13 @@ def search(request):
     if request.is_ajax and request.method == "GET":
         if 'term' in request.GET:
             term = request.GET.get("term")
-            queryset = Job.objects.filter(Q(job_title__icontains=term)|
-                                        Q(skillset_required__icontains=term)|
-                                        Q(role__icontains=term)|
-                                        Q(country__icontains=term)
+            # queryset = Job.objects.filter(Q(job_title__icontains=term)
+            #                             )
+            queryset = Skill.objects.filter(Q(name__icontains=term)
                                         )
-            list_queryset = [query.job_title for query in queryset]
-            print(list_queryset)
+            print("dsfdsffdfdfdff", term, queryset)
+            list_queryset = [query.name for query in queryset]
+            list_queryset = list(dict.fromkeys(list_queryset))
             return JsonResponse(list_queryset, safe=False)
     return redirect("job:job_list")
     

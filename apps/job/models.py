@@ -5,7 +5,6 @@ from django.utils.text import slugify
 from .utils import generate_unique_slug
 from django.urls import reverse
 from job.managers import JobManager
-from django.db.models.functions import Cast
 from tinymce.models import HTMLField
 User=get_user_model()
 

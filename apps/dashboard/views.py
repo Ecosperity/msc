@@ -5,6 +5,8 @@ from django.views.generic import ListView, DeleteView
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.urls import reverse_lazy
+from apps.dashboard.forms import AddSkillset
+from dashboard.models import SkillSet
 from apps.functions import allow_access_to
 from job.models import Job, JobApplicant, Skill
 from job.forms import CreateJobForm
@@ -99,7 +101,7 @@ def update_job(request, slug):
     # return render(request, 'dashboard/update_job.html', {'job': job})
     if request.method == "POST":
         form = CreateJobForm(request.POST, instance=job)
-        print(form.data)
+        skills = request.POST.getlist('skills')
         if form.is_valid():
             publish = form.cleaned_data.get('publish')
             user=request.user
@@ -109,6 +111,9 @@ def update_job(request, slug):
             if publish:
                 form.published_at=timezone.now()
             form.save()
+            Skill.objects.filter(job=job).delete()
+            for skill in skills:
+                Skill.objects.create(name=skill, job=job)
             messages.success(request, "Job updated successfully")
             return redirect(job.get_absolute_update_url())
         else:
@@ -148,5 +153,54 @@ class ApplicantList(ListView):
     context_object_name = 'applicant_list'
     paginate_by = 10
     # queryset= JobApplicant.objects.all()
-
 applicant_list = ApplicantList.as_view()
+
+@allow_access_to([User.ADMIN, User.MANAGER])
+def create_skillset(request):
+    if request.method == "POST":
+        form = AddSkillset(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Skillset added successfully")
+    form = AddSkillset()
+    return render(request, 'dashboard/create_skillset.html', {'form':form})
+
+@method_decorator(allow_access_to([User.ADMIN, User.MANAGER]), name="dispatch")
+class SkillsetList(ListView):
+    model = SkillSet
+    template_name = 'dashboard/skillset_list.html'
+    context_object_name = 'skillsets'
+    paginate_by = 8
+    
+    def get_queryset(self, *args, **kwargs):
+        query = self.request.GET.get('name')
+        sorting_value = self.request.GET.get('sorting_value')
+        skillsets = SkillSet.objects.skillset_lists(query, sorting_value)
+        if query is not None:
+            skillsets_length = len(skillsets)
+            messages.success(self.request, f"{skillsets_length if skillsets_length >=1  else 'No'} items found for {query}.")
+        return skillsets
+skillset_list = SkillsetList.as_view()
+
+@allow_access_to([User.ADMIN, User.MANAGER])
+def skillset_detail(request, pk):
+    skillset = SkillSet.objects.skillset_detail(pk)
+    return render(request, 'dashboard/skillset_detail.html', {'skillset':skillset})
+
+allow_access_to([User.ADMIN, User.MANAGER])
+def update_skillset(request, pk):
+    skillset = get_object_or_404(SkillSet, pk=pk)
+    form = AddSkillset(request.POST, instance=skillset)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Skillset added successfully")
+
+    form = AddSkillset(instance=skillset)
+    return render(request, 'dashboard/update_skillset.html', {'form':form})
+
+@method_decorator(allow_access_to([User.ADMIN, User.MANAGER]), name="dispatch")
+class DeleteSkillset(DeleteView):
+    model = SkillSet
+    success_url = reverse_lazy('dashboard:skillset_list')
+    template_name = "dashboard/skillset_confirm_delete.html"
+delete_skillset=DeleteSkillset.as_view()
