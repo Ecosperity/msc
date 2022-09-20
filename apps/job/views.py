@@ -7,6 +7,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from functools import reduce
+import operator
 from django.http import JsonResponse
 from django.views.generic import ListView
 from apps.job.forms import JobApplicantForm, JobApplicantUserForm
@@ -42,7 +44,8 @@ class JobList(ListView):
     def get_queryset(self, *args, **kwargs):
         skills = self.request.GET.get('skills')
         locations = self.request.GET.get('locations')
-        
+
+        jobs = Job.objects.published_job_lists(None)
         if skills or locations:
             skill_with_space = skills.split(",")
             skill_without_space = [i for i in skill_with_space if i!=" "]
@@ -51,20 +54,19 @@ class JobList(ListView):
             location_without_space = [i for i in location_with_space if i!=" "]
             
             query_list = skill_without_space + location_without_space
-            for q in query_list:
-                queryset = Job.objects.filter(
-                     Q(place__icontains=q)|
-                     Q(job_title__icontains=q)|
-                     Q(skill__name__icontains=q))
-            job = queryset.distinct()
+            job = jobs
+            query = Q(reduce(operator.and_, (Q(place__icontains=option) for option in query_list))) | \
+                    Q(reduce(operator.or_, (Q(job_title__icontains=option) for option in query_list))) | \
+                    Q(reduce(operator.or_, (Q(skill__name__icontains=option) for option in query_list)))
+            job = job.filter(query).distinct()
             if job is not None:
                 job_length = len(job)
                 messages.success(self.request, f"{job_length if job_length >=1  else 'No'} jobs found.")
             if not job:
-                job = Job.objects.filter(publish=True)
+                job = jobs
             return job
         else:
-            job = Job.objects.filter(publish=True)
+            job = jobs
         return job
 job_list = JobList.as_view()
 
