@@ -1,13 +1,21 @@
 {% block css %}
 <style>
-  #id_search{
+#id_search{
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
   }
-  #id_submit{
+#id_submit{
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
   }
+.ui-autocomplete {
+    max-height: 400px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
 </style>
 {% endblock %}
 <form action="">
