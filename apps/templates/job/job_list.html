@@ -51,7 +51,7 @@
                 <h5 class="card-title">{{job.job_title|truncatechars:30}}</h5>
                 <h6 class="card-subtitle mb-2"><strong>company : </strong>{{job.company}}</h6>
                 <h6 class="card-subtitle mb-2"><strong>Experience : </strong>{{job.experience}}</h6>
-                <h6 class="card-subtitle mb-2"><strong>Strong on : </strong>{{job.skills|truncatechars:20}}</h6>
+                <h6 class="card-subtitle mb-2"><strong>Place : </strong>{{job.place|truncatechars:20}}</h6>
                 <p class="card-text">{{job.job_description|safe}}</p>
                 <a href="{% url 'job:job_detail' slug=job.slug %}" class="btn btn-secondary w-100">View and apply</a>
             </div>

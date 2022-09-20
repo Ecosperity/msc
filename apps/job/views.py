@@ -55,10 +55,11 @@ class JobList(ListView):
             
             query_list = skill_without_space + location_without_space
             job = jobs
-            query = Q(reduce(operator.and_, (Q(place__icontains=option) for option in query_list))) | \
-                    Q(reduce(operator.or_, (Q(job_title__icontains=option) for option in query_list))) | \
-                    Q(reduce(operator.or_, (Q(skill__name__icontains=option) for option in query_list)))
-            job = job.filter(query).distinct()
+            query = Q(reduce(operator.or_, (Q(place__icontains=option) for option in query_list))) | \
+                    Q(reduce(operator.and_, (Q(job_title__icontains=option) for option in query_list))) | \
+                    Q(reduce(operator.and_, (Q(skill__name__icontains=option) for option in query_list)))
+            job = job.filter(query).distinct().order_by("-id")
+            print(query)
             if job is not None:
                 job_length = len(job)
                 messages.success(self.request, f"{job_length if job_length >=1  else 'No'} jobs found.")
