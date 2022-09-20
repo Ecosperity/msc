@@ -1,9 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.views.generic import ListView, DeleteView
 from django.utils.decorators import method_decorator
 from django.utils import timezone
+import xlwt
 from django.urls import reverse_lazy
 from apps.dashboard.forms import AddSkillset
 from dashboard.models import SkillSet
@@ -122,6 +124,7 @@ def update_job(request, slug):
         form = CreateJobForm(instance=job)
     return render(request, 'dashboard/update_job.html', {'form': form, 'job':job})
 
+@method_decorator(allow_access_to([User.ADMIN, User.MANAGER]), name="dispatch")
 class DeleteJob(DeleteView):
     model = Job
     success_url = reverse_lazy('dashboard:job_list')
@@ -152,7 +155,6 @@ class ApplicantList(ListView):
     template_name= 'dashboard/applicant_list.html'
     context_object_name = 'applicant_list'
     paginate_by = 10
-    # queryset= JobApplicant.objects.all()
 applicant_list = ApplicantList.as_view()
 
 @allow_access_to([User.ADMIN, User.MANAGER])
@@ -204,3 +206,40 @@ class DeleteSkillset(DeleteView):
     success_url = reverse_lazy('dashboard:skillset_list')
     template_name = "dashboard/skillset_confirm_delete.html"
 delete_skillset=DeleteSkillset.as_view()
+
+@allow_access_to([User.ADMIN, User.MANAGER])
+def export_applicant_list(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="applicants.xls"'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Applicants')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+    columns = ('Name', 
+               'Mobile', 
+               'Email Address', 
+               'Notice period', 
+               'LinkedIn link', 
+               'Qualitative skills', 
+               'Subject', 
+               'message'
+    )
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+    font_style = xlwt.XFStyle()
+    rows = JobApplicant.objects.values_list('user__name', 
+                                            'user__mobile', 
+                                            'user__email', 
+                                            'notice_period', 
+                                            'linkedin_link', 
+                                            'qualitative_skills', 
+                                            'subject', 
+                                            'message'
+                                            )
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+    wb.save(response)
+    return response

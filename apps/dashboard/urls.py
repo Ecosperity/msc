@@ -16,4 +16,5 @@ urlpatterns=[
     path("skillset-detail/<int:pk>/", views.skillset_detail, name='skillset_detail'),
     path("update-skillset/<int:pk>/", views.update_skillset, name='update_skillset'),
     path("delete-skillset/<int:pk>/", views.delete_skillset, name='delete_skillset'),
+    path("export-applicant-list/", views.export_applicant_list, name='export_applicant_list'),
 ]
