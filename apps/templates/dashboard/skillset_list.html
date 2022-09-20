@@ -1,6 +1,15 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load hitcount_tags humanize %}
 {% block dashboard_content %}
+{% block dashboard_css %}
+<style>
+    .fabutton {
+    background: none;
+    padding: 0px;
+    border: none;
+}
+</style>
+{% endblock dashboard_css %}
 <form action=".">
     <div class="d-flex flex-row justify-content">
         <div class="pb-2"><input type="text" name="name" class="form-control" required></div>

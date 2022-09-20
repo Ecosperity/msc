@@ -9,10 +9,10 @@ from django.contrib.postgres.search import (
 class JobQuerySet(models.QuerySet):
 
     def search(self, query, queryset):
-        vector = SearchVector('job_title', 'job_description', 'state', 'city')
+        vector = SearchVector('job_title', 'job_description', 'place')
         query = SearchQuery(query)
         search_headline = SearchHeadline('job_description', query)
-        return queryset.annotate(
+        queryset = queryset.annotate(
                         rank=SearchRank
                         (vector, query)
                         ).annotate(
@@ -22,7 +22,8 @@ class JobQuerySet(models.QuerySet):
                         ).order_by(
                         '-rank'
                         )
-
+        return queryset
+    
     def all_job_lists(self, query, sorting_value):
         queryset = self.all()
         if sorting_value is not None:

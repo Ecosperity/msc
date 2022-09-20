@@ -19,15 +19,19 @@ def search(request):
     if request.is_ajax and request.method == "GET":
         if 'term' in request.GET:
             term = request.GET.get("term")
-            # queryset = Job.objects.filter(Q(job_title__icontains=term)
-            #                             )
-            queryset = Skill.objects.filter(Q(name__icontains=term)
-                                        )
-            print("dsfdsffdfdfdff", term, queryset)
-            list_queryset = [query.name for query in queryset]
-            list_queryset = list(dict.fromkeys(list_queryset))
-            return JsonResponse(list_queryset, safe=False)
-    return redirect("job:job_list")
+            skill_queryset = Skill.objects.filter(Q(name__icontains=term))
+            job_queryset = Job.objects.filter(Q(job_title__icontains=term))
+    
+            skill_query = [query.name for query in skill_queryset]
+            job_query =[query.job_title for query in job_queryset]
+            list_queryset = skill_query + job_query
+        if 'location' in request.GET:
+            location = request.GET.get("location")
+            queryset = Job.objects.filter(Q(place__icontains=location))
+            list_queryset = [query.place for query in queryset] 
+
+        unique_list_queryset = list(dict.fromkeys(list_queryset))
+        return JsonResponse(unique_list_queryset, safe=False)
     
 class JobList(ListView):
     model = Job
@@ -36,11 +40,31 @@ class JobList(ListView):
     paginate_by = 8
     
     def get_queryset(self, *args, **kwargs):
-        query = self.request.GET.get('name')
-        job = Job.objects.published_job_lists(query)
-        if query is not None:
-            job_length = len(job)
-            messages.success(self.request, f"{job_length if job_length >=1  else 'No'} items found for {query}.")
+        skills = self.request.GET.get('skills')
+        locations = self.request.GET.get('locations')
+        
+        if skills or locations:
+            skill_with_space = skills.split(",")
+            skill_without_space = [i for i in skill_with_space if i!=" "]
+            
+            location_with_space = locations.split(",")
+            location_without_space = [i for i in location_with_space if i!=" "]
+            
+            query_list = skill_without_space + location_without_space
+            for q in query_list:
+                queryset = Job.objects.filter(
+                     Q(place__icontains=q)|
+                     Q(job_title__icontains=q)|
+                     Q(skill__name__icontains=q))
+            job = queryset.distinct()
+            if job is not None:
+                job_length = len(job)
+                messages.success(self.request, f"{job_length if job_length >=1  else 'No'} jobs found.")
+            if not job:
+                job = Job.objects.filter(publish=True)
+            return job
+        else:
+            job = Job.objects.filter(publish=True)
         return job
 job_list = JobList.as_view()
 

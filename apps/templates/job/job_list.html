@@ -43,38 +43,6 @@
     </button>
 </div>
 
-<form action=".">
-  <div class="d-flex flex-row justify-content">
-
-    <div class="p-2 form-group col-sm-3">
-      <select name="job_title" class='form-control' >
-        <option value="" data-index=1>Job title</option>
-        {% for job in job %}
-        <option value="{{job.job_title}}" data-index=1>{{job.job_title}}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="p-2 form-group col-sm-3">
-      <select name="location" class='form-control'>
-        <option value="" data-index=1>location</option>
-        {% for job in job %}
-        <option value="{{job.job_location}}" data-index=1>{{job.state}}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="p-2 form-group col-sm-3">
-      <select name="experience" class='form-control'>
-        <option value="" data-index=1>experience level</option>
-        {% for job in job %}
-        <option value="{{job.experience}}" data-index=1>{{job.experience}}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="p-2"><input type="text" name="name" class="form-control"></div>
-    <div class="p-2"><input type="submit" value="Search" class="btn btn-secondary w-100"></div>
-  </div>
-</form>
-
 <div class="row">
   {% for job in job %}
     <div class="col-md-4 col-lg-3  g-4">
