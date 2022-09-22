@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.db import transaction
 from functools import reduce
 import operator
 from django.http import JsonResponse
@@ -42,24 +43,17 @@ class JobList(ListView):
     paginate_by = 8
     
     def get_queryset(self, *args, **kwargs):
-        skills = self.request.GET.get('skills')
         locations = self.request.GET.get('locations')
-
-        jobs = Job.objects.published_job_lists(None)
+        skills = self.request.GET.get('skills')
+        jobs = Job.objects.published_job_lists()
         if skills or locations:
-            skill_with_space = skills.split(",")
-            skill_without_space = [i for i in skill_with_space if i!=" "]
-            
-            location_with_space = locations.split(",")
-            location_without_space = [i for i in location_with_space if i!=" "]
-            
-            query_list = skill_without_space + location_without_space
-            job = jobs
-            query = Q(reduce(operator.or_, (Q(place__icontains=option) for option in query_list))) | \
-                    Q(reduce(operator.and_, (Q(job_title__icontains=option) for option in query_list))) | \
-                    Q(reduce(operator.and_, (Q(skill__name__icontains=option) for option in query_list)))
-            job = job.filter(query).distinct().order_by("-id")
-            print(query)
+            location_lists = [location_list.strip(' ') for location_list in [location for location in locations.split(",") if location!=" "]]
+            skill_lists = [skill_list.strip(' ') for skill_list in [skill for skill in skills.split(",") if skill!=" "]]
+
+            query = (Q(reduce(operator.or_, (Q(place__icontains=option) for option in location_lists)))) & \
+                    (Q(reduce(operator.or_, (Q(job_title__icontains=option) for option in skill_lists))) | \
+                     Q(reduce(operator.or_, (Q(skill__name__icontains=option) for option in skill_lists))))
+            job = jobs.filter(query).order_by("-id")
             if job is not None:
                 job_length = len(job)
                 messages.success(self.request, f"{job_length if job_length >=1  else 'No'} jobs found.")
@@ -107,6 +101,11 @@ def apply_job(request, slug):
         user_form = JobApplicantUserForm(request.POST, request.FILES, instance=user)
         applicant_form = JobApplicantForm(request.POST, request.FILES, instance=applicant)
         if user_form.is_valid() and applicant_form.is_valid():
+            resume=applicant_form.cleaned_data.get('resume')
+            if resume.size > 2 * 1024 * 1024:
+                messages.warning(request, "Resume too large. Size should not exceed 2 MiB.")
+                return redirect("job:job_detail", slug=job.slug)
+
             notice_period=applicant_form.cleaned_data.get('notice_period')
             resume=applicant_form.cleaned_data.get('resume')
             name=user_form.cleaned_data.get('name')
@@ -116,36 +115,40 @@ def apply_job(request, slug):
             qualitative_skills=applicant_form.cleaned_data.get('qualitative_skills')
             subject=applicant_form.cleaned_data.get('subject')
             message=applicant_form.cleaned_data.get('message')
-
-            user.name=name
-            user.mobile=mobile
-            user.save()
             try:
-                applicant = JobApplicant.objects.get(user=user)
-                applicant.notice_period=notice_period
-                applicant.resume=resume
-                applicant.linkedin_link=linkedin_link
-                applicant.qualitative_skills=qualitative_skills
-                applicant.subject=subject
-                applicant.message=message
+                with transaction.atomic():
+                    user.name=name
+                    user.mobile=mobile
+                    user.save()
+                    try:
+                        applicant = JobApplicant.objects.get(user=user)
+                        applicant.notice_period=notice_period
+                        applicant.resume=resume
+                        applicant.linkedin_link=linkedin_link
+                        applicant.qualitative_skills=qualitative_skills
+                        applicant.subject=subject
+                        applicant.message=message
+                    except:
+                        applicant = JobApplicant(
+                                    user=user,
+                                    notice_period=notice_period,
+                                    is_applied=1,
+                                    resume=resume,
+                                    linkedin_link=linkedin_link,
+                                    qualitative_skills=qualitative_skills,
+                                    subject=subject,
+                                    message=message,
+                                )
+                    applicant.save()
+                    applicant.job.add(job)
+                    job.job_applied_count=job.job_applied_count + 1 if job.job_applied_count else 1
+                    job.save()
+                    messages.success(request, "You have succesfully applied for the job")
+                    return redirect("job:job_detail", slug=job.slug)
             except:
-                applicant = JobApplicant(
-                            user=user,
-                            notice_period=notice_period,
-                            is_applied=1,
-                            resume=resume,
-                            linkedin_link=linkedin_link,
-                            qualitative_skills=qualitative_skills,
-                            subject=subject,
-                            message=message,
-                        )
-            applicant.save()
-            applicant.job.add(job)
-            job.job_applied_count=job.job_applied_count + 1 if job.job_applied_count else 1
-            job.save()
-            applicant.save()
-
-            messages.success(request, "You have succesfully applied for the job")
+                pass
+        else:
+            messages.warning(request, "Something went wrong or not valid data")
             return redirect("job:job_detail", slug=job.slug)
 
 @csrf_exempt

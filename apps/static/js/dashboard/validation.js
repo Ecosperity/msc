@@ -9,7 +9,11 @@ jQuery('#job_form').validate({
 			required:true,
 			maxlength:100
 		},
-        experience:{
+        minimum_experience_years:{
+            required: true,
+            maxlength:100
+        },
+		maximum_experience_years:{
             required: true,
             maxlength:100
         },
@@ -59,8 +63,12 @@ jQuery('#job_form').validate({
 			required:"Please enter required skills",
 			maxlength:"Maximum 100 characters please"
 			},
-		experience:{
-			required:"Please enter required experience",
+		minimum_experience_years:{
+			required:"Please enter required minimum experience",
+			maxlength:"Maximum 50 characters please"
+			},
+		maximum_experience_years:{
+			required:"Please enter required maximum experience",
 			maxlength:"Maximum 50 characters please"
 			},
 		role:{
@@ -118,8 +126,24 @@ $("#id_apply_job").validate({
 			required:true,
 			maxlength:50
 		},
+		linkedin_link:{
+			required:true,
+			maxlength:100
+		},
+		qualitative_skills:{
+			required:true,
+			maxlength:100
+		},
+		subject:{
+			required:true,
+			maxlength:200
+		},
+		message:{
+			required:true,
+			maxlength:200
+		},
 	},messages:{
-		job_title:{
+		name:{
 			required:"Please enter your name",
 			maxlength:"Maximum 50 characters please"
 			},
@@ -131,6 +155,36 @@ $("#id_apply_job").validate({
 			},
 		notice_period:{
 			required:"Please enter your notice period",
+			maxlength:"Maximum 20 characters please"
+			},
+		linkedin_link:{
+			required:"Please enter your linkedIn link",
+			maxlength:"Maximum 100 characters please"
+			},
+		qualitative_skills:{
+			required:"Please enter your qualitative skills",
+			maxlength:"Maximum 100 characters please"
+			},
+		subject:{
+			required:"Please enter your subject(mention the role you are applying)",
+			maxlength:"Maximum 200 characters please"
+		},
+		message:{
+			required:"Please enter your message",
+			maxlength:"Maximum 200 characters please"
+		},
+	},
+})
+
+$("#id_skillset").validate({
+	rules:{
+		name:{
+			required:true,
+			maxlength:50
+		},
+	},messages:{
+		name:{
+			required:"Please enter skill",
 			maxlength:"Maximum 50 characters please"
 			},
 	},

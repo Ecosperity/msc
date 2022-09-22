@@ -1,13 +1,24 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load static %}
 {% block dashboard_content %}
+{% block dashboard_css %}
+<style>
+.error{
+    color:red;
+}
+</style>
+{% endblock dashboard_css %}
 <h3 class="text-center">Upload Skillset</h3>
 <div class="col-md-8 offset-md-2 mb-4">
     
-    <form action="." method="post" id="job_form">
+    <form action="." method="post" id="id_skillset">
         {% csrf_token %}
           {{form.as_p}}
         <input type="submit" class="btn btn-primary w-100">
         </form>
 
 {% endblock dashboard_content %}
+{% block dashboard_inline_javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/dashboard/validation.js' %}"></script>
+{% endblock dashboard_inline_javascript %}
