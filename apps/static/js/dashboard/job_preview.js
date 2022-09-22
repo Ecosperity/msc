@@ -12,10 +12,22 @@ let jobModal = document.getElementById('btnjobPreview');
     let job_description = tinyMCE.get('id_job_description').getContent();    
     let minimum_experience_years = document.getElementById('id_minimum_experience_years').value;    
     let maximum_experience_years = document.getElementById('id_maximum_experience_years').value;    
+    let salary = document.getElementById('id_salary').value;
+    let salary_predefined = document.getElementById('id_predefined');    
+    let minimum_salary = document.getElementById('id_minimum_salary');    
+    let maximum_salary = document.getElementById('id_maximum_salary');    
+    let salary_measurement = document.getElementById('id_salary_measurement');    
+    let salary_currency = document.getElementById('id_salary_currency');    
+    let salary_duration = document.getElementById('id_duration');    
+    if(salary_predefined.checked==true){
+        salary = '';
+        salary = `${minimum_salary.value} To ${maximum_salary.value} ${salary_measurement.value} ${salary_currency.value} ${salary_duration.value}`;
+        console.log(salary)
+    }
     let publish = document.getElementById('id_publish').checked;
     if(publish==true){ publish = "YES";}else{ publish="NO";}
     let skillset = document.getElementsByName('skills'); 
-    let salary = document.getElementById('id_salary').value;
+    
     divcontentPreview.innerHTML="<b>Job title :</b> "+job_title.value;
     divcontentPreview.innerHTML+="<hr>";
     divcontentPreview.innerHTML+="<b>Role :</b> " +role.value;
