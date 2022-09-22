@@ -50,13 +50,13 @@ def create_job(request):
                     if publish:
                         form.published_at=timezone.now()
                     form.save()
-                    job = Job.objects.last()
                     for skill in skills:
-                        Skill.objects.create(name=skill, job=job)
+                        Skill.objects.create(name=skill, job=form)
                     messages.success(request, "Job uploaded successfully")
                     return redirect(".")
             except:
-                pass
+                messages.warning(request, "Some error occured, please try again")
+                return redirect(".")
         else:
             messages.warning(request, "No valid data")
     else:
@@ -107,7 +107,8 @@ def update_job(request, slug):
                     messages.success(request, "Job updated successfully")
                     return redirect(job.get_absolute_update_url())
             except:
-                pass
+                messages.warning(request, "Not able to update, please try again")
+                return redirect(request.META.get('HTTP_REFERER'))
         else:
             messages.warning(request, "No valid data")
     else:
@@ -148,16 +149,12 @@ class ApplicantList(ListView):
     def get_queryset(self, *args, **kwargs):
         query = self.request.GET.get('name')
         sorting_value = self.request.GET.get('sorting_value')
-        if query or sorting_value:
-            applicant_list = JobApplicant.objects.all_applicant_lists(query, sorting_value)
-            if applicant_list is not None:
-                applicant_length = len(applicant_list)
-                messages.success(self.request, f"{applicant_length if applicant_length >=1  else 'No'} applicant found.")
-            else:
-                applicant_list = JobApplicant.objects.all_applicant_lists(None, None)
-        else:
-            applicant_list = JobApplicant.objects.all_applicant_lists(None, None)
+        applicant_list = JobApplicant.objects.all_applicant_lists(query, sorting_value)
+        if query is not None:
+            applicant_length = len(applicant_list)
+            messages.success(self.request, f"{applicant_length if applicant_length >=1  else 'No'} applicant found.")
         return applicant_list
+
 applicant_list = ApplicantList.as_view()
 
 @allow_access_to([User.ADMIN, User.MANAGER])

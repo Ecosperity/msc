@@ -8,8 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.db import transaction
-from functools import reduce
-import operator
 from django.http import JsonResponse
 from django.views.generic import ListView
 from apps.job.forms import JobApplicantForm, JobApplicantUserForm
@@ -45,23 +43,18 @@ class JobList(ListView):
     def get_queryset(self, *args, **kwargs):
         locations = self.request.GET.get('locations')
         skills = self.request.GET.get('skills')
-        jobs = Job.objects.published_job_lists()
-        if skills or locations:
+        job = Job.objects.published_job_lists()
+        if locations or skills:
             location_lists = [location_list.strip(' ') for location_list in [location for location in locations.split(",") if location!=" "]]
             skill_lists = [skill_list.strip(' ') for skill_list in [skill for skill in skills.split(",") if skill!=" "]]
-
-            query = (Q(reduce(operator.or_, (Q(place__icontains=option) for option in location_lists)))) & \
-                    (Q(reduce(operator.or_, (Q(job_title__icontains=option) for option in skill_lists))) | \
-                     Q(reduce(operator.or_, (Q(skill__name__icontains=option) for option in skill_lists))))
-            job = jobs.filter(query).order_by("-id")
-            if job is not None:
-                job_length = len(job)
-                messages.success(self.request, f"{job_length if job_length >=1  else 'No'} jobs found.")
-            if not job:
-                job = jobs
-            return job
-        else:
-            job = jobs
+            search_skills = location_lists + skill_lists
+            job = Job.objects.published_job_lists(search_skills)        
+            job_length = len(job)
+            if job_length < 1 :
+                job = Job.objects.published_job_lists()
+                messages.success(self.request, "No items found.")
+            else:
+                messages.success(self.request, f"{job_length} items found.")
         return job
 job_list = JobList.as_view()
 
@@ -146,7 +139,8 @@ def apply_job(request, slug):
                     messages.success(request, "You have succesfully applied for the job")
                     return redirect("job:job_detail", slug=job.slug)
             except:
-                pass
+                messages.warning(request, "Not able to apply, please try again")
+                return redirect(request.META.get('HTTP_REFERER'))
         else:
             messages.warning(request, "Something went wrong or not valid data")
             return redirect("job:job_detail", slug=job.slug)

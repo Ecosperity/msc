@@ -5,10 +5,20 @@ from django.contrib.postgres.search import (
                                         SearchHeadline,
                                         SearchRank
                                     )
+from django.db.models import Q
+import operator
+from functools import reduce
 
 class JobQuerySet(models.QuerySet):
 
     def search(self, query, queryset):
+        if isinstance(query, list):
+            query = (Q(reduce(operator.or_, (Q(place__icontains=option) for option in query)))) & \
+                    (Q(reduce(operator.or_, (Q(job_title__icontains=option) for option in query))) | \
+                     Q(reduce(operator.or_, (Q(skill__name__icontains=option) for option in query))))
+            queryset = queryset.filter(query).order_by("-id")
+            return queryset
+
         vector = SearchVector('job_title', 'job_description', 'place')
         query = SearchQuery(query)
         search_headline = SearchHeadline('job_description', query)
@@ -33,7 +43,7 @@ class JobQuerySet(models.QuerySet):
         else:
             return self.search(query, queryset)
         
-    def published_job_lists(self, query):
+    def published_job_lists(self, query=None):
         queryset = self.filter(publish=True).order_by("-id")
         if query is None:
             return queryset
@@ -97,5 +107,5 @@ class JobApplicantManager(models.Manager):
     def get_queryset(self):
         return JobApplicantQuerySet(self.model, using=self._db)
     
-    def all_applicant_lists(self, query, sorting_value):
+    def all_applicant_lists(self, query=None, sorting_value=None):
         return self.get_queryset().all_applicant_lists(query, sorting_value)
