@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from .utils import generate_unique_slug
 from django.urls import reverse
-from job.managers import JobManager
+from job.managers import JobApplicantManager, JobManager
 from tinymce.models import HTMLField
 User=get_user_model()
 
@@ -105,6 +105,8 @@ class JobApplicant(models.Model):
     resume = models.FileField(upload_to="resumes/%Y/%m/%d/")
     subject = models.CharField(max_length=200)
     message = models.TextField()
+
+    objects = JobApplicantManager()
 
     def __str__(self):
         return f'Applicantt ==> {self.user}'

@@ -6,7 +6,7 @@ from job.models import Job, JobApplicant, User
 class CreateJobForm(forms.ModelForm):
     job_title = forms.CharField(widget=forms.TextInput( attrs={'class': 'form-control'}))
     role = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    job_description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
+    job_description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}), required=True)
     experience = forms.CharField(widget=forms.TextInput( attrs={'class': 'form-control'}), required=False)
     no_of_openings = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     country = forms.CharField(widget=forms.Select(choices=Job.COUNTRY_CHOICES, attrs={'class': 'form-control'}))
