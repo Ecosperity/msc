@@ -47,47 +47,22 @@
             </div>
         </th>
         <th scope="col">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <form action="">
-                        <input type='hidden' name='sorting_value' value='skills'>
-                        <button type="submit" class="fabutton">
-                            <i class="fa-sharp fa-solid fa-up-long"></i>
-                        </button>
-                      
-                    </form>
-                </div>
-                <div>
-                    Skills
-                </div>
-                <div>
-                    <form action=".">
-                        <input type='hidden' name='sorting_value' value='-skills'>
-                        <button type="submit" class="fabutton">
-                            <i class="fa-sharp fa-solid fa-down-long"></i>
-                        </button>
-                      
-                    </form>
-                </div>
-            </div>
-        </th>
-        <th scope="col">
         </div>
         <div class="d-flex justify-content-between">
             <div>
                 <form action="">
-                    <input type='hidden' name='sorting_value' value='state'>
+                    <input type='hidden' name='sorting_value' value='country'>
                     <button type="submit" class="fabutton">
                         <i class="fa-sharp fa-solid fa-up-long"></i>
                     </button>
                 </form>
             </div>
             <div>
-                State
+                Country
             </div>
             <div>
                 <form action=".">
-                    <input type='hidden' name='sorting_value' value='-state'>
+                    <input type='hidden' name='sorting_value' value='-country'>
                     <button type="submit" class="fabutton">
                         <i class="fa-sharp fa-solid fa-down-long"></i>
                     </button>
@@ -99,18 +74,18 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <form action="">
-                        <input type='hidden' name='sorting_value' value='city'>
+                        <input type='hidden' name='sorting_value' value='place'>
                         <button type="submit" class="fabutton">
                             <i class="fa-sharp fa-solid fa-up-long"></i>
                         </button>
                     </form>
                 </div>
                 <div>
-                    city
+                    Place
                 </div>
                 <div>
                     <form action=".">
-                        <input type='hidden' name='sorting_value' value='-city'>
+                        <input type='hidden' name='sorting_value' value='-place'>
                         <button type="submit" class="fabutton">
                             <i class="fa-sharp fa-solid fa-down-long"></i>
                         </button>
@@ -221,9 +196,8 @@
         <tr>
         <th scope="row">{{ page_obj.start_index|add:forloop.counter0 }}</th>
         <td>{{job.job_title|truncatechars:20}}</td>
-        <td>{{job.skills|truncatechars:20}}</td>
-        <td>{{job.state|truncatechars:20}}</td>
-        <td>{{job.city|truncatechars:20}}</td>
+        <td>{{job.country|truncatechars:20}}</td>
+        <td>{{job.place|truncatechars:20}}</td>
         <td>{{job.uploaded_at|naturaltime|truncatechars:20}}</td>
         <td>{{job.published_at|naturaltime|truncatechars:20}}</td>
         <td>

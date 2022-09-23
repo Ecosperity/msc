@@ -6,13 +6,13 @@ from django.views.generic import ListView, DeleteView
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 import xlwt
+from django.db import transaction
 from django.urls import reverse_lazy
 from apps.dashboard.forms import AddSkillset
 from dashboard.models import SkillSet
 from apps.functions import allow_access_to
 from job.models import Job, JobApplicant, Skill
 from job.forms import CreateJobForm
-
 User = get_user_model()
 
 @allow_access_to([User.ADMIN, User.MANAGER])
@@ -25,34 +25,38 @@ def create_job(request):
         form = CreateJobForm(request.POST)
         skills = request.POST.getlist("skills")
         if form.is_valid():
-            publish = form.cleaned_data.get('publish')
-            salary = form.cleaned_data.get('salary')
-            experience = form.cleaned_data.get('experience')
-            if not salary:
-                minimum_salary = request.POST.get('minimum_salary')
-                maximum_salary = request.POST.get('maximum_salary')
-                salary_measurement = request.POST.get('salary_measurement')
-                salary_currency = request.POST.get('salary_currency')
-                duration = request.POST.get('duration')
-                salary = f'{minimum_salary} to {maximum_salary} {salary_measurement} {salary_currency} {duration}'
-            if not experience:
-                minimum_experience_years = request.POST.get('minimum_experience_years')
-                maximum_experience_years = request.POST.get('maximum_experience_years')
-                experience = f'{minimum_experience_years} to {maximum_experience_years} Years'
-            user=request.user
-            form=form.save(commit=False)
-            form.salary=salary
-            form.experience=experience
-            form.uploaded_by=user
-            form.uploaded_at=timezone.now()
-            if publish:
-                form.published_at=timezone.now()
-            form.save()
-            job = Job.objects.last()
-            for skill in skills:
-                Skill.objects.create(name=skill, job=job)
-            messages.success(request, "Job uploaded successfully")
-            return redirect(".")
+            try:
+                with transaction.atomic():
+                    publish = form.cleaned_data.get('publish')
+                    salary = form.cleaned_data.get('salary')
+                    experience = form.cleaned_data.get('experience')
+                    if not salary:
+                        minimum_salary = request.POST.get('minimum_salary')
+                        maximum_salary = request.POST.get('maximum_salary')
+                        salary_measurement = request.POST.get('salary_measurement')
+                        salary_currency = request.POST.get('salary_currency')
+                        duration = request.POST.get('duration')
+                        salary = f'{minimum_salary} to {maximum_salary} {salary_measurement} {salary_currency} {duration}'
+                    if not experience:
+                        minimum_experience_years = request.POST.get('minimum_experience_years')
+                        maximum_experience_years = request.POST.get('maximum_experience_years')
+                        experience = f'{minimum_experience_years} to {maximum_experience_years} Years'
+                    user=request.user
+                    form=form.save(commit=False)
+                    form.salary=salary
+                    form.experience=experience
+                    form.uploaded_by=user
+                    form.uploaded_at=timezone.now()
+                    if publish:
+                        form.published_at=timezone.now()
+                    form.save()
+                    for skill in skills:
+                        Skill.objects.create(name=skill, job=form)
+                    messages.success(request, "Job uploaded successfully")
+                    return redirect(".")
+            except:
+                messages.warning(request, "Some error occured, please try again")
+                return redirect(".")
         else:
             messages.warning(request, "No valid data")
     else:
@@ -73,7 +77,6 @@ class JobList(ListView):
             job_length = len(job)
             messages.success(self.request, f"{job_length if job_length >=1  else 'No'} items found for {query}.")
         return job
-
 job_list=JobList.as_view()
 
 @allow_access_to([User.ADMIN, User.MANAGER])
@@ -84,40 +87,28 @@ def job_detail(request, slug):
 @allow_access_to([User.ADMIN, User.MANAGER])
 def update_job(request, slug):
     job = get_object_or_404(Job, slug=slug)
-    # if request.method == "POST":
-    #     data=request.POST
-    #     job.job_title=data['job_title']
-    #     job.job_description=data['job_description']
-    #     job.skills=data['skills']
-    #     job.experience=data['experience']
-    #     job.no_of_openings=data['no_of_openings']
-    #     job.state=data['state']
-    #     job.city=data['city']
-    #     if data.get('publish', None)=='on':
-    #         job.publish=True
-    #     else:
-    #         job.publish=False
-    #     job.save()
-    #     messages.success(request, "job updated successfully")
-    #     return redirect(job.get_absolute_update_url())
-    # return render(request, 'dashboard/update_job.html', {'job': job})
     if request.method == "POST":
         form = CreateJobForm(request.POST, instance=job)
         skills = request.POST.getlist('skills')
         if form.is_valid():
-            publish = form.cleaned_data.get('publish')
-            user=request.user
-            form=form.save(commit=False)
-            form.uploaded_by=user
-            form.uploaded_at=timezone.now()
-            if publish:
-                form.published_at=timezone.now()
-            form.save()
-            Skill.objects.filter(job=job).delete()
-            for skill in skills:
-                Skill.objects.create(name=skill, job=job)
-            messages.success(request, "Job updated successfully")
-            return redirect(job.get_absolute_update_url())
+            try:
+                with transaction.atomic():
+                    publish = form.cleaned_data.get('publish')
+                    user=request.user
+                    form=form.save(commit=False)
+                    form.uploaded_by=user
+                    form.uploaded_at=timezone.now()
+                    if publish:
+                        form.published_at=timezone.now()
+                    form.save()
+                    Skill.objects.filter(job=job).delete()
+                    for skill in skills:
+                        Skill.objects.create(name=skill, job=job)
+                    messages.success(request, "Job updated successfully")
+                    return redirect(job.get_absolute_update_url())
+            except:
+                messages.warning(request, "Not able to update, please try again")
+                return redirect(request.META.get('HTTP_REFERER'))
         else:
             messages.warning(request, "No valid data")
     else:
@@ -155,6 +146,15 @@ class ApplicantList(ListView):
     template_name= 'dashboard/applicant_list.html'
     context_object_name = 'applicant_list'
     paginate_by = 10
+    def get_queryset(self, *args, **kwargs):
+        query = self.request.GET.get('name')
+        sorting_value = self.request.GET.get('sorting_value')
+        applicant_list = JobApplicant.objects.all_applicant_lists(query, sorting_value)
+        if query is not None:
+            applicant_length = len(applicant_list)
+            messages.success(self.request, f"{applicant_length if applicant_length >=1  else 'No'} applicant found.")
+        return applicant_list
+
 applicant_list = ApplicantList.as_view()
 
 @allow_access_to([User.ADMIN, User.MANAGER])

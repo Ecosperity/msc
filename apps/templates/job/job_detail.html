@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %}
+{% block css %}
+<style>
+  .error{
+      color:red;
+  }
+  </style>
+  {% endblock %}
+  {% block content %}
 .<div class="card text-left">
   <div class="card-body">
     <h4 class="card-title">{{job.job_title}}</h4>
@@ -69,3 +77,12 @@
   </div>
 </div>
 {% endblock content %}
+{% block inline_javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/dashboard/validation.js' %}"></script>
+<script src="{% static 'js/dashboard/job_preview.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="{% static 'js/dashboard/skills_add.js' %}"></script>
+{% endblock inline_javascript %}
