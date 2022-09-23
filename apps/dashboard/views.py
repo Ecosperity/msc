@@ -13,6 +13,7 @@ from dashboard.models import SkillSet
 from apps.functions import allow_access_to
 from job.models import Job, JobApplicant, Skill
 from job.forms import CreateJobForm
+import logging
 User = get_user_model()
 
 @allow_access_to([User.ADMIN, User.MANAGER])
@@ -55,6 +56,7 @@ def create_job(request):
                     messages.success(request, "Job uploaded successfully")
                     return redirect(".")
             except:
+                logging.info("Not able to add the job")
                 messages.warning(request, "Some error occured, please try again")
                 return redirect(".")
         else:
@@ -107,6 +109,7 @@ def update_job(request, slug):
                     messages.success(request, "Job updated successfully")
                     return redirect(job.get_absolute_update_url())
             except:
+                logging.info("Not able to update the job")
                 messages.warning(request, "Not able to update, please try again")
                 return redirect(request.META.get('HTTP_REFERER'))
         else:

@@ -13,6 +13,7 @@ from django.views.generic import ListView
 from apps.job.forms import JobApplicantForm, JobApplicantUserForm
 from job.models import Job, JobApplicant, Skill
 from dashboard.models import SkillSet
+import logging
 User = get_user_model()
 
 @csrf_exempt
@@ -96,6 +97,7 @@ def apply_job(request, slug):
         if user_form.is_valid() and applicant_form.is_valid():
             resume=applicant_form.cleaned_data.get('resume')
             if resume.size > 2 * 1024 * 1024:
+                logging.warning("Applicant attempted to upload large resume file.")
                 messages.warning(request, "Resume too large. Size should not exceed 2 MiB.")
                 return redirect("job:job_detail", slug=job.slug)
 
@@ -139,6 +141,7 @@ def apply_job(request, slug):
                     messages.success(request, "You have succesfully applied for the job")
                     return redirect("job:job_detail", slug=job.slug)
             except:
+                logging.info("Some error occured while applying the job")
                 messages.warning(request, "Not able to apply, please try again")
                 return redirect(request.META.get('HTTP_REFERER'))
         else:
