@@ -2,10 +2,9 @@ let mic = document.getElementById("btn-mic");
 let micStop = document.getElementById("btn-mic-stop");
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
-// recognition.continuous = true;
 
 mic.addEventListener("click",function(){
-    // recognition.start();
+    recognition.start();
     // mic.style.background= '#bc32ef';
     // mic.style.borderRadius= '60%';
     Speak("I am listening you")
@@ -22,7 +21,7 @@ recognition.onend = function(){
 mic.style.background = '';
 
 }
-
+recognition.continuous = true;
 recognition.onresult = function(event) {
     let resultIndex = event.resultIndex;
     let transcript = event.results[resultIndex][0].transcript
