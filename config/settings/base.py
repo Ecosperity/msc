@@ -34,12 +34,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': config('DATABASE_NAME', default='newton'),
-        'USER': config('DATABASE_USER', default='postgres'),
-        'PASSWORD': config('DATABASE_PASSWORD', default='root'),
-        'HOST': config('DATABASE_HOST', default='127.0.0.1'),
-        'PORT': config('DATABASE_PORT', default='5432'),
+        'USER': config('DATABASE_USER', default='admin'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
@@ -77,7 +80,7 @@ THIRD_PARTY_APPS = [
     "hitcount",
     "tinymce",
     "django_cleanup",
-    "active_link"
+    "active_link",
 ]
 
 LOCAL_APPS = [
@@ -233,24 +236,24 @@ MANAGERS = ADMINS
 # https://docs.djangoproject.com/en/dev/ref/settings/#logging
 # See https://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        }
-    },
-    "root": {"level": "INFO", "handlers": ["console"]},
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "verbose": {
+#             "format": "%(levelname)s %(asctime)s %(module)s "
+#             "%(process)d %(thread)d %(message)s"
+#         }
+#     },
+#     "handlers": {
+#         "console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#             "formatter": "verbose",
+#         }
+#     },
+#     "root": {"level": "INFO", "handlers": ["console"]},
+# }
 
 
 # django-allauth
