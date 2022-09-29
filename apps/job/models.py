@@ -87,7 +87,6 @@ class Job(models.Model):
     def get_absolute_delete_url(self):
             return reverse("dashboard:delete_job", kwargs={"slug": self.slug}) 
 
-
 class Skill(models.Model):
     name = models.CharField(max_length=50)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)

@@ -8,6 +8,7 @@ from django.contrib.postgres.search import (
 from django.db.models import Q
 import operator
 from functools import reduce
+from datetime import date, timedelta
 
 class JobQuerySet(models.QuerySet):
 
@@ -57,7 +58,42 @@ class JobQuerySet(models.QuerySet):
         return self.get(slug=slug)
 
     def update_job(self, slug):
-        self.get(slug=slug)
+        self.search(slug=slug).all()
+    
+    def get_filtered_data(self, salary, freshness, experience, country):
+        today =  date.today()
+        filter_day = None
+        if freshness == 'Last one day':
+            filter_day = today-timedelta(days=1)
+        
+        if freshness == 'Last three days':
+            filter_day = today-timedelta(days=3)
+        
+        if freshness == 'Last seven days':
+            filter_day = today-timedelta(days=7)
+
+        if freshness == 'Last fifteen days':
+            filter_day = today-timedelta(days=15)
+        
+        if freshness == 'Last thirty days':
+            filter_day = today-timedelta(days=30)
+
+        queryset = self.published_job_lists()
+        if freshness:
+            queryset = queryset.filter(Q(published_at__gte=filter_day))
+
+        if country:
+            query = (Q(reduce(operator.or_, (Q(country__icontains=option) for option in country))))
+            queryset = queryset.filter(query)
+
+        # if salary:
+        #     queryset = queryset.filter(salary__icontains=salary)
+
+        # if experience:
+        #     queryset = queryset.filter(Q(experience__icontains=experience))
+
+        queryset = queryset.order_by('-published_at')
+        return queryset
     
 class JobManager(models.Manager):
     def get_queryset(self):
@@ -75,6 +111,8 @@ class JobManager(models.Manager):
     def job_detail(self, slug):
         return self.get_queryset().job_detail(slug)
 
+    def get_filtered_data(self, salary=None, freshness=None, experience=None, country=[]):
+        return self.get_queryset().get_filtered_data(salary, freshness, experience, country)
 
 class JobApplicantQuerySet(models.QuerySet):
 

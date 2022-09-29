@@ -33,15 +33,22 @@ def search(request):
             list_queryset = [query.place for query in queryset] 
 
         unique_list_queryset = list(dict.fromkeys(list_queryset))
-        return JsonResponse(unique_list_queryset, safe=False)
-    
+        return JsonResponse(unique_list_queryset, safe=False)   
+
+class HomeView(ListView):
+    model = Job
+    template_name = 'templates/index.html'
+    context_object_name = 'job'
+    def get_queryset(self, *args, **kwargs):
+        return Job.objects.published_job_lists().order_by("published_at")[:4]
+
 class JobList(ListView):
     model = Job
-    template_name = 'job/job_list.html'
+    template_name = 'templates/projects.html'
     context_object_name = 'job'
-    paginate_by = 8
+    paginate_by = 9
     
-    def get_queryset(self, *args, **kwargs):
+    def get_queryset(self):
         locations = self.request.GET.get('locations')
         skills = self.request.GET.get('skills')
         job = Job.objects.published_job_lists()
@@ -62,7 +69,7 @@ job_list = JobList.as_view()
 @method_decorator(login_required, name='dispatch')
 class JobDetail(HitCountDetailView):
     model = Job
-    template_name = "job/job_detail.html"
+    template_name = "templates/project-details.html"
     context_object_name = "job"
     slug_field = 'slug'
     count_hit = True
@@ -149,10 +156,24 @@ def apply_job(request, slug):
             return redirect("job:job_detail", slug=job.slug)
 
 @csrf_exempt
-def skill_search(request):
+def skillSearch(request):
     if request.is_ajax and request.method == "GET":
         if 'term' in request.GET:
             term = request.GET.get("term")           
             list_queryset = SkillSet.objects.filter(name__icontains=term)
             list_queryset = [query.name for query in list_queryset]
             return JsonResponse(list_queryset, safe=False)
+
+def search_result(request):
+    salary = request.GET.get("salary", None)
+    freshness = request.GET.get("freshness", None)
+    experience = request.GET.get("experience", None)
+    country = request.GET.getlist("country", None)
+    job_list = Job.objects.get_filtered_data(salary, freshness, experience, country)
+    
+    context = {'job_list':job_list,
+               'freshness':freshness,
+               'salary':salary,
+               'experience':experience,
+               }
+    return render(request, 'job/search_result.html', context)
