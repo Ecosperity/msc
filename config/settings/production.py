@@ -10,7 +10,7 @@ from .base import *  # noqa
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = [config("DJANGO_ALLOWED_HOSTS", default=["msc.newtondigi.com","www.msc.newtondigi.com"])]
+ALLOWED_HOSTS = ["msc.newtondigi.com","www.msc.newtondigi.com"]
 
 # DATABASES
 # ------------------------------------------------------------------------------
