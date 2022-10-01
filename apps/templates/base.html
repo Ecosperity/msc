@@ -1,95 +1,312 @@
 {% load static i18n compress%}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}dreamjob{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="django rest api">
-    <meta name="author" content="Dilip">
-
-    <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
-
+<!--THEME CREATED FOR MSCTECHNOLOGY -->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MSCTECHNOLOGY{% endblock title %}</title>
+	<!-- google font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap"
+		rel="stylesheet">
+	<!-- favicons Icons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicons/apple-touch-icon.png' %}" />
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicons/favicon-32x32.png' %}" />
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicons/favicon-16x16.png' %}" />
+	<link rel="manifest" href="{% static 'assets/images/favicons/site.webmanifest' %}" />
     {% block css %}{% endblock %}
-    <!-- Latest compiled and minified Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <!-- This file stores project-specific CSS -->
+	<!-- plugins css -->
     {% compress css %}
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/animate/animate.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/assets/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel/assets/owl.theme.default.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/cretech-icons/style.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/vendors/youtube-popup/youtube-popup.css' %}">
+	<!-- templates css -->
+	<link rel="stylesheet" href="{% static 'assets/css/cretech.css' %}">
     {% endcompress %}
-    <!-- Le javascript
-    ================================================== -->
-      <!-- Bootstrap JS -->
-      <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-      <!-- Your stuff: Third-party javascript libraries go here -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <!-- place project specific Javascript in this file -->
-      {% compress js %}
-      <script defer src="{% static 'js/project.js' %}"></script>
-      {% endcompress %}
-      {% block javascript %}{% endblock javascript %}
-  </head>
-  <body>
-    <div class="mb-1">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'job:job_list' %}">Newton Consulting</a>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'job:job_list' %}">Home <span class="visually-hidden">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li>
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-                </li>
-              {% else %}
-                {% if ACCOUNT_ALLOW_REGISTRATION %}
-              <li class="nav-item">
-                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}" >{% translate "Sign Up" %}</a>
-              </li>
-              {% endif %}
-                <li class="nav-item">
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-                </li>
-              {% endif %}
-              {% if request.user.role == 0 %}
-              <li class="nav-item">
-                <a id="sign-up-link" class="nav-link" href="{% url 'dashboard:dashboard' %}">{% translate "Dashboard" %}</a>
-              </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <div class="container-fluid">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endfor %}
-      {% endif %}
-      {% block content %}{% endblock content %}
-    </div>
-    {% block modal %}{% endblock modal %}
-    {% block inline_javascript %}{% endblock inline_javascript %}
-  </body>
+</head>
+
+<body class="custom-cursor">
+
+	<div class="custom-cursor__cursor"></div>
+	<div class="custom-cursor__cursor-two"></div>
+
+	<div class="preloader">
+		<div class="preloader__circle"></div>
+	</div>
+
+	<div class="page-wrapper">
+		<div class="topbar">
+			<div class="container-fluid">
+				<p class="topbar__text">Welcome to MSC Techmolgoeies</p><!-- /.topbar__text -->
+				<ul class="topbar__info">
+					<li>
+						<i class="fa fa-envelope"></i>
+						<a href="mailto:info@msc-technology.com">info@msc-technology.com</a>
+					</li>
+					<li>
+						<i class="fa fa-map-marker"></i>
+						Kosmo One, Tower-B, Ambattur Industrial Estate, Chennai
+
+					</li>
+				</ul><!-- /.topbar__info -->
+				<ul class="topbar__social">
+					<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fab fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+					<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+				</ul><!-- /.topbar__social -->
+			</div><!-- /.container-fluid -->
+		</div><!-- /.topbar -->
+		<nav class="main-menu sticky-header">
+			<div class="container-fluid">
+				<div class="main-menu__logo">
+					<a href="{% url 'job:home' %}">
+						<img src="{% static 'assets/images/logo-dark.png' %}" width="98" height="33" alt="Cretech">
+					</a>
+				</div><!-- /.main-menu__logo -->
+
+				<ul class="main-menu__list">
+					<li class="menu-item-has-children">
+						<a href="index-2.html">Home</a>
+											</li>
+					<li class="menu-item-has-children">
+						<a href="#">About Us</a>
+						<ul>
+							<li><a href="about.html">Who we are</a></li>
+							<li><a href="team.html">Group Profile</a></li>
+							<li><a href="team.html">Our Values</a></li>
+							<li><a href="team.html">Top Management</a></li>
+							<li><a href="team.html">Corporate Culture</a></li>
+							<li><a href="team.html">Certification</a></li>
+
+
+						</ul>
+					</li>
+					<li class="menu-item-has-children">
+						<a href="services-1.html">Career</a>
+						<ul>
+							<li><a href="services-1.html">Current Opening</a></li>
+							</ul>
+					</li>
+					<li class="menu-item-has-children">
+						<a href="projects.html">News Center</a>
+						<ul>
+							<li><a href="projects.html">Latest Insight</a></li>
+							<li><a href="project-details.html">Media Coverage</a></li>
+						</ul>
+					</li>
+					
+					<li><a href="contact.html">Contact</a></li>
+				</ul><!-- /.main-menu__list -->
+
+				<div class="main-menu__right">
+					<a href="#" class="mobile-nav__toggler">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+					<a href="#" class="search-toggler">
+						<i class="icon-magnifying-glass"></i>
+					</a><!-- /.search-toggler -->
+					<a href="tel:+9288009860" class="main-menu__cta">
+						<i class="fa fa-phone-alt"></i>
+						<span class="main-menu__cta__text">
+							<b>+ 92 ( 8800 ) 9860</b>
+							Call Anytime
+						</span><!-- /.main-menu__cta__text -->
+					</a><!-- /.main-menu__cta -->
+				</div><!-- /.main-menu__right -->
+
+			</div><!-- /.container-fluid -->
+		</nav><!-- /.main-menu -->
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+		{% block content %}{% endblock %}
+
+		<div class="footer-main section-padding--bottom footer-main--top-paddings">
+			<div class="container">
+				<div class="row gutter-y-30">
+					<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--about">
+							<a href="index-2.html" class="footer-widget__logo">
+								<img src="{% static 'assets/images/logo-light.png' %}" width="119" height="40" alt="Cretech">
+							</a>
+							<div class="section-padding-lg--top"></div>
+							<!-- /.footer-widget__text -->
+							<ul class="footer-widget__social">
+								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+								<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+								<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+							</ul><!-- /.footer-widget__social -->
+						</div><!-- /.footer-widget -->
+					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+										<div class="col-lg-3 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--newsletter">
+							<h3 class="footer-widget__title">Quick link</h3><!-- /.footer-widget__title -->
+							
+							<ul class="footer-widget__links">
+								<li>
+									<a href="service-cyber-security.html">Cyber Security</a>
+								</li>
+								<li>
+									<a href="service-it-management.html">IT Management</a>
+								</li>
+								<li>
+									<a href="service-qa-testing.html">QA & Testing</a>
+								</li>
+								<li>
+									<a href="service-infrastructure-plan.html">Infrastructure Plan</a>
+								</li>
+								<li>
+									<a href="service-it-consultent.html">IT Consultent</a>
+								</li>
+							</ul><!-- /.footer-widget__links -->
+							<!-- /.footer-widget__text -->
+							
+						</div><!-- /.footer-widget -->
+					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						<div class="footer-widget footer-widget--contact">
+							<h3 class="footer-widget__title">Contact</h3><!-- /.footer-widget__title -->
+							
+							<p class="footer-widget__links">INDIA<br>
+								MSC Technology (India) pvt. Ltd<BR>
+								Kosmo One, Tower-B,
+								11th Floor, Plot No.14, III Main Road,<BR>
+								Ambattur Industrial Estate, Chennai,
+								TN, India <BR>Tel.: (+91) 44 7104 1700
+						</p>
+								
+								<P class="footer-widget__links">
+									
+									ITALY <br>
+									MSC Technology (Italia),<BR>
+									Via Nizza, 262/Int.27,
+									10125 Torino, Italia<BR>
+									Tel.: (+39) 011 754 7200
+								</P>
+
+									<p class="footer-widget__links">SWITZERLAND<br>
+									MSC Technology (Switzerland)<BR>
+									Avenue Eugène-Pittard 16,
+									1206 Genève, Switzerland<BR>
+									Tel.: (+41) 22 703 88 88
+								
+									</P>
+							
+									<P class="footer-widget__links">USA<br>
+									MSC Technology (North America)<BR>
+									Corporate Headquarters<BR>
+									160 Mount Bethel Road Warren,
+									NJ 07059-5147<BR>
+									Tel.: +1 (908) 605-4100
+								</p>
+							<!-- /.footer-widget__contact -->
+						</div><!-- /.footer-widget -->
+					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div><!-- /.footer-main -->
+		<div class="footer-bottom">
+			<div class="container">
+				<p>&copy; Copyright © 2016 MSC Technology. All rights reserved.<br>
+					<span class="dynamic-year"></span> <a href="https://www.msc.com">An MSC Mediterranean Shipping Company</a></p>
+			</div><!-- /.container -->
+		</div><!-- /.footer-bottom -->
+	</div><!-- /.page-wrapper -->
+
+	<div class="mobile-nav__wrapper">
+		<div class="mobile-nav__overlay mobile-nav__toggler"></div>
+		<!-- /.mobile-nav__overlay -->
+		<div class="mobile-nav__content">
+			<a href="#" class="mobile-nav__close mobile-nav__toggler">
+				<span></span>
+				<span></span>
+			</a>
+
+			<div class="logo-box">
+				<a href="index-2.html" aria-label="logo image"><img src="{% static 'assets/images/logo-light.png' %}" width="98"
+						height="33" alt="Cretech"></a>
+			</div>
+			<!-- /.logo-box -->
+			<div class="mobile-nav__container"></div>
+			<!-- /.mobile-nav__container -->
+
+			<ul class="mobile-nav__contact list-unstyled">
+				<li>
+					<i class="fa fa-phone"></i>
+					<a href="tel:+8898006802">+ 88 ( 9800 ) 6802</a>
+				</li>
+				<li>
+					<i class="fa fa-envelope"></i>
+					<a href="mailto:needhelp@company.com">needhelp@company.com</a>
+				</li>
+				<li>
+					<i class="fa fa-map-marker-alt"></i>
+					88 Broklyn Golden Road Street <br> New York. USA
+				</li>
+			</ul><!-- /.mobile-nav__contact -->
+			<ul class="mobile-nav__social">
+				<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+				<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+				<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+				<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+			</ul><!-- /.mobile-nav__social -->
+
+		</div>
+		<!-- /.mobile-nav__content -->
+	</div>
+	<!-- /.mobile-nav__wrapper -->
+
+	<div class="search-popup">
+		<div class="search-popup__overlay search-toggler"></div>
+		<!-- /.search-popup__overlay -->
+		<div class="search-popup__content">
+			<form action="#">
+				<label for="search" class="sr-only">search here</label><!-- /.sr-only -->
+				<input type="text" id="search" placeholder="Search Here..." />
+				<button type="submit" aria-label="search submit" class="thm-btn">
+					<span><i class="icon-magnifying-glass"></i></span>
+				</button>
+			</form>
+		</div>
+		<!-- /.search-popup__content -->
+	</div>
+	<!-- /.search-popup -->
+
+	<a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+
+	<!-- plugins js -->
+    {% compress js %}
+	<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+	<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'assets/vendors/jquery-validation/jquery.validate.min.js' %}"></script>
+	<script src="{% static 'assets/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'assets/vendors/jquery-appear/jquery.appear.min.js' %}"></script>
+	<script src="{% static 'assets/vendors/wow/wow.js' %}"></script>
+	<script src="{% static 'assets/vendors/jarallax/jarallax.min.js' %}"></script>
+	<script src="{% static 'assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
+	<script src="{% static 'assets/vendors/lettering-js/jquery.lettering.js' %}"></script>
+	<script src="{% static 'assets/vendors/youtube-popup/youtube-popup.jquery.js' %}"></script>
+	<!-- template js -->
+	<script src="{% static 'assets/js/cretech.js' %}"></script>
+    {% endcompress %}
+    {% block javascript %}{% endblock javascript %}
+</body>
 </html>

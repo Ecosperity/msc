@@ -1,10 +1,4 @@
 from django.db import models
-from django.contrib.postgres.search import (
-                                        SearchVector, 
-                                        SearchQuery, 
-                                        SearchHeadline,
-                                        SearchRank
-                                    )
 from django.db.models import Q
 import operator
 from functools import reduce
@@ -20,19 +14,12 @@ class JobQuerySet(models.QuerySet):
             queryset = queryset.filter(query).order_by("-id")
             return queryset
 
-        vector = SearchVector('job_title', 'job_description', 'place')
-        query = SearchQuery(query)
-        search_headline = SearchHeadline('job_description', query)
-        queryset = queryset.annotate(
-                        rank=SearchRank
-                        (vector, query)
-                        ).annotate(
-                        headline=search_headline
-                        ).filter(
-                        rank__gte=0.001
-                        ).order_by(
-                        '-rank'
-                        )
+        
+        queryset = queryset.filter(Q(job_title__icontains=query)|
+                                    Q(role__icontains=query)|
+                                    Q(country__icontains=query)|
+                                    Q(place__icontains=query)
+                                    )
         return queryset
     
     def all_job_lists(self, query, sorting_value):
@@ -117,19 +104,11 @@ class JobManager(models.Manager):
 class JobApplicantQuerySet(models.QuerySet):
 
     def search(self, query, queryset):
-        vector = SearchVector('user__name', 'user__mobile', 'user__email', 'notice_period')
-        query = SearchQuery(query)
-        search_headline = SearchHeadline('user__email', query)
-        queryset = queryset.annotate(
-                        rank=SearchRank
-                        (vector, query)
-                        ).annotate(
-                        headline=search_headline
-                        ).filter(
-                        rank__gte=0.001
-                        ).order_by(
-                        '-rank'
-                        )
+        queryset = queryset.filter(Q(user__name__icontains=query)|
+                                    Q(user__mobile__icontains=query) |
+                                    Q(user__email__icontains=query) |
+                                    Q(notice_period__icontains=query)
+                                    )
         return queryset
     
     def all_applicant_lists(self, query, sorting_value):
