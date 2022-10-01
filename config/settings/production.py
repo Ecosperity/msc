@@ -47,6 +47,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ------------------------------------------------------------------------------
 MEDIA_URL = "/media/"
 
+STATIC_ROOT = "/home/mscnewtondigi/www/static/"
+MEDIA_ROOT = "/home/mscnewtondigi/www/media/"
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
