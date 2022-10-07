@@ -10,24 +10,12 @@ $(document).ready(function () {
     $('.chat-screen').toggleClass('show-chat');
     ChattingData('');
   }, 3000);
+
   //Toggle fullscreen
   $(".chat-bot-icon").click(function (e) {
     $(this).children('svg').toggleClass('animate');
     $('.chat-screen').toggleClass('show-chat');
-
   })
-
-
-  $('.end-chat').click(function () {
-    $('.chat-body').addClass('hide');
-    $('.chat-input').addClass('hide');
-    $('.chat-session-end').removeClass('hide');
-    $('.chat-header-option').addClass('hide');
-  });
-  $('#btnChatClose').click(function () {
-    $(".chat-bot-icon").children('svg').toggleClass('animate');
-    $('.chat-screen').toggleClass('show-chat');
-  });
 
   $('#txtmessage').keyup(function (event) {
     if (event.keyCode === 13) {
@@ -47,6 +35,7 @@ $(document).ready(function () {
       ChattingData(msg);
     }
   });
+
 });
 
 
@@ -105,7 +94,7 @@ function ChattingData(text) {
     $('#txtmessage').removeAttr('disabled');
     $('#txtmessage').focus();
     $(".divTyping").remove();
-    Speak("I am listening you")
+    // Speak("I am listening you")
   });
 }
 
@@ -119,28 +108,32 @@ function Speak(text) {
                 <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.19999999999999998s"></animate>
             </circle></svg></div>`);
 
-  var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-  URL = 'chatbot/speaking';
-  $.ajax({
-    url: URL,
-    type: 'POST',
-    headers: { "X-CSRFToken": csrftoken },
-    data: {
-      'text': text
-    }
-  }).done(function (data) {
     recognition.start();
-    mic.style.background = '#bc32ef';
-    mic.style.borderRadius = '60%';
-    setTimeout(() => {
-      $(".divTyping").remove();
-    }, 4000);
-  });
+    mic.style.background= '#bc32ef';
+    mic.style.borderRadius= '60%';
+
+  // var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+  // URL = 'chatbot/speaking';
+  // $.ajax({
+  //   url: URL,
+  //   type: 'POST',
+  //   headers: { "X-CSRFToken": csrftoken },
+  //   data: {
+  //     'text': text
+  //   }
+  // }).done(function (data) {
+  //   recognition.start();
+  //   mic.style.background = '#bc32ef';
+  //   mic.style.borderRadius = '60%';
+  //   setTimeout(() => {
+  //     $(".divTyping").remove();
+  //   }, 4000);
+  // });
 }
 
 function location_btn_event(val){
   // alert(val);
-  let cdata = `location ${val}`;
+  let cdata = `${val}`;
   ChattingData(cdata);
 }
 function menubar_btn_event(val){
@@ -150,9 +143,9 @@ function menubar_btn_event(val){
       $('#btnJobs').attr('disabled',true);   
       }
   if(val=='jobs'){  
+    $('#btnJobs').removeClass("btn-outline-success").addClass("btn-success").attr('disabled',true);;
+    $('#btnmscTechnology').attr('disabled',true);  
     ChattingData("I am looking for jobs");    
-      $('#btnJobs').removeClass("btn-outline-success").addClass("btn-success").attr('disabled',true);;
-      $('#btnmscTechnology').attr('disabled',true);  
       
   }
 }

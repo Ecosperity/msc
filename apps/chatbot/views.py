@@ -5,6 +5,7 @@ import webbrowser
 import threading
 from django.http import JsonResponse
 
+location = 'india'
 
 def jobssearch(request):  
     return render(request, 'chatbot/jobsearch.html')
@@ -13,37 +14,34 @@ def msc_technology(request):
     return render(request, 'chatbot/msc_technology.html')
 
 #text-Speech converzation
-def speak(text):
-    # text-to-speach
+def speak(text): 
     engine = pyttsx3.init()
-    engine.setProperty('rate', 160)    
-    # engine.setProperty('voice', 'english_rp+f4')
-    engine.setProperty('voice', 'english+f1')
-    # engine.setProperty('voice', 'english+f2')
-    # engine.setProperty('voice', 'english+f3')
-    # engine.setProperty('voice', 'english+f4')
-    # engine.setProperty('voice', 'english_rp+f3') 
+    engine.setProperty('rate', 160)   
+    voices = engine.getProperty('voices')#getting details of current voice
+    #engine.setProperty('voice', voices[0].id)  #o for male
+    engine.setProperty('voice', voices[1].id)   #1 for female
     engine.say(text)
     engine.runAndWait()
     # engine.stop()
-
+    
 def speaking(request):
     text = request.POST.get('text') 
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 160)
-    # engine.setProperty('voice', 'english_rp+f4')
-    engine.setProperty('voice', 'english+f1')
-    engine.say(text)
-    engine.runAndWait()
-    return JsonResponse(text, safe=False)
+    # text-to-speach
+    engine1 = pyttsx3.init()
+    engine1.setProperty('rate', 160)   
+    voices1 = engine1.getProperty('voices')#getting details of current voice
+    #engine.setProperty('voice', voices[0].id)  #o for male
+    engine1.setProperty('voice', voices1[1].id)   #1 for female
+    engine1.say(text)
+    engine1.runAndWait()
     # engine.stop()
+    return JsonResponse(text, safe=False)
 
 
 def BotConversation(request):   
     q = request.POST.get('text')
     if q=='':
-        speak("Hi, My name is Mia")
-        speak("How can I help you ?")
+        speak("Hi, My name is Mia. How can I help you ?")        
         return JsonResponse("Hi, My name is Mia, How can I help you ?", safe=False)
     else:
         speak("You said " + q)
@@ -54,7 +52,7 @@ def BotConversation(request):
                 }
                 speak("Which Location")
                 return JsonResponse(context, safe=False)
-        if "location india" in q.lower():     
+        if "india" in q.lower():     
                 context = {                
                 'title':"location",                
                 'q':"India okay, Please tell me Your Skills"
@@ -124,28 +122,3 @@ def BotConversation(request):
             
         return JsonResponse(q, safe=False)
 
-
-##Speech to text converzation
-# def takeQuerySpeechRec():
-#     speech_r = sr.Recognizer()
-#     with sr.Microphone() as micro:
-#         print("i am listening you............")
-#         speak("i am listening you.")
-#         audio = speech_r.listen(micro)
-#         # listen for 5 seconds and create the ambient noise energy level
-#         speech_r.adjust_for_ambient_noise(micro, duration=5)
-#         speech_r.pause_threshold=1
-#         try:
-#             query = speech_r.recognize_google(audio, language='en-IN')
-#             speak("you said" + query)
-#             print(query)
-#             if "youtube" in query.lower():
-#                 print("Opening Youtube.com....")
-#                 speak("Opening Youtube.com please wait")
-#                 webbrowser.open("https://youtube.com/")
-#             else:
-#                 speak("you said" + query)
-#         except sr.UnknownValueError:
-#             print("unrecognized your Voice. Say that again please")
-#             speak("unrecognized your Voice. Say again please")
-    
