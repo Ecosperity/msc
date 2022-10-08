@@ -10,7 +10,11 @@
 }
 </style>
 {% endblock dashboard_css %}
-    <h3 class="text-center">Applicant lists</h3>
+<div class="card col mx-auto">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title" style="font-size: 20px;">Applicant lists</h4>
+    </div>
+<div class="card-body">
     <div class="d-flex align-items-center justify-content-between">
       <div>
         <form action=".">
@@ -146,5 +150,7 @@
       {% endfor %}
     </tbody>
   </table>
+  </div>
+</div>
 {% include 'common/pagination.html' %}
 {% endblock dashboard_content %}

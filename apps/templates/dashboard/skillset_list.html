@@ -10,12 +10,17 @@
 }
 </style>
 {% endblock dashboard_css %}
-<form action=".">
-    <div class="d-flex flex-row justify-content">
-        <div class="pb-2"><input type="text" name="name" class="form-control" required></div>
-        <div class="pb-2"><input type="submit" value="Search" class="btn btn-primary"></div>
+<div class="card col mx-auto">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title" style="font-size: 20px;">Upload Skillset</h4>
     </div>
-</form>
+  <div class="card-body">
+    <form action=".">
+        <div class="d-flex flex-row justify-content">
+            <div class="pb-2"><input type="text" name="name" class="form-control" required></div>
+            <div class="pb-2"><input type="submit" value="Search" class="btn btn-primary"></div>
+        </div>
+    </form>
 
   <table class="table table-striped table-bordered">
     <thead>
@@ -67,5 +72,7 @@
       {% endfor %}
     </tbody>
   </table>
+  </div>
+</div>
 {% include 'common/pagination.html' %}
 {% endblock dashboard_content %}
