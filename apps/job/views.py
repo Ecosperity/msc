@@ -38,15 +38,15 @@ def search(request):
 class HomeView(ListView):
     model = Job
     template_name = 'templates/index.html'
-    context_object_name = 'job'
+    context_object_name = 'jobs'
     def get_queryset(self, *args, **kwargs):
-        return Job.objects.published_job_lists().order_by("published_at")[:4]
+        return Job.objects.published_job_lists().order_by("published_at", "-id")[:5]
 
 class JobList(ListView):
     model = Job
-    template_name = 'templates/projects.html'
-    context_object_name = 'job'
-    paginate_by = 9
+    template_name = 'job/job_list.html'
+    context_object_name = 'jobs'
+    paginate_by = 12
     
     def get_queryset(self):
         locations = self.request.GET.get('locations')
@@ -60,7 +60,7 @@ class JobList(ListView):
             job_length = len(job)
             if job_length < 1 :
                 job = Job.objects.published_job_lists()
-                messages.success(self.request, "No items found.")
+                messages.success(self.request, "No jobs found.")
             else:
                 messages.success(self.request, f"{job_length} items found.")
         return job
@@ -69,7 +69,7 @@ job_list = JobList.as_view()
 @method_decorator(login_required, name='dispatch')
 class JobDetail(HitCountDetailView):
     model = Job
-    template_name = "templates/project-details.html"
+    template_name = "job/job_detail.html"
     context_object_name = "job"
     slug_field = 'slug'
     count_hit = True

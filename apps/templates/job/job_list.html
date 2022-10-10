@@ -1,27 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h3 class="text-center">Find your dream job</h3>
-{% include 'job/home/search.html' %}
+<!-- <h2 class="text-center">Explore All Opportunities</h2> -->
 
-<div class="row">
-  {% for job in job %}
-    <div class="col-md-4 col-lg-3  g-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{job.job_title|truncatechars:30}}</h5>
-                <h6 class="card-subtitle mb-2"><strong>company : </strong>{{job.company}}</h6>
-                <h6 class="card-subtitle mb-2"><strong>Experience : </strong>{{job.experience}}</h6>
-                <h6 class="card-subtitle mb-2"><strong>skills : </strong>{% for skill in job.skill_set.all %}{{skill.name}}, {% endfor %}</h6>
-                <h6 class="card-subtitle mb-2"><strong>Place : </strong>{{job.place|truncatechars:20}}</h6>
-                <p class="card-text">{{job.uploaded_at}}</p>
-                <a href="{% url 'job:job_detail' slug=job.slug %}" class="btn btn-secondary w-100"style="margin-bottom:10px!important">View and apply</a>
-            </div>
+<section class="service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right">
+	<div class="container">
+    {% include 'job/home/search.html' %}
+		<div class="row g-3">
+        {% for job in jobs %}
+        <div class="col-sm-3">
+            <div class="item">
+                <div class="service-card-three">
+                    <div class="service-card-three__icon">
+                        <i class="icon-new-product"></i>
+                    </div><!-- /.service-card-three__icon -->
+                    <div class="service-card-three__content">
+                        <h3 class="service-card-three__title"><a href="{% url 'job:job_detail' slug=job.slug %}">{{job.job_title}}</a></h3><!-- /.service-card-three__title -->
+                        <div class="service-card-three__text">No of Position: {{job.no_of_openings}} </div><!-- /.service-card-three__text -->
+                        <div class="service-card-three__text">Place: {{job.place}} </div><!-- /.service-card-three__text -->
+                        <a href="{% url 'job:job_detail' slug=job.slug %}" class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </a><!-- /.service-card-three__text -->
+                    </div><!-- /.service-card-three__content -->
+                </div><!-- /.service-card-three -->
+            </div><!-- /.item -->
         </div>
-    </div>
-  {% endfor %}
-</div>
-
+        {% endfor %}
+        </div>
+	</div><!-- /.container -->
+</section>
 {% if is_paginated %}
   <nav aria-label="Page navigation example">
       <ul class="pagination float-end">
@@ -45,11 +50,11 @@
       </ul>
   </nav>
 {% endif %}
-{% endblock content %}
-{% block inline_javascript %}
+{% endblock %}
+{% block javascript %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{% static 'js/home/search.js' %}"></script>
-{% endblock inline_javascript %}
+{% endblock javascript %}

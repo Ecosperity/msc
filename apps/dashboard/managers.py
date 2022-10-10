@@ -1,28 +1,12 @@
 from django.db import models
-from django.contrib.postgres.search import (
-                                        SearchVector, 
-                                        SearchQuery, 
-                                        SearchHeadline,
-                                        SearchRank
-                                    )
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 class SkillSetQuerySet(models.QuerySet):
     
     def search(self, query, queryset):
-        vector = SearchVector('name')
-        query = SearchQuery(query)
-        search_headline = SearchHeadline('name', query)
-        return queryset.annotate(
-                        rank=SearchRank
-                        (vector, query)
-                        ).annotate(
-                        headline=search_headline
-                        ).filter(
-                        rank__gte=0.001
-                        ).order_by(
-                        '-rank'
-                        )
+        queryset = queryset.filter(Q(name=query))
+        return queryset
 
     def skillset_lists(self, query, sorting_value):
         queryset = self.all()

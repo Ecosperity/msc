@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static humanize %}
 {% block css %}
 <style>
   .error{
@@ -8,76 +8,158 @@
   </style>
   {% endblock %}
   {% block content %}
-.<div class="card text-left">
-  <div class="card-body">
-    <h4 class="card-title">{{job.job_title}}</h4>
-    <p class="card-text">{{job.job_description|safe}}{{job.media}}</p>
-  </div>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob">Apply </a>
-</div>
+<div class="container">
+  <h3 class="text-center">Job descriptions </h3>
+  <div class="row">
+    <div class="col-md-10 offset-sm-1">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{job.job_title}}</h4>
+          <p class="card-text">{{job.job_description|safe}}{{job.media}}</p>
 
-<div class="row">
-  <div class="col">
-    <div class="collapse multi-collapse" id="collapseApplyJob">
-      <div class="container mt-4">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <div class="card text-left ">
-                    <div class="card-body">
-                        <form action="{% url 'job:apply_job' job.slug %}" method="post" id="id_apply_job" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="id_name" class="form-label">Your name</label>
-                                {{user_form.name}}
-                            </div>
-    
-                            <div class="mb-3">
-                                <label for="id_mobile" class="form-label">Your mobile no</label>
-                                {{user_form.mobile}}
-                            </div>
-    
-                            <div class="mb-3">
-                                <label for="id_job_title" class="form-label">Your notice period</label>
-                                {{applicant_form.notice_period}}
-                            </div>
-
-                            <div class="mb-3">
-                              <label for="id_linkedin_link" class="form-label">Your linkedin link</label><br>
-                              {{applicant_form.linkedin_link}}
-                            </div>
-
-                            <div class="mb-3">
-                              <label for="id_qualitative_skills" class="form-label">Your qualitative skills</label><br>
-                              {{applicant_form.qualitative_skills}}
-                            </div>
-                            
-                            <div class="mb-3">
-                              <label for="id_subject" class="form-label">Subject (Please mention the Role you are applying)</label><br>
-                              {{applicant_form.subject}}
-                            </div>
-
-                            <div class="mb-3">
-                              <label for="id_message" class="form-label">Message</label>
-                              {{applicant_form.message}}
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="id_resume" class="form-label">Upload your resume (pdf format)</label><br>
-                                {{applicant_form.resume}}
-                            </div>
-
-                            <button type="submit"class="btn btn-primary w-100" {% if check_applied_condition %}disabled{% endif %}>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</button>
-                        </form>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-sm-3">
+              Role
             </div>
+            <div class="col-sm-9">
+             : <strong>{{job.role}}</strong>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              Place
+            </div>
+            <div class="col-sm-9">
+              : <strong>{{job.place}}</strong>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              Country
+            </div>
+            <div class="col-sm-9">
+              : <strong>{{job.country}}</strong>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              Employement type
+            </div>
+            <div class="col-sm-9">
+              : <strong>{{job.employement_type}}</strong>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              Salary
+            </div>
+            <div class="col-sm-9">
+              : <strong>{{job.salary}}</strong>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              Required skills
+            </div>
+            <div class="col-sm-9">
+              : <strong>{% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}</strong>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-3">
+              Industry
+            </div>
+            <div class="col-sm-9">
+              : <strong>{{job.industry}}</strong> 
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              Functional area
+            </div>
+            <div class="col-sm-9">
+              : <strong>{{job.functional_area}}</strong>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              Published at
+            </div>
+            <div class="col-sm-9">
+              : <strong>{{job.published_at|naturaltime}}</strong>
+            </div>
+          </div>
+        </div>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob">Apply Now </a>
+      </div>
+      
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="collapseApplyJob">
+            <div class="card">
+              <div class="card-body">
+                  <form action="{% url 'job:apply_job' job.slug %}" method="post" id="id_apply_job" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                          <label for="id_name" class="form-label">Your name</label>
+                          {{user_form.name}}
+                      </div>
+
+                      <div class="mb-3">
+                          <label for="id_mobile" class="form-label">Your mobile no</label>
+                          {{user_form.mobile}}
+                      </div>
+
+                      <div class="mb-3">
+                          <label for="id_job_title" class="form-label">Your notice period</label>
+                          {{applicant_form.notice_period}}
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="id_linkedin_link" class="form-label">Your linkedin link</label><br>
+                        {{applicant_form.linkedin_link}}
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="id_qualitative_skills" class="form-label">Your qualitative skills</label><br>
+                        {{applicant_form.qualitative_skills}}
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="id_subject" class="form-label">Subject (Please mention the Role you are applying)</label><br>
+                        {{applicant_form.subject}}
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="id_message" class="form-label">Message</label>
+                        {{applicant_form.message}}
+                      </div>
+
+                      <div class="mb-3">
+                          <label for="id_resume" class="form-label">Upload your resume (pdf format)</label><br>
+                          {{applicant_form.resume}}
+                      </div>
+
+                      <button type="submit"class="btn btn-primary w-100" {% if check_applied_condition %}disabled{% endif %}>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</button>
+                  </form>
+              </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-{% endblock content %}
-{% block inline_javascript %}
+{% endblock %}
+{% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{% static 'js/dashboard/validation.js' %}"></script>
 <script src="{% static 'js/dashboard/job_preview.js' %}"></script>
@@ -85,4 +167,4 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="{% static 'js/dashboard/skills_add.js' %}"></script>
-{% endblock inline_javascript %}
+{% endblock javascript %}

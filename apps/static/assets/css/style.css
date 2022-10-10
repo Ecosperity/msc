@@ -1,0 +1,19 @@
+.btn-primary {
+    background-color: #eed484!important;
+    color: black;
+    border: none;
+}
+.bg-primary {
+    background-color: #eed484!important;
+    color: black;
+    border: none;
+}
+.card {
+    background-color: #fff;
+    padding: 20px;
+}
+
+.pagination > .active > a{
+    color: white;
+    background-color: #eed484;
+}
