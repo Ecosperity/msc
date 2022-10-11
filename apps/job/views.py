@@ -40,7 +40,7 @@ class HomeView(ListView):
     template_name = 'templates/index.html'
     context_object_name = 'jobs'
     def get_queryset(self, *args, **kwargs):
-        return Job.objects.published_job_lists().order_by("published_at", "-id")[:5]
+        return Job.objects.published_job_lists().order_by("-published_at", "-id")[:5]
 
 class JobList(ListView):
     model = Job
