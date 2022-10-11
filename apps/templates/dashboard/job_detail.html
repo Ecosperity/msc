@@ -1,10 +1,94 @@
 {% extends 'dashboard/dashboard_base.html' %}
+{% load humanize %}
 {% block dashboard_content %}
-.<div class="card text-left">
-  <img class="card-img-top" src="holder.js/100px180/" alt="">
+<div class="card col mx-auto">
+  <div class="card-header card-header-primary">
+      <h4 class="card-title" style="font-size: 20px;">Job Details</h4>
+  </div>
   <div class="card-body">
-    <h4 class="card-title">Title</h4>
-    <p class="card-text">Body</p>
+    <h4 class="card-title">{{job.job_title}}<span class="float-end"><a href="{% url 'dashboard:update_job' slug=job.slug %}"><i class="fa-solid fa-pen mx-2 text-info"></i></a></span></h4>
+    <p class="card-text">{{job.job_description|safe}}{{job.media}}</p>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Role
+      </div>
+      <div class="col-sm-9">
+       : <strong>{{job.role}}</strong>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Place
+      </div>
+      <div class="col-sm-9">
+        : <strong>{{job.place}}</strong>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Country
+      </div>
+      <div class="col-sm-9">
+        : <strong>{{job.country}}</strong>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Employement type
+      </div>
+      <div class="col-sm-9">
+        : <strong>{{job.employement_type}}</strong>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Salary
+      </div>
+      <div class="col-sm-9">
+        : <strong>{{job.salary}}</strong>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Required skills
+      </div>
+      <div class="col-sm-9">
+        : <strong>{% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}</strong>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-3">
+        Industry
+      </div>
+      <div class="col-sm-9">
+        : <strong>{{job.industry}}</strong> 
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Functional area
+      </div>
+      <div class="col-sm-9">
+        : <strong>{{job.functional_area}}</strong>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        Published at
+      </div>
+      <div class="col-sm-9">
+        : <strong>{{job.published_at|naturaltime}}</strong>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock dashboard_content %}

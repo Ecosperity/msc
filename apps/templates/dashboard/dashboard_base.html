@@ -101,7 +101,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if '/dashboard/job-list/' == request.path %}active{% endif %}" href="{% url 'dashboard:job_list' %}">
+                <a class="nav-link {% if '/dashboard/job-list/' == request.path or '/dashboard/job-detail/' in request.path or '/dashboard/update-job/' in request.path or '/dashboard/delete-job/' in request.path %}active{% endif %}" href="{% url 'dashboard:job_list' %}">
                   <span><i class="fa-solid fa-list"></i></span>
                   Job list
                 </a>
@@ -119,7 +119,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if '/dashboard/skillset-list/' == request.path or '/dashboard/update-skillset/' in request.path or '/dashboard/delete-skillset/' in request.path %}active{% endif %}" href="{% url 'dashboard:skillset_list' %}">
+                <a class="nav-link {% if '/dashboard/skillset-list/' == request.path or '/dashboard/update-skillset/' in request.path or '/dashboard/delete-skillset/' in request.path or '/dashboard/skillset-detail/' in request.path %}active{% endif %}" href="{% url 'dashboard:skillset_list' %}">
                   <span><i class="fa-solid fa-list"></i></span>
                   Skillset list
                 </a>

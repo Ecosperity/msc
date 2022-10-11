@@ -8,15 +8,18 @@
 }
 </style>
 {% endblock dashboard_css %}
-<h3 class="text-center">Upload Skillset</h3>
-<div class="col-md-8 offset-md-2 mb-4">
-    
+<div class="card mx-auto">
+  <div class="card-header card-header-primary">
+    <h4 class="card-title" style="font-size: 20px;">Update Job</h4>
+  </div>
+  <div class="card-body">
     <form action="." method="post" id="id_skillset">
-        {% csrf_token %}
-          {{form.as_p}}
-        <input type="submit" class="btn btn-primary w-100">
-        </form>
-
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" class="btn btn-primary w-100">
+    </form>
+  </div>
+</div>
 {% endblock dashboard_content %}
 {% block dashboard_inline_javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

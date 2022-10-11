@@ -339,3 +339,7 @@ body {
 .nav-item .nav-link.active {
     background-color: #eed484;
 }
+.pagination > .active > a{
+    color: white;
+    background-color: #eed484;
+}
