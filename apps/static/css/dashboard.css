@@ -339,6 +339,9 @@ body {
 .nav-item .nav-link.active {
     background-color: #eed484;
 }
+.nav-item .nav-link:hover {
+    background-color: #efe9d7;
+}
 .pagination > .active > a{
     color: white;
     background-color: #eed484;
