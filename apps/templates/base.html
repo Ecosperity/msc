@@ -77,36 +77,43 @@
 
 				<ul class="main-menu__list">
 					<li class="menu-item-has-children">
-						<a href="index-2.html">Home</a>
+						<a href="{% url 'job:home' %}">Home</a>
 											</li>
 					<li class="menu-item-has-children">
 						<a href="#">About Us</a>
 						<ul>
-							<li><a href="about.html">Who we are</a></li>
-							<li><a href="team.html">Group Profile</a></li>
-							<li><a href="team.html">Our Values</a></li>
-							<li><a href="team.html">Top Management</a></li>
-							<li><a href="team.html">Corporate Culture</a></li>
-							<li><a href="team.html">Certification</a></li>
-
-
+							<li><a href="{% url 'who_we_are' %}">Who we are</a></li>
+							<li><a href="{% url 'group_profile' %}">Group Profile</a></li>
+							<li><a href="{% url 'our_values' %}">Our Values</a></li>
+							<li><a href="{% url 'top_management' %}">Top Management</a></li>
+							<li><a href="{% url 'corporate_culture' %}">Corporate Culture</a></li>
+							<li><a href="{% url 'certification' %}">Certification</a></li>
 						</ul>
 					</li>
 					<li class="menu-item-has-children">
-						<a href="services-1.html">Career</a>
+						<a href="{% url 'current_opening' %}">Career</a>
 						<ul>
-							<li><a href="services-1.html">Current Opening</a></li>
+							<li><a href="{% url 'current_opening' %}">Current Opening</a></li>
 							</ul>
 					</li>
 					<li class="menu-item-has-children">
-						<a href="projects.html">News Center</a>
+						<a href="{% url 'latest_insite' %}">News Center</a>
 						<ul>
-							<li><a href="projects.html">Latest Insight</a></li>
-							<li><a href="project-details.html">Media Coverage</a></li>
+							<li><a href="{% url 'latest_insite' %}">Latest Insight</a></li>
+							<li><a href="{% url 'media_coverage' %}">Media Coverage</a></li>
 						</ul>
 					</li>
 					
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="{% url 'contact_us' %}">Contact</a></li>
+					{% if not request.user.is_authenticated %}
+					<li><a href="{% url 'account_login' %}">Login</a></li>
+					<li><a href="{% url 'account_signup' %}">Register</a></li>
+					{% else %}
+					<li><a href="{% url 'account_logout' %}">Logout</a></li>
+					{% endif %}
+					{% if request.user.role == 0 or request.user.role == 1%}
+					<li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+					{% endif %}
 				</ul><!-- /.main-menu__list -->
 
 				<div class="main-menu__right">

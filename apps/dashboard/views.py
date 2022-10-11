@@ -77,7 +77,7 @@ class JobList(ListView):
         job = Job.objects.all_job_lists(query, sorting_value)
         if query is not None:
             job_length = len(job)
-            messages.success(self.request, f"{job_length if job_length >=1  else 'No'} items found for {query}.")
+            messages.success(self.request, f"{job_length if job_length >=1  else 'No'} job found for {query}.")
         return job
 job_list=JobList.as_view()
 
@@ -183,7 +183,7 @@ class SkillsetList(ListView):
         skillsets = SkillSet.objects.skillset_lists(query, sorting_value)
         if query is not None:
             skillsets_length = len(skillsets)
-            messages.success(self.request, f"{skillsets_length if skillsets_length >=1  else 'No'} items found for {query}.")
+            messages.success(self.request, f"{skillsets_length if skillsets_length >=1  else 'No'} job found for {query}.")
         return skillsets
 skillset_list = SkillsetList.as_view()
 

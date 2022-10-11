@@ -60,9 +60,9 @@ class JobList(ListView):
             job_length = len(job)
             if job_length < 1 :
                 job = Job.objects.published_job_lists()
-                messages.success(self.request, "No jobs found.")
+                messages.success(self.request, "No job found.")
             else:
-                messages.success(self.request, f"{job_length} items found.")
+                messages.success(self.request, f"{job_length} Job found.")
         return job
 job_list = JobList.as_view()
 
