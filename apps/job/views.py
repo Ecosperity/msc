@@ -77,7 +77,11 @@ class JobDetail(HitCountDetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user=self.request.user
-        context['check_applied_condition'] = 1 in [job.is_applied for job in Job.objects.get(slug=self.kwargs.get('slug')).jobapplicant_set.all().filter(user=user)]
+        slug=self.kwargs.get('slug')
+        skill=[skill.name for skill in self.object.skill_set.all()]
+        object=self.object
+        context['check_applied_condition'] = 1 in [job.is_applied for job in Job.objects.get(slug=slug).jobapplicant_set.all().filter(user=user)]
+        context['related_jobs'] = Job.objects.filter(country=object.country, place=object.place, skill__name__in=skill).distinct().exclude(slug=slug)
         try:
             applicant = JobApplicant.objects.get(user=user)
         except:

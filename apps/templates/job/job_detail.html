@@ -170,6 +170,32 @@
     </div>
   </div>
 </div>
+{% if related_jobs %}
+<section class="service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right section-padding--top">
+	<div class="container">
+    <h3>Similar Jobs</h3><hr><hr>
+		<div class="row g-3">
+        {% for job in related_jobs %}
+        <div class="col-sm-3">
+            <div class="item">
+                <div class="service-card-three">
+                    <div class="service-card-three__icon">
+                        <i class="icon-new-product"></i>
+                    </div><!-- /.service-card-three__icon -->
+                    <div class="service-card-three__content">
+                        <h3 class="service-card-three__title"><a href="{% url 'job:job_detail' slug=job.slug %}">{{job.job_title}}</a></h3><!-- /.service-card-three__title -->
+                        <div class="service-card-three__text">No of Position: {{job.no_of_openings}} </div><!-- /.service-card-three__text -->
+                        <div class="service-card-three__text">Place: {{job.place}} </div><!-- /.service-card-three__text -->
+                        <a href="{% url 'job:job_detail' slug=job.slug %}" class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </a><!-- /.service-card-three__text -->
+                    </div><!-- /.service-card-three__content -->
+                </div><!-- /.service-card-three -->
+            </div><!-- /.item -->
+        </div>
+        {% endfor %}
+        </div>
+	</div><!-- /.container -->
+</section>
+{% endif %}
 {% endblock %}
 {% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
