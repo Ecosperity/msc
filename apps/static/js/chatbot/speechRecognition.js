@@ -7,7 +7,7 @@ mic.addEventListener("click",function(){
     recognition.start();
     mic.style.background= '#bc32ef';
     mic.style.borderRadius= '60%';
-    Speak("I am listening you")
+    // Speak("I am listening you")
 })
 
 micStop.addEventListener("click",function(){   

@@ -95,6 +95,9 @@ function ChattingData(text) {
     $('#txtmessage').focus();
     $(".divTyping").remove();
     // Speak("I am listening you")
+    recognition.start();
+    mic.style.background= '#bc32ef';
+    mic.style.borderRadius= '60%';
   });
 }
 
