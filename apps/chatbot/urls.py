@@ -4,7 +4,7 @@ app_name='chatbot'
 
 urlpatterns = [    
     path('BotConversation',views.BotConversation, name='BotConversation'),
-    path('speaking',views.speaking, name='speaking'),
+    path('gohil',views.gohil, name='gohil'),
     path('jobssearch/',views.jobssearch, name='jobssearch'),
     path('msc-technology/',views.msc_technology, name='msc_technology'),
 ]

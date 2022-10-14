@@ -6,7 +6,8 @@ recognition.continuous = true;
 mic.addEventListener("click",function(){
     recognition.start();
     mic.style.background= '#bc32ef';
-    mic.style.borderRadius= '60%';
+    mic.style.borderRadius = '60%';
+    // mic.classList.add("blink_me")   
     // Speak("I am listening you")
 })
 

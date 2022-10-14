@@ -40,7 +40,10 @@ $(document).ready(function () {
 
 
 function ChattingData(text) {
-  $('.chat-body').append('<div class="chat-bubble me">' + text + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
+  recognition.stop();
+  if(text !==''){
+    $('.chat-body').append('<div class="chat-bubble mt-1 me">' + text + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
+  }
   $('.chat-body').append(`<div class="divTyping chat-bubble you" id="divTyping"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;display: block;shape-rendering: auto;width: 43px;height: 20px;" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                 <circle cx="0" cy="44.1678" r="15" fill="#ffffff">
                     <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.6s"></animate>
