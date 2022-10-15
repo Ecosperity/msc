@@ -95,13 +95,13 @@
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link {% if '/dashboard/' == request.path %}active{% endif %}" aria-current="page" href="{% url 'dashboard:dashboard' %}">
-                  <span data-feather="home" class="align-text-bottom"></span>
+                  <span><i class="fa-solid fa-list"></i></span>
                   Dashboard
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {% if '/dashboard/create-job/' in request.path %}active{% endif %}" href="{% url 'dashboard:create_job' %}">
-                  <span><i class="fa-solid fa-bag-shopping"></i></span>
+                  <span><i class="fa-solid fa-list"></i></span>
                   Add job
                 </a>
               </li>
