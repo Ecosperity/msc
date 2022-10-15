@@ -5,12 +5,17 @@
 .error{
     color:red;
 }
+.job_descroption *{
+    font-size: 16px;
+    font-family: var(--cretech-font, "DM Sans", sans-serif);
+    color: var(--cretech-text, #8B8178);
+}
 </style>
 {% endblock %}
 {% block content %}
 <div class="page-header">
   <div class="page-header__bg"
-    style="background-image: url({% static 'assets/images/background/page-header-bg-1-1.jpg' %});"></div>
+    style="background-image: url({% static 'ssets/images/background/page-header-bg-1-1.jpg' %});"></div>
   <!-- /.page-header__bg -->
   <div class="container">
     <ul class="thm-breadcrumb list-unstyled">
@@ -21,17 +26,17 @@
   </div><!-- /.container -->
 </div><!-- /.page-header -->
 <div class="container section-padding--top">
-  <h3 class="text-center">Job descriptions </h3>
+  <h3 class="text-center">Job descriptions</h3>
   <div class="row">
     <div class="col-md-10 offset-sm-1">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">{{job.job_title}}</h4>
-          <p class="card-text">{{job.job_description|safe}}{{job.media}}</p>
+          <div class="job_descroption"><strong>{{job.job_description|safe}}{{job.media}}</strong></div>
 
           <div class="row">
             <div class="col-sm-3">
-              Role
+              <strong>Role</strong>
             </div>
             <div class="col-sm-9">
              : <strong>{{job.role}}</strong>
@@ -40,7 +45,7 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Place
+              <strong>Place</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{{job.place}}</strong>
@@ -49,7 +54,7 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Country
+              <strong>Country</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{{job.country}}</strong>
@@ -58,7 +63,7 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Employement type
+              <strong>Employement type</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{{job.employement_type}}</strong>
@@ -67,7 +72,7 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Salary
+              <strong>Salary</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{{job.salary}}</strong>
@@ -76,7 +81,7 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Required skills
+              <strong>Required skills</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}</strong>
@@ -85,7 +90,7 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Experience required
+              <strong>Experience required</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{{job.experience}}</strong>
@@ -94,7 +99,7 @@
           
           <div class="row">
             <div class="col-sm-3">
-              Industry
+              <strong>Industry</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{{job.industry}}</strong> 
@@ -103,7 +108,7 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Functional area
+              <strong>Functional area</strong>
             </div>
             <div class="col-sm-9">
               : <strong>{{job.functional_area}}</strong>
@@ -112,14 +117,18 @@
 
           <div class="row">
             <div class="col-sm-3">
-              Published at
+              <strong>Published at</strong>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-5">
               : <strong>{{job.published_at|naturaltime}}</strong>
+            </div>
+            <div class="col-sm-4">
+              <a href="{% url 'job:job_list' %}" class="thm-btn float-end"><span>All jobs</span></a>
             </div>
           </div>
         </div>
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob">Apply Now </a>
+        <button type="submit" class="thm-btn w-100"data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob"><span>Apply Now</span></button>
+        <!-- <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob">Apply Now </a> -->
       </div>
       
       <div class="row">
@@ -168,8 +177,8 @@
                           <label for="id_resume" class="form-label">Upload your resume (pdf format)</label><br>
                           {{applicant_form.resume}}
                       </div>
-
-                      <button type="submit"class="btn btn-primary w-100" {% if check_applied_condition %}disabled{% endif %}>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</button>
+                      <button type="submit" class="thm-btn w-100"{% if check_applied_condition %}disabled{% endif %}><span>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</span></button>
+                      <!-- <button type="submit"class="btn btn-primary w-100" {% if check_applied_condition %}disabled{% endif %}>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</button> -->
                   </form>
               </div>
           </div>
