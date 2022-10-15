@@ -22,7 +22,7 @@
     bottom: 82px;
 }
 .chat-screen .chat-header {
-    background-image: linear-gradient(to right, #334e9f,#6f42c1);
+    background-image: linear-gradient(to right, #EED484,#EED484);    
     border-radius: 15px 15px 0 0;
     padding: 15px;
     display: block;
@@ -30,19 +30,17 @@
 .chat-screen .chat-header .chat-header-title {
     display: inline-block;
     width: calc(100% - 50px);
-    color: #fff;
+    color: #000000;
     font-size: 14px;
 }
 .chat-screen .chat-header .chat-header-option {
     display: inline-block;
     width: 44px;
-    color: #fff;
+    color: #000000;
     font-size: 14px;
     text-align: right;
 }
-.chat-screen .chat-header .chat-header-option .dropdown .dropdown-toggle svg {
-    color: #fff;
-}
+
 .chat-screen .chat-mail {
     padding: 30px;
     display: block;
@@ -54,23 +52,10 @@
     font-size: 14px;
     padding: 0.55rem 1.25rem;
 }
-.chat-screen .chat-mail input.form-control:focus {
-    box-shadow: none;
-    border: 1px solid #add5fc;
-}
-.chat-screen .chat-mail .select2 .selection .select2-selection .select2-selection__rendered {
-    border-radius: 30px;
-    border: 1px solid #e1e1e1;
-    height: calc(1.28em + 1.28rem + 2px);
-    padding: 9px 20px;
-    font-size: 14px;
-}
-.chat-screen .chat-mail .select2.select2-container--open .selection .select2-selection {
-    box-shadow: none;
-    border-radius: 30px;
-}
+
+
 .chat-screen .chat-mail button {
-    background-image: linear-gradient(to right, #334e9f,#6f42c1);
+    background-image: linear-gradient(to right, #EED484,#EED484);
     border: none;
     padding: 0.58rem 1.25rem;
     transition: transform 0.5s ease;
@@ -83,7 +68,7 @@
     /* display: inline-block; */
     min-height: 336px;
     max-height: 336px;
-    background: #fbfbfb;
+    background: #fbfbfb;  
 }
 .chat-screen .chat-body .chat-start {
     border: 1px solid #f8d4ff;
@@ -106,8 +91,9 @@
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.02);
 }
 .chat-screen .chat-body .chat-bubble.you {
-    background-image: linear-gradient(to right, #673ab7, #813bcb, #9e38de, #bc32ef, #dc22ff);
-    color: #fff;
+    /* background-image: linear-gradient(to right, #673ab7, #813bcb, #9e38de, #bc32ef, #dc22ff); */
+    background-image: linear-gradient(to right, #EED484, #EED48E, #EED498, #EED4A2, #EED4AC);
+    color: #000000;
     border-radius: 0 15px 15px 15px;
     align-self: flex-start;
     display: table;
@@ -120,14 +106,7 @@
     align-self: flex-end;
     display: table;
 }
-/* .chat-screen .chat-body .chat-bubble.me {
-    background-image: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF);
-    color: #888ea8;
-    border-radius: 15px 0px 15px 15px;
-    float: right;
-    align-self: flex-end;
-    display: table;
-} */
+
 .chat-screen .chat-input {
     width: 100%;
     position: relative;
@@ -234,18 +213,14 @@
     text-decoration: underline;
     line-height: 20px;
 }
-.chat-screen .powered-by {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 12px;
-}
+
 .chat-bot-icon {
     position: fixed;
     bottom: 20px;
     right: 20px;
     height: 50px;
     width: 50px;
-    background-image: linear-gradient(to right, #334e9f,#6f42c1);
+    background-image: linear-gradient(to right, #EED484,#EED484);
     z-index: 9999;
     border-radius: 30px;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
@@ -262,7 +237,7 @@
     top: -33px;
 }
 .chat-bot-icon svg {
-    color: #fff;
+    color: #000000;
     -moz-transition: all 0.5s linear;
     -webkit-transition: all 0.5s linear;
     transition: transform 0.5s linear;
@@ -294,33 +269,6 @@
 }
 .cursor-pointer {
     cursor: pointer;
-}
-
-.select2-container .select2-dropdown .select2-search .select2-search__field{
-    border: 1px solid #c0c0c0;
-    font-size: 13px;
-    padding: 4px 10px;
-}
-.select2-container .select2-dropdown .select2-results .select2-results__options .select2-results__option{
-    padding: 4px 10px;
-    font-size: 13px;
-    font-weight: normal;
-}
-.select2-dropdown{
-    z-index: 999999999 !important;
-}
-
-.dropdown:not(.custom-dropdown-icon) .dropdown-menu a.dropdown-item {
-    font-size: 12px;
-    font-weight: normal;
-    color: #888ea8;
-    padding: 11px 8px;
-    border-radius: 6px;
-    text-shadow: none;
-}
-
-.border{
-  border-color: red;
 }
 
 .blink_me {
