@@ -1,5 +1,15 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load humanize %}
+{% block dashboard_css %}
+<style>
+.job_descroption *, strong, .col-sm-3{
+    font-size: 16px;
+    font-family: var(--cretech-font, "DM Sans", sans-serif);
+    color: var(--cretech-text, #8B8178);
+    font-weight: bolder;
+}
+</style>
+{% endblock dashboard_css %}
 {% block dashboard_content %}
 <div class="card col mx-auto">
   <div class="card-header card-header-primary">
@@ -7,10 +17,10 @@
   </div>
   <div class="card-body">
     <h4 class="card-title">{{job.job_title}}<span class="float-end"><a href="{% url 'dashboard:update_job' slug=job.slug %}"><i class="fa-solid fa-pen mx-2 text-info"></i></a></span></h4>
-    <p class="card-text">{{job.job_description|safe}}{{job.media}}</p>
+    <div class="job_descroption"><strong>{{job.job_description|safe}}{{job.media}}</strong></div>
 
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-3 dilip">
         Role
       </div>
       <div class="col-sm-9">
@@ -59,7 +69,7 @@
         Required skills
       </div>
       <div class="col-sm-9">
-        : <strong>{% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}</strong>
+        : <strong>{% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2 text-dark">{{skill.name}}</h6>{% endfor %}</strong>
       </div>
     </div>
 
