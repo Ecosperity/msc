@@ -26,7 +26,10 @@
     border-radius: 15px 15px 0 0;
     padding: 15px;
     display: block;
+    cursor: move;
+    
 }
+
 .chat-screen .chat-header .chat-header-title {
     display: inline-block;
     width: calc(100% - 50px);
@@ -223,6 +226,7 @@
     background-image: linear-gradient(to right, #EED484,#EED484);
     z-index: 9999;
     border-radius: 30px;
+    border: 1px solid #000000;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     line-height: 50px;

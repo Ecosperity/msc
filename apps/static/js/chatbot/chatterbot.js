@@ -68,18 +68,19 @@ function ChattingData(text) {
       // window.open("jobssearch/");
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
       $('.chat-body').append(`<div class="form-group border border-2 text-center">                    
-      <input type="button" id="btnJobsIndia" onclick="location_btn_event('india')" value="I am looking for jobs in India" class="btn btn-sm btn-outline-success my-1">
-      <input type="button" id="btnJobsItaly" onclick="location_btn_event('italy')" value="I am looking for jobs in Italy" class="btn btn-sm btn-outline-success my-1">
-      <input type="button" id="btnJobsUSA" onclick="location_btn_event('usa')" value="I am looking for jobs in USA" class="btn btn-sm btn-outline-success my-1">
-      <input type="button" id="btnJobsSwitzerland" onclick="location_btn_event('switzerland')" value="I am looking for jobs in Switzerland" class="btn btn-sm btn-outline-success my-1">
+      <input type="button" id="btnJobsIndia" onclick="location_btn_event('india')" value="I am looking for jobs in India" class="btn btn-sm btn-outline-success rounded-pill my-1">
+      <input type="button" id="btnJobsItaly" onclick="location_btn_event('italy')" value="I am looking for jobs in Italy" class="btn btn-sm btn-outline-warning rounded-pill my-1">
+      <input type="button" id="btnJobsUSA" onclick="location_btn_event('usa')" value="I am looking for jobs in USA" class="btn btn-sm btn-outline-info rounded-pill my-1">
+      <input type="button" id="btnJobsSwitzerland" onclick="location_btn_event('switzerland')" value="I am looking for jobs in Switzerland" class="btn btn-sm btn-outline-danger rounded-pill my-1">
       </div>`).animate({scrollTop: $('.chat-body').prop("scrollHeight")}, 400); 
-    }else if(data.title=='msc'){       
+    }else if(data.title=='msc technology'){       
       window.open("chatbot/msc-technology/");
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }else if(data.title=='location'){       
-      // window.open("msc-technology/");
-      $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
-     
+      // window.open("msc-technology/"); 
+       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
+      data.skill_list.forEach(element => {$('.chat-body').append(`<input type="button" value='${element}' onclick="skills_btn_event('${element}')" class="btn btn-sm btn-outline-secondary my-1 rounded-pill"></input>`) })
+      $('.chat-body').append('<div class="chat-bubble you">Select your Skill</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }
     else if(data.location !=undefined){   
       window.open("chatbot/jobssearch/?skill=" + data.skill +"&title="+data.title +"&location="+data.location);
@@ -87,11 +88,15 @@ function ChattingData(text) {
     }else if(data.page !=undefined){      
       window.open("chatbot/jobssearch/?skill=" + data.skill +"&title="+data.title);
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
+    }else if(data.title =='thankYou'){ 
+      recognition.stop();
+      $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }else{
       $('.chat-body').append('<div class="chat-bubble you">' + data + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
       $('.chat-body').append(`<div class="form-group border border-2 text-center">                    
-      <input type="button" id="btnmscTechnology" onclick="menubar_btn_event('mscTechnology')" value="I want know about MSC Technology" class="btn btn-sm btn-outline-secondary my-1">
-      <input type="button" id="btnJobs" onclick="menubar_btn_event('jobs')" value="I am looking for job" class="btn btn-sm btn-outline-success my-1">
+      <input type="button" id="btnmscTechnology" onclick="menubar_btn_event('mscTechnology')" value="I want know about MSC Technology" class="btn btn-sm btn-outline-secondary my-1 rounded-pill">
+      <input type="button" id="btnmscNewsroom" onclick="menubar_btn_event('mscNewsroom')" value="I want know about MSC Newsroom" class="btn btn-sm btn-outline-info my-1 rounded-pill">
+      <input type="button" id="btnJobs" onclick="menubar_btn_event('jobs')" value="I am looking for job" class="btn btn-sm btn-outline-success my-1 rounded-pill">
                 </div>`).animate({scrollTop: $('.chat-body').prop("scrollHeight")}, 400);
     }
     $('#txtmessage').removeAttr('disabled');
@@ -142,16 +147,73 @@ function location_btn_event(val){
   let cdata = `${val}`;
   ChattingData(cdata);
 }
+function skills_btn_event(val){ 
+  let skilldata = `${val}`;  
+   $('#txtmessage').val($('#txtmessage').val() +" "+ skilldata);
+
+}
 function menubar_btn_event(val){
   if(val=='mscTechnology'){     
       ChattingData("More About MSC Technology");     
       $('#btnmscTechnology').removeClass("btn-outline-secondary").addClass("btn-success").attr('disabled',true);;
       $('#btnJobs').attr('disabled',true);   
+      $('#btnmscNewsroom').attr('disabled',true);   
+      }
+  if(val=='mscNewsroom'){     
+      ChattingData("More About MSC Newsroom");     
+      $('#btnmscNewsroom').removeClass("btn-outline-info").addClass("btn-info").attr('disabled',true);
+      $('#btnJobs').attr('disabled',true);   
+      $('#btnmscTechnology').attr('disabled',true);   
       }
   if(val=='jobs'){  
     $('#btnJobs').removeClass("btn-outline-success").addClass("btn-success").attr('disabled',true);;
     $('#btnmscTechnology').attr('disabled',true);  
+    $('#btnmscNewsroom').attr('disabled',true);  
     ChattingData("I am looking for jobs");    
       
   }
 }
+
+// Dragble JS start
+dragElement(document.getElementById("mydiv"));
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 10, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+// Dragble JS end
