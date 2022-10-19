@@ -734,3 +734,13 @@
 	</div><!-- /.container -->
 </section>
 {% endblock %}
+{% block javascript %}
+<!-- Voice Chatbot -->
+<script src="{% static 'js/chatbot/popper.min.js' %}"></script>
+{% include 'chatbot/chat.html' %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/home/search.js' %}"></script>
+{% endblock javascript %}

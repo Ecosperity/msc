@@ -24,6 +24,7 @@ urlpatterns = [
     path("users/", include("apps.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     path("dashboard/", include("apps.dashboard.urls", namespace="dashboard")),
+    path("chatbot/", include("apps.chatbot.urls", namespace="chatbot")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

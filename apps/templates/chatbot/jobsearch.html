@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Chatbot for Job Portal {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card my-3">
+                <h3 class="card-header text-center">Job Search Result</h3>
+                <div class="card-body">
+                    <button type="button" class="btn btn-success position-relative">
+                        Jobs Founds
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          1                          
+                        </span>
+                      </button>
+                      <br>
+                    <h5 class="card-title mt-2">Skill: {{request.GET.skill}}</h5>
+                    <h5 class="card-title">Title: {{request.GET.title}}</h5>
+                    <p class="card-text">Jos found(1).</p>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
