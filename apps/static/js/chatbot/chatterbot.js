@@ -55,11 +55,11 @@ function ChattingData(text) {
   $('#txtmessage').val('');
   $('#txtmessage').attr('disabled', 'disabled');
   var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-  URL = 'chatbot/BotConversation';
+  URL = '/chatbot/BotConversation/';
   $.ajax({
     url: URL,
-    type: 'POST',
-    headers: { "X-CSRFToken": csrftoken },
+    type: 'GET',
+    // headers: { "X-CSRFToken": csrftoken },
     data: {
       'text': text
     }
@@ -74,7 +74,7 @@ function ChattingData(text) {
       <input type="button" id="btnJobsSwitzerland" onclick="location_btn_event('switzerland')" value="I am looking for jobs in Switzerland" class="btn btn-sm btn-outline-danger rounded-pill my-1">
       </div>`).animate({scrollTop: $('.chat-body').prop("scrollHeight")}, 400); 
     }else if(data.title=='msc technology'){       
-      window.open("chatbot/msc-technology/");
+      window.open("/chatbot/msc-technology/");
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }else if(data.title=='location'){       
       // window.open("msc-technology/"); 
@@ -83,10 +83,10 @@ function ChattingData(text) {
       $('.chat-body').append('<div class="chat-bubble you">Select your Skill</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }
     else if(data.location !=undefined){   
-      window.open("chatbot/jobssearch/?skill=" + data.skill +"&title="+data.title +"&location="+data.location);
+      window.open("/chatbot/jobssearch/?skill=" + data.skill +"&title="+data.title +"&location="+data.location);
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }else if(data.page !=undefined){      
-      window.open("chatbot/jobssearch/?skill=" + data.skill +"&title="+data.title);
+      window.open("/chatbot/jobssearch/?skill=" + data.skill +"&title="+data.title);
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }else if(data.title =='thankYou'){ 
       recognition.stop();

@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Chatbot</title>
-</head>
-<body>    
 {% load static %}
   <!-- BEGIN MANDATORY STYLES -->
   <link href="{% static 'css/chatbot/chatBot.css' %}" rel="stylesheet" type="text/css"/>  
   <!-- END MANDATORY STYLES -->
 <!-- Chat bot UI start -->
-{% csrf_token %}
 <div class="chat-screen" id="mydiv">    
     <div class="chat-header drag" id="mydivheader">
         <div class="chat-header-title">   
@@ -72,7 +62,3 @@
     </svg>
 </div>
 <!-- Chat Bot UI Ends -->
-<!--MANDATORY SCRIPTS -->
-<script src="{% static 'js/chatbot/chatterbot.js' %}"></script>
-<script src="{% static 'js/chatbot/speechRecognition.js' %}"></script>
-{% comment %} {% endblock %} {% endcomment %}

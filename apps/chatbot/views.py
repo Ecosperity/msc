@@ -1,12 +1,8 @@
 from django.shortcuts import render
 import pyttsx3
-# import speech_recognition as sr
 import webbrowser
-import threading
-from django.http import JsonResponse, HttpResponse
-from django.db.models.functions import Lower
+from django.http import JsonResponse
 from dashboard.models import SkillSet
-import time
 
 
 location = 'india'
@@ -17,24 +13,25 @@ def jobssearch(request):
 
 #text-Speech converzation
 def speak(text):
-    engine = pyttsx3.init()
     try:            
+        engine = pyttsx3.init()
         engine.setProperty('rate', 160)   
         voices = engine.getProperty('voices')#getting details of current voice
         #engine.setProperty('voice', voices[0].id)  #o for male
-        engine.setProperty('voice', voices[1].id)   #1 for female
+        # engine.setProperty('voice', voices[1].id)   #1 for female
+        engine.setProperty('voice', 'english_rp+f3')
         engine.say(text)
         engine.runAndWait()
         # time.sleep(1)
         if engine._inLoop:
             engine.endLoop()
         engine.stop()
-    except:       
+    except:     
         pass
 
 def BotConversation(request):
     if request.is_ajax:  
-        q = request.POST.get('text')
+        q = request.GET.get('text')
         if q=='':
             speak("Hi, My name is Mia. How can I help you ?")        
             return JsonResponse("Hi, My name is Mia, How can I help you ?", safe=False)
@@ -107,15 +104,6 @@ def BotConversation(request):
                 speak("Please tell me Your Skills")
                 return JsonResponse(context, safe=False)        
         
-            if "youtube" in q.lower():                
-                speak("Opening Youtube.com")
-                webbrowser.open("https://youtube.com/")   
-                q =  "Opened Youtube.com"
-            if "google search" in q.lower():                
-                speak("Opening google.com")
-                webbrowser.open("https://google.com/")   
-                q =  "Opened google.com"
-                
             skillData = [item.name.lower() for item in all_skills]                            
             if any(sdata in q.lower() for sdata in skillData): 
                 skill = []           
