@@ -1,5 +1,8 @@
 from django.shortcuts import render
-import pyttsx3
+import time
+from gtts import gTTS
+from io import BytesIO
+import pygame
 import webbrowser
 from django.http import JsonResponse
 from dashboard.models import SkillSet
@@ -14,18 +17,14 @@ def jobssearch(request):
 #text-Speech converzation
 def speak(text):
     try:            
-        engine = pyttsx3.init()
-        engine.setProperty('rate', 160)   
-        voices = engine.getProperty('voices')#getting details of current voice
-        #engine.setProperty('voice', voices[0].id)  #o for male
-        # engine.setProperty('voice', voices[1].id)   #1 for female
-        engine.setProperty('voice', 'english_rp+f3')
-        engine.say(text)
-        engine.runAndWait()
-        # time.sleep(1)
-        if engine._inLoop:
-            engine.endLoop()
-        engine.stop()
+        mp3_fp = BytesIO()
+        tts = gTTS(text=text, lang='en', slow=False)
+        tts.write_to_fp(mp3_fp)
+        pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.music.load(mp3_fp, 'mp3')
+        pygame.mixer.music.play()    
+        time.sleep(3)
     except:     
         pass
 
