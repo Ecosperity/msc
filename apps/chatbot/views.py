@@ -18,14 +18,16 @@ def jobssearch(request):
 def speak(text):
     try:            
         mp3_fp = BytesIO()
-        tts = gTTS(text=text, lang='en', slow=False)
+        # tts = gTTS(text=text, lang='en', slow=False)
+        tts = gTTS(text=text, lang='en', tld='com.au')
         tts.write_to_fp(mp3_fp)
         pygame.init()
         pygame.mixer.init()
         pygame.mixer.music.load(mp3_fp, 'mp3')
         pygame.mixer.music.play()    
         time.sleep(3)
-    except:     
+    except Exception as e:
+        print("exception.............", e)     
         pass
 
 def BotConversation(request):

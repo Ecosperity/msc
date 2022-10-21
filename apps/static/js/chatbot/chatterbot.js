@@ -63,7 +63,8 @@ function ChattingData(text) {
     data: {
       'text': text
     }
-  }).done(function (data) {    
+  }).done(function (data) { 
+    recognition.stop();
     if(data.title=='jobs'){       
       // window.open("jobssearch/");
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
