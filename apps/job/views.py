@@ -84,14 +84,6 @@ class JobDetail(HitCountDetailView):
     slug_field = 'slug'
     count_hit = True
 
-    def get_queryset(self):
-        slug=self.kwargs.get('slug')
-        object = cache.get('object')
-        if object is None:
-            object = Job.objects.filter(slug=slug)
-            cache.set('object', object)
-        return object
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user=self.request.user
