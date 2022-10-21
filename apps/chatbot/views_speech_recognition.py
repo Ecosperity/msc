@@ -8,7 +8,6 @@ from django.http import JsonResponse
 
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
-print(sr.__version__)
 def recognize_speech():
     with microphone as source:
         audio = recognizer.listen(source, phrase_time_limit=5)

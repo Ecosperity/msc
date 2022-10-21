@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.db import transaction
 from django.http import JsonResponse
 from django.views.generic import ListView
+from django.core.cache import cache
 from apps.job.forms import JobApplicantForm, JobApplicantUserForm
 from job.models import Job, JobApplicant, Skill
 from dashboard.models import SkillSet
@@ -40,7 +41,11 @@ class HomeView(ListView):
     template_name = 'templates/index.html'
     context_object_name = 'jobs'
     def get_queryset(self, *args, **kwargs):
-        return Job.objects.published_job_lists().order_by("-published_at", "-id")[:5]
+        objects = cache.get('objects')
+        if objects is None:
+            objects = Job.objects.published_job_lists().order_by("-published_at", "-id")[:5]
+            cache.set('objects', objects)
+        return objects
 
 class JobList(ListView):
     model = Job
@@ -51,19 +56,24 @@ class JobList(ListView):
     def get_queryset(self):
         locations = self.request.GET.get('locations')
         skills = self.request.GET.get('skills')
-        job = Job.objects.published_job_lists()
+
+        object_list = cache.get('object_list')
+        if object_list is None:
+            object_list = Job.objects.published_job_lists()
+            cache.set('object_list', object_list)
+
         if locations or skills:
             location_lists = [location_list.strip(' ') for location_list in [location for location in locations.split(",") if location!=" "]]
             skill_lists = [skill_list.strip(' ') for skill_list in [skill for skill in skills.split(",") if skill!=" "]]
             search_skills = location_lists + skill_lists
-            job = Job.objects.published_job_lists(search_skills)        
-            job_length = len(job)
+            object_list = Job.objects.published_job_lists(search_skills)        
+            job_length = len(object_list)
             if job_length < 1 :
-                job = Job.objects.published_job_lists()
+                object_list = Job.objects.published_job_lists()
                 messages.success(self.request, "No job found.")
             else:
                 messages.success(self.request, f"{job_length} Job found.")
-        return job
+        return object_list
 job_list = JobList.as_view()
 
 @method_decorator(login_required, name='dispatch')

@@ -27,7 +27,6 @@ def speak(text):
         pygame.mixer.music.play()    
         time.sleep(3)
     except Exception as e:
-        print("exception.............", e)     
         pass
 
 def BotConversation(request):
