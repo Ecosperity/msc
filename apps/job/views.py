@@ -84,6 +84,14 @@ class JobDetail(HitCountDetailView):
     slug_field = 'slug'
     count_hit = True
 
+    def get_queryset(self):
+        slug=self.kwargs.get('slug')
+        object = cache.get('object')
+        if object is None:
+            object = Job.objects.filter(slug=slug)
+            cache.set('object', object)
+        return object
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user=self.request.user
@@ -91,7 +99,11 @@ class JobDetail(HitCountDetailView):
         skill=[skill.name for skill in self.object.skill_set.all()]
         object=self.object
         context['check_applied_condition'] = 1 in [job.is_applied for job in Job.objects.get(slug=slug).jobapplicant_set.all().filter(user=user)]
-        context['related_jobs'] = Job.objects.filter(country=object.country, place=object.place, skill__name__in=skill).distinct().exclude(slug=slug)
+        context['similar_jobs'] = cache.get('similar_jobs')
+        if context['similar_jobs'] is None:
+            context['similar_jobs'] = Job.objects.filter(country=object.country, place=object.place, skill__name__in=skill).distinct().exclude(slug=slug)
+            cache.set('similar_jobs', context['similar_jobs'])
+
         try:
             applicant = JobApplicant.objects.get(user=user)
         except:
