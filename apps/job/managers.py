@@ -8,9 +8,9 @@ class JobQuerySet(models.QuerySet):
 
     def search(self, query, queryset):
         if isinstance(query, list):
-            query = (Q(reduce(operator.or_, (Q(place__icontains=option) for option in query)))) & \
-                    (Q(reduce(operator.or_, (Q(job_title__icontains=option) for option in query))) | \
-                     Q(reduce(operator.or_, (Q(skill__name__icontains=option) for option in query))))
+            query = (Q(reduce(operator.or_, (Q(place=option) for option in query)))) & \
+                    (Q(reduce(operator.or_, (Q(job_title=option) for option in query))) | \
+                     Q(reduce(operator.or_, (Q(skill__name=option) for option in query))))
             queryset = queryset.filter(query).order_by("-id")
             return queryset
 
