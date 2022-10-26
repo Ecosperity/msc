@@ -136,7 +136,8 @@
 
 			</div><!-- /.container-fluid -->
 		</nav><!-- /.main-menu -->
-        {% if messages %}
+        {% block message %}
+		{% if messages %}
             {% for message in messages %}
             <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
                 {{ message }}
@@ -144,6 +145,7 @@
             </div>
             {% endfor %}
         {% endif %}
+		{% endblock message %}
 		{% block content %}{% endblock %}
 
 		<div class="footer-main section-padding--bottom footer-main--top-padding">
