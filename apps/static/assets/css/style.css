@@ -17,3 +17,18 @@
     color: white;
     background-color: #eed484;
 }
+
+.job_detail {
+    margin: 0;
+    color: var(--cretech-black, #12062c);
+    font-size: 45px;
+    letter-spacing: -0.05em;
+    font-weight: bold;
+    margin-top: 3px;
+    margin-bottom: 20px;
+  }
+  .job_detail_title{
+    color: var(--cretech-black, #12062c);
+    font-weight: bold;
+    margin-bottom: 20px;
+  }

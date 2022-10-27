@@ -5,10 +5,9 @@
 .error{
     color:red;
 }
-.job_descroption *{
-    font-size: 16px;
-    font-family: var(--cretech-font, "DM Sans", sans-serif);
-    color: var(--cretech-text, #8B8178);
+.job_descroption > * {
+  padding-top: 0;
+  text-align: justify;
 }
 </style>
 {% endblock %}
@@ -26,101 +25,101 @@
   </div><!-- /.container -->
 </div><!-- /.page-header -->
 <div class="container section-padding--top">
-  <h3 class="text-center">Job descriptions</h3>
+  <h3 class="text-center job_detail">Job descriptions</h3>
   <div class="row">
     <div class="col-md-10 offset-sm-1">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">{{job.job_title}}</h4>
-          <div class="job_descroption"><strong>{{job.job_description|safe}}{{job.media}}</strong></div>
+          <h4 class="card-title job_detail_title">{{job.job_title}}</h4>
+          <div class="job_descroption">{{job.job_description|safe}}{{job.media}}</div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Role</strong>
+              Role
             </div>
             <div class="col-sm-9">
-             : <strong>{{job.role}}</strong>
+             : {{job.role}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Place</strong>
+              Place
             </div>
             <div class="col-sm-9">
-              : <strong>{{job.place}}</strong>
+              : {{job.place}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Country</strong>
+              Country
             </div>
             <div class="col-sm-9">
-              : <strong>{{job.country}}</strong>
+              : {{job.country}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Employement type</strong>
+              Employement type
             </div>
             <div class="col-sm-9">
-              : <strong>{{job.employement_type}}</strong>
+              : {{job.employement_type}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Salary</strong>
+              Salary
             </div>
             <div class="col-sm-9">
-              : <strong>{{job.salary}}</strong>
+              : {{job.salary}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Required skills</strong>
+              Required skills
             </div>
             <div class="col-sm-9">
-              : <strong>{% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}</strong>
+              : {% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Experience required</strong>
+              Experience required
             </div>
             <div class="col-sm-9">
-              : <strong>{{job.experience}}</strong>
+              : {{job.experience}}
             </div>
           </div>
           
           <div class="row">
             <div class="col-sm-3">
-              <strong>Industry</strong>
+              Industry
             </div>
             <div class="col-sm-9">
-              : <strong>{{job.industry}}</strong> 
+              : {{job.industry}} 
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Functional area</strong>
+              Functional area
             </div>
             <div class="col-sm-9">
-              : <strong>{{job.functional_area}}</strong>
+              : {{job.functional_area}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-3">
-              <strong>Published at</strong>
+              Published at
             </div>
             <div class="col-sm-5">
-              : <strong>{{job.published_at|naturaltime}}</strong>
+              : {{job.published_at|naturaltime}}
             </div>
             <div class="col-sm-4">
               <a href="{% url 'job:job_list' %}" class="thm-btn float-end"><span>All jobs</span></a>
@@ -223,4 +222,11 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="{% static 'js/dashboard/skills_add.js' %}"></script>
+<script>
+$('p')
+    .filter(function() {
+        return $.trim($(this).text()) === '' && $(this).children().length == 0
+    })
+    .remove()
+</script>
 {% endblock javascript %}
