@@ -3,6 +3,14 @@
 #id_search{
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+  #id_location{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
   }
 #id_submit{
     border-top-right-radius: 25px;
@@ -51,7 +59,7 @@
       <input type="text" class="form-control" name="locations" id="id_location" placeholder="Type location, locality"autocomplete="off" required>
     </div>
     <div class="col-md-4 class_submit">
-      <input type="submit" class="btn w-100 text-white"style="background-color: var(--cretech-primary, #6a2dec)" id="id_submit">
+      <input type="submit" class="btn w-100 submit_button cta-two__btn"id="id_submit">
     </div>
   </div>
 </form>
