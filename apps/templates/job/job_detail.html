@@ -5,15 +5,23 @@
 .error{
     color:red;
 }
-.job_descroption *{
-    font-size: 16px;
-    font-family: var(--cretech-font, "DM Sans", sans-serif);
-    color: var(--cretech-text, #8B8178);
-    text-align: justify;
+.job_descroption *, .specification{
+  color: var(--cretech-text, #8B8178);
+  font-family: var(--cretech-font, "DM Sans", sans-serif);
+  text-align: justify;
+  font-size: 14px!important;
+  font-weight: 100;
+  line-height: 1.4;
 }
-.job_descroption > * {
+.job_descroption > *, .specification {
+  color: var(--cretech-text, #8B8178);
+  font-family: var(--cretech-font, "DM Sans", sans-serif);
   padding-top: 0;
   text-align: justify;
+  font-size: 14px!important;
+  font-weight: 100;
+  line-height: 1.4;
+
 }
 </style>
 {% endblock %}
@@ -38,97 +46,98 @@
         <div class="card-body">
           <h4 class="card-title job_detail_title">{{job.job_title}}</h4>
           <div class="job_descroption">{{job.job_description|safe}}{{job.media}}</div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Role
+          <div class="specification">
+            <div class="row">
+              <div class="col-sm-3">
+                Role
+              </div>
+              <div class="col-sm-9">
+               : {{job.role}}
+              </div>
             </div>
-            <div class="col-sm-9">
-             : {{job.role}}
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Place
+              </div>
+              <div class="col-sm-9">
+                : {{job.place}}
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Place
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Country
+              </div>
+              <div class="col-sm-9">
+                : {{job.country}}
+              </div>
             </div>
-            <div class="col-sm-9">
-              : {{job.place}}
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Employement type
+              </div>
+              <div class="col-sm-9">
+                : {{job.employement_type}}
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Country
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Salary
+              </div>
+              <div class="col-sm-9">
+                : {{job.salary}}
+              </div>
             </div>
-            <div class="col-sm-9">
-              : {{job.country}}
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Required skills
+              </div>
+              <div class="col-sm-9">
+                : {% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Employement type
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Experience required
+              </div>
+              <div class="col-sm-9">
+                : {{job.experience}}
+              </div>
             </div>
-            <div class="col-sm-9">
-              : {{job.employement_type}}
+            
+            <div class="row">
+              <div class="col-sm-3">
+                Industry
+              </div>
+              <div class="col-sm-9">
+                : {{job.industry}} 
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Salary
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Functional area
+              </div>
+              <div class="col-sm-9">
+                : {{job.functional_area}}
+              </div>
             </div>
-            <div class="col-sm-9">
-              : {{job.salary}}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Required skills
-            </div>
-            <div class="col-sm-9">
-              : {% for skill in job.skill_set.all %}<h6 class="badge bg-primary rounded-pill me-3 p-2">{{skill.name}}</h6>{% endfor %}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Experience required
-            </div>
-            <div class="col-sm-9">
-              : {{job.experience}}
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-sm-3">
-              Industry
-            </div>
-            <div class="col-sm-9">
-              : {{job.industry}} 
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Functional area
-            </div>
-            <div class="col-sm-9">
-              : {{job.functional_area}}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-3">
-              Published at
-            </div>
-            <div class="col-sm-5">
-              : {{job.published_at|naturaltime}}
-            </div>
-            <div class="col-sm-4">
-              <a href="{% url 'job:job_list' %}" class="thm-btn float-end"><span>All jobs</span></a>
+  
+            <div class="row">
+              <div class="col-sm-3">
+                Published at
+              </div>
+              <div class="col-sm-5">
+                : {{job.published_at|naturaltime}}
+              </div>
+              <div class="col-sm-4">
+                <a href="{% url 'job:job_list' %}" class="thm-btn float-end"><span>All jobs</span></a>
+              </div>
             </div>
           </div>
         </div>
@@ -196,7 +205,7 @@
 {% if similar_jobs %}
 <section class="service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right section-padding--top">
 	<div class="container">
-    <h3>Similar Jobs</h3><hr><hr>
+    <div class="job_detail">Similar Jobs</div>
 		<div class="row g-3">
         {% for job in similar_jobs %}
         <div class="col-sm-3">
