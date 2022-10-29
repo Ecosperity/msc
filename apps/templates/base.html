@@ -34,108 +34,93 @@
 	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     {% endcompress %}
 </head>
-
 <body class="custom-cursor">
-
 	<div class="custom-cursor__cursor"></div>
 	<div class="custom-cursor__cursor-two"></div>
-
 	<div class="preloader">
 		<div class="preloader__circle"></div>
 	</div>
-
 	<div class="page-wrapper">
-		<div class="topbar">
-			<div class="container-fluid">
-				<p class="topbar__text">Welcome to MSC Technologies</p><!-- /.topbar__text -->
-				<ul class="topbar__info">
-					<li>
-						<i class="fa fa-envelope"></i>
-						<a href="mailto:info@msc-technology.com">info@msc-technology.com</a>
-					</li>
-					<li>
-						<i class="fa fa-map-marker"></i>
-						Kosmo One, Tower-B, Ambattur Industrial Estate, Chennai
-
-					</li>
-				</ul><!-- /.topbar__info -->
-				<ul class="topbar__social">
-					<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-					<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-				</ul><!-- /.topbar__social -->
-			</div><!-- /.container-fluid -->
-		</div><!-- /.topbar -->
-		<nav class="main-menu sticky-header">
-			<div class="container-fluid">
-				<div class="main-menu__logo">
-					<a href="{% url 'job:home' %}">
-						<img src="{% static 'assets/images/logo-dark.png' %}" width="98" height="33" alt="Cretech">
-					</a>
-				</div><!-- /.main-menu__logo -->
-
-				<ul class="main-menu__list">
-					<li class="menu-item-has-children">
-						<a href="{% url 'job:home' %}">Home</a>
-											</li>
-					<li class="menu-item-has-children">
-						<a href="#">About Us</a>
-						<ul>
-							<li><a href="{% url 'who_we_are' %}">Who we are</a></li>
-							<li><a href="{% url 'group_profile' %}">Group Profile</a></li>
-							<li><a href="{% url 'our_values' %}">Our Values</a></li>
-							<li><a href="{% url 'top_management' %}">Top Management</a></li>
-							<li><a href="{% url 'corporate_culture' %}">Corporate Culture</a></li>
-							<li><a href="{% url 'certification' %}">Certification</a></li>
-						</ul>
-					</li>
-					<li class="menu-item-has-children">
-						<a href="{% url 'current_opening' %}">Career</a>
-						<ul>
-							<li><a href="{% url 'current_opening' %}">Current Opening</a></li>
+		<header class="header-two">
+			<div class="topbar-two">
+				<div class="container">
+					<div class="topbar-two__inner">
+						<div class="topbar-two__logo">
+							<a href="/">
+								<img src="{% static 'assets/images/logo-dark.png' %}" width="200" height="55" alt="MSC TECHNOLOGY">
+							</a>
+						</div><!-- /.topbar-two__logo -->
+						<ul class="topbar-two__list">
+							
+						</ul><!-- /.topbar-two__list -->
+						<div class="topbar-two__btns">
+							<a href="{% url 'job:job_list' %}" class="thm-btn topbar-two__btn"><span>CURRENT OPENING</span></a>
+							<!-- /.thm-btn topbar-two__btn -->
+						</div><!-- /.topbar-two__btns -->
+					</div><!-- /.topbar-two__inner -->
+				</div><!-- /.container -->
+			</div><!-- /.topbar-two -->
+			<nav class="main-menu sticky-header">
+				<div class="container">
+					<div class="main-menu__inner">
+						<div class="main-menu__logo">
+							<a href="index-2.html">
+								<img src="{% static 'assets/images/logo-light.png' %}" width="200" height="55" alt="MSC TECHNOLOGY">
+							</a>
+						</div><!-- /.main-menu__logo -->
+						<ul class="main-menu__list">
+							<li class="menu-item-has-children">
+							<a href="/">Home</a>
+								</li>
+							<li class="menu-item-has-children">
+								<a href="#">About Us</a>
+							<ul>
+									<li><a href="#">Who we are</a></li>
+									<li><a href="#">Group Profile</a></li>
+									<li><a href="#">Our Values</a></li>
+									<li><a href="#">Top Management</a></li>
+									<li><a href="#">Corporate Culture</a></li>
+									<li><a href="#">Certification</a></li>
 							</ul>
-					</li>
-					<li class="menu-item-has-children">
-						<a href="{% url 'latest_insite' %}">News Center</a>
-						<ul>
-							<li><a href="{% url 'latest_insite' %}">Latest Insight</a></li>
-							<li><a href="{% url 'media_coverage' %}">Media Coverage</a></li>
-						</ul>
-					</li>
-					
-					<li><a href="{% url 'contact_us' %}">Contact</a></li>
-					{% if not request.user.is_authenticated %}
-					<li><a href="{% url 'account_login' %}">Login</a></li>
-					<li><a href="{% url 'account_signup' %}">Register</a></li>
-					{% else %}
-					<li><a href="{% url 'account_logout' %}">Logout</a></li>
-					{% endif %}
-					{% if request.user.role == 0 or request.user.role == 1%}
-					<li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
-					{% endif %}
-				</ul><!-- /.main-menu__list -->
-
-				<div class="main-menu__right">
-					<a href="#" class="mobile-nav__toggler">
-						<span></span>
-						<span></span>
-						<span></span>
-					</a>
-					<a href="#" class="search-toggler">
-						<i class="icon-magnifying-glass"></i>
-					</a><!-- /.search-toggler -->
-					<a href="tel:+9288009860" class="main-menu__cta">
-						<i class="fa fa-phone-alt"></i>
-						<span class="main-menu__cta__text">
-							<b>+ 92 ( 8800 ) 9860</b>
-							Call Anytime
-						</span><!-- /.main-menu__cta__text -->
-					</a><!-- /.main-menu__cta -->
-				</div><!-- /.main-menu__right -->
-
-			</div><!-- /.container-fluid -->
-		</nav><!-- /.main-menu -->
+							</li>
+							<li class="menu-item-has-children">
+								<a href="{% url 'job:job_list' %}">Career</a>
+								<ul>
+								<li><a href="{% url 'job:job_list' %}">Current Opening</a></li>
+								</ul>
+							</li>
+							<li class="menu-item-has-children">
+								<a href="#">News Center</a>
+								<ul>
+									<li><a href="#">Latest Insight</a></li>
+									<li><a href="#">Media Coverage</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Contact</a></li>
+							{% if not request.user.is_authenticated %}
+							<li><a href="{% url 'account_login' %}">Login</a></li>
+							<li><a href="{% url 'account_signup' %}">Register</a></li>
+							{% else %}
+							<li><a href="{% url 'account_logout' %}">Logout</a></li>
+							{% endif %}
+							{% if request.user.role == 0 or request.user.role == 1%}
+							<li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+							{% endif %}
+						</ul><!-- /.main-menu__list -->
+						<div class="main-menu__right">
+							<a href="#" class="mobile-nav__toggler">
+								<span></span>
+								<span></span>
+								<span></span>
+							</a>
+							<a href="#" class="search-toggler">
+								<i class="icon-magnifying-glass"></i>
+							</a><!-- /.search-toggler -->
+						</div><!-- /.main-menu__right -->
+					</div><!-- /.main-menu__inner -->
+				</div><!-- /.container -->
+			</nav><!-- /.main-menu -->
+		</header><!-- /.header-two -->
         {% block message %}
 		{% if messages %}
             {% for message in messages %}
@@ -148,15 +133,84 @@
 		{% endblock message %}
 		{% block content %}{% endblock %}
 
-		<div class="footer-main section-padding--bottom footer-main--top-padding">
+		<section class="section-padding--top section-padding--bottom service-three black-bg"
+		style="background-image: url({% static 'assets/images/background/service-1-bg-1.png' %});">
+		<div class="container">
+			<div class="service-three__block">
+				<div class="row">
+					<div class="col-lg-7">
+						<div class="section-title">
+							
+							<h2 class="section-title__title section-title__title--light">Key Benefits Working <BR>At MSC Technology</h2><!-- /.section-title__title -->
+						</div><!-- /.section-title -->
+					</div><!-- /.col-lg-7 -->
+					<div class="col-lg-5">
+						<div class="service-three__block__text">Accusa ntium doloremque laudantium totam rem
+							aperiamea
+							queipsa quae abillo inventore veritatis.</div><!-- /.service-three__block__text -->
+					</div><!-- /.col-lg-5 -->
+				</div><!-- /.row -->
+			</div><!-- /.service-three__block -->
+			<ul class="service-three__list">
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="000ms">
+					<i class="icon-web-development service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">WORK LIFE BALANCE</a></h3>
+				</li>
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="100ms">
+					<i class="icon-analysis service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">LEARNING & DEVELOPMENT</a></h3>
+				</li>
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="200ms">
+					<i class="icon-consulting service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">CUTTING TECHNOLOGIES ACCESS</a></h3>
+				</li>
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="300ms">
+					<i class="icon-iot service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">FIRST CLASS WORK ENVIRONEMENT</a></h3>
+				</li>
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="400ms">
+					<i class="icon-cloud service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">FAST PROGRESSION</a></h3>
+				</li>
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="500ms">
+					<i class="icon-group service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">TALENT REWARDING</a></h3>
+				</li>
+
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="500ms">
+					<i class="icon-tv service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">INTERNATIONAL</a></h3>
+				</li>
+
+				<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+					data-wow-delay="500ms">
+					<i class="icon-coding service-three__list__icon"></i>
+					<h3 class="service-three__list__title"><a href="#">DEVELOPMENT OPPORTUNITIES</a></h3>
+				</li>
+
+
+			</ul><!-- /.service-three__list -->
+		</div><!-- /.container -->
+	</section>
+
+	
+
+		<div class="footer-main section-padding--top section-padding--bottom">
 			<div class="container">
 				<div class="row gutter-y-30">
 					<div class="col-lg-3 col-md-6 col-sm-12">
 						<div class="footer-widget footer-widget--about">
-							<a href="index-2.html" class="footer-widget__logo">
-								<img src="{% static 'assets/images/logo-light.png' %}" width="119" height="40" alt="Cretech">
+							<a href="#" class="footer-widget__logo">
+								<img src="{% static 'assets/images/logo-light.png' %}" width="119" height="40" alt="MSC TECHNOLOGY">
 							</a>
-							<div class="section-padding-lg--top"></div>
+							<div class="socialmedia-top"></div>
 							<!-- /.footer-widget__text -->
 							<ul class="footer-widget__social">
 								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -170,24 +224,29 @@
 						<div class="footer-widget footer-widget--newsletter">
 							<h3 class="footer-widget__title">Quick link</h3><!-- /.footer-widget__title -->
 							
+							
+							
+							
 							<ul class="footer-widget__links">
 								<li>
-									<a href="service-cyber-security.html">Cyber Security</a>
+									<a href="#">About us</a>
 								</li>
 								<li>
-									<a href="service-it-management.html">IT Management</a>
+									<a href="#">Team</a>
 								</li>
 								<li>
-									<a href="service-qa-testing.html">QA & Testing</a>
+									<a href="#">Career</a>
 								</li>
 								<li>
-									<a href="service-infrastructure-plan.html">Infrastructure Plan</a>
+									<a href="#">Latest News</a>
 								</li>
 								<li>
-									<a href="service-it-consultent.html">IT Consultent</a>
+									<a href="#">Media</a>
 								</li>
 							</ul><!-- /.footer-widget__links -->
 							<!-- /.footer-widget__text -->
+
+							
 							
 						</div><!-- /.footer-widget -->
 					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
@@ -201,6 +260,7 @@
 								11th Floor, Plot No.14, III Main Road,<BR>
 								Ambattur Industrial Estate, Chennai,
 								TN, India <BR>Tel.: (+91) 44 7104 1700
+							
 						</p>
 								
 								<P class="footer-widget__links">
@@ -235,11 +295,12 @@
 		</div><!-- /.footer-main -->
 		<div class="footer-bottom">
 			<div class="container">
-				<p>&copy; Copyright © 2016 MSC Technology. All rights reserved.<br>
-					<span class="dynamic-year"></span> <a href="https://www.msc.com">An MSC Mediterranean Shipping Company</a></p>
+				<p>&copy; Copyright <span class="dynamic-year"></span>  <br>
+					<a href="https://www.msc.com">An MSC Mediterranean Shipping Company</a></p>
 			</div><!-- /.container -->
 		</div><!-- /.footer-bottom -->
 	</div><!-- /.page-wrapper -->
+
 
 	<div class="mobile-nav__wrapper">
 		<div class="mobile-nav__overlay mobile-nav__toggler"></div>
@@ -251,8 +312,8 @@
 			</a>
 
 			<div class="logo-box">
-				<a href="index-2.html" aria-label="logo image"><img src="{% static 'assets/images/logo-light.png' %}" width="98"
-						height="33" alt="Cretech"></a>
+				<a href="#" aria-label="logo image"><img src="{% static 'assets/images/logo-light.png' %}" width="98"
+						height="33" alt="MSC TECHNOLOGY"></a>
 			</div>
 			<!-- /.logo-box -->
 			<div class="mobile-nav__container"></div>
@@ -261,15 +322,16 @@
 			<ul class="mobile-nav__contact list-unstyled">
 				<li>
 					<i class="fa fa-phone"></i>
-					<a href="tel:+8898006802">+ 88 ( 9800 ) 6802</a>
+					<a href="tel:+447104 1700">+ 91 ( 44 ) 7104 1700</a>
 				</li>
 				<li>
 					<i class="fa fa-envelope"></i>
-					<a href="mailto:needhelp@company.com">needhelp@company.com</a>
+					<a href="mailto:contact@msc-technology.com">contact@msc-technology.com</a>
 				</li>
 				<li>
 					<i class="fa fa-map-marker-alt"></i>
-					88 Broklyn Golden Road Street <br> New York. USA
+					Kosmo One, Tower-B, 11th Floor, Plot No.14, III Main Road<br>
+Ambattur Industrial Estate, <br> Chennai, TN, India
 				</li>
 			</ul><!-- /.mobile-nav__contact -->
 			<ul class="mobile-nav__social">
@@ -278,6 +340,8 @@
 				<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
 				<li><a href="#"><i class="fab fa-instagram"></i></a></li>
 			</ul><!-- /.mobile-nav__social -->
+
+
 
 		</div>
 		<!-- /.mobile-nav__content -->

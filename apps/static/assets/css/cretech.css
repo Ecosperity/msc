@@ -23,8 +23,6 @@
   --cretech-gray: #f9f6ff;
   --cretech-gray-rgb: 249, 246, 255;
   --cretech-border: #e1dbec;
-
-  --bs-link-color:#eed484;
 }
 
 /***********************
@@ -225,9 +223,16 @@ a:visited {
 }
 
 .section-padding--top {
-  padding-top: 80px;
+  padding-top: 800  0px;
 }
 
+.socialmedia-top {
+  padding-top: 30px;
+}
+
+.socialmedia-bottom {
+  padding-top: 30px;
+}
 @media (min-width: 992px) {
   .section-padding--top {
     padding-top: 120px;
@@ -418,8 +423,8 @@ a:visited {
   height: 45px;
   background: var(--cretech-primary,  #eed484);
   position: fixed;
-  bottom: 23px;
-  right: 61px;
+  bottom: 24px;
+  right: 65px;
   z-index: 99;
   text-align: center;
   -webkit-transition: all 0.4s ease;
@@ -731,7 +736,7 @@ a:visited {
   margin: 0;
   font-size: 13px;
   font-weight: 500;
-  color: var(--cretech-text-light, #a39eae);
+  color: #eed484;
 }
 
 .topbar__info {
@@ -756,7 +761,7 @@ a:visited {
           align-items: center;
   font-size: 13px;
   font-weight: 500;
-  color: var(--cretech-text-light, #a39eae);
+  color: #eed484;
 }
 
 .topbar__info li + li {
@@ -1319,7 +1324,7 @@ a:visited {
 
 @media (min-width: 1200px) {
   .header-two .main-menu__inner {
-    background-color: var(--cretech-black, #12062c);
+    background-color: #EED484;
     -webkit-box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.07);
             box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.07);
     padding: 0 40px;
@@ -1337,7 +1342,7 @@ a:visited {
 }
 
 .header-two .main-menu__list > li > a {
-  color: var(--cretech-link-light, #877e9b);
+  color: #000000;
   padding: 19px 0;
 }
 
@@ -1898,7 +1903,7 @@ a:visited {
   overflow: hidden;
   overflow-y: auto;
   height: 100%;
-  background-color: var(--cretech-bg-black, #0d0421);
+  background-color: #000000;
   -ms-overflow-style: none;
   scrollbar-width: none;
   padding: 30px 15px;
@@ -1968,7 +1973,7 @@ a:visited {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 16px;
-  color: var(--cretech-link-light, #877e9b);
+  color: #fff;
   display: block;
   line-height: 40px;
 }
@@ -1990,7 +1995,7 @@ a:visited {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 16px;
-  color: var(--cretech-link-light, #877e9b);
+  color: #f9f6ff;
   display: block;
   line-height: 40px;
 }
@@ -2170,8 +2175,7 @@ a:visited {
   right: 0;
   bottom: 0;
   background-color: var(--cretech-black, #cfb66b);
-  mix-blend-mode: difference;
-  opacity: 0.7;
+  
   background-size: cover;
 }
 
@@ -3530,17 +3534,18 @@ a:visited {
   background-repeat: no-repeat;
   background-position: left center;
    background-blend-mode: luminosity;
+   background-color: #1b365d;
 }
 
 .footer-main--top-padding {
-  padding-top: 160px;
-  margin-top: -30px;
+  padding-top: 100px;
+  margin-top: -80px;
 }
 
 @media (min-width: 992px) {
   .footer-main--top-padding {
     padding-top: 240px;
-    margin-top: -30px;
+    margin-top: -120px;
   }
 }
 
@@ -3588,10 +3593,10 @@ a:visited {
 
 .footer-widget__title::after {
   content: '';
-  width: 31px;
+  width: 100px;
   height: 2px;
   display: block;
-  background-color: var(--cretech-secondary, #000000);
+  background-color: #EED484;
   margin-top: 8px;
 }
 
@@ -3814,7 +3819,7 @@ a:visited {
 }
 
 .blog-card-one__date i {
-  color: var(--cretech-secondary, #9c2ede);
+  color: #000000;
   margin-right: 5px;
 }
 
@@ -3825,7 +3830,7 @@ a:visited {
   display: inline-block;
   font-weight: bold;
   letter-spacing: .1em;
-  color: #fff;
+  color: rgb(0, 0, 0);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
   padding: 0 19px;
@@ -4778,7 +4783,7 @@ a:visited {
   margin: 0;
   font-size: 24px;
   line-height: 1.25em;
-  color: #fff;
+  color: #222221;
   font-weight: 700;
   letter-spacing: -0.025em;
   max-width: 165px;
@@ -6099,14 +6104,14 @@ a:visited {
 .service-three__list__item {
   padding-top: 30px;
   padding-bottom: 22px;
-  border: 1px dashed #ab32f2;
+  border: 1px dashed #eed484;
   text-align: center;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
 
 .service-three__list__item:hover {
-  background-color: #ab32f2;
+  background-color: #eed484;
 }
 
 .service-three__list__icon {
@@ -6131,7 +6136,7 @@ a:visited {
 }
 
 .service-three__list__title a:hover {
-  color: #fff;
+  color: #000000;
   background-size: 100% 2px;
 }
 
@@ -7815,7 +7820,7 @@ a:visited {
   right: 0;
   bottom: 0;
   background-color: var(--cretech-black, #12062c);
-  mix-blend-mode: luminosity;
+  
 }
 
 .cta-two__bg > div > div {
@@ -7943,7 +7948,7 @@ a:visited {
 }
 
 .testimonials-one-card__image img {
-  border: 5px solid var(--cretech-secondary, #9c2ede);
+  border: 1px solid var(--cretech-secondary, #EED484);
 }
 
 @media (min-width: 768px) {

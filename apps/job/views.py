@@ -43,7 +43,7 @@ class HomeView(ListView):
     def get_queryset(self, *args, **kwargs):
         objects = cache.get('objects')
         if objects is None:
-            objects = Job.objects.published_job_lists().order_by("-published_at", "-id")[:5]
+            objects = Job.objects.published_job_lists().order_by("-published_at", "-id")[:4]
             cache.set('objects', objects)
         return objects
 
