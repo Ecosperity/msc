@@ -53,6 +53,7 @@ class Job(models.Model):
 
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     publish = models.BooleanField(default=False)
+    recommended_job = models.BooleanField(default=False)
     # dates
     uploaded_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(null=True, blank=True)

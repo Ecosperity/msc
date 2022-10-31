@@ -8,6 +8,10 @@
     padding: 0px;
     border: none;
 }
+.add{
+    border-radius: 20px;
+    width: 100px;
+}
 </style>
 {% endblock dashboard_css %}
 <div class="card col mx-auto">
@@ -194,6 +198,30 @@
             Views
         </th>
         <th scope="col" class="text-center">Actions</th>
+        <!-- <th scope="col" class="text-center">Recommended</th> -->
+        <th scope="col">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <form action="">
+                        <input type='hidden' name='sorting_value' value='recommended_job'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-up-long"></i>
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    Recommended
+                </div>
+                <div>
+                    <form action=".">
+                        <input type='hidden' name='sorting_value' value='-recommended_job'>
+                        <button type="submit" class="fabutton">
+                            <i class="fa-sharp fa-solid fa-down-long"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -210,7 +238,7 @@
                 {% if job.publish %}
                 <a href="{% url 'dashboard:unpublish_job' job.slug %}"><i class="fa-solid fa-toggle-on"></i></a>
                 {% else %}
-                <a href="{% url 'dashboard:publish_job' job.slug %}"><i class="fa-solid fa-toggle-off text-secondary"></i></i></a>
+                <a href="{% url 'dashboard:publish_job' job.slug %}"><i class="fa-solid fa-toggle-off text-secondary"></i></a>
                 {% endif %}
             </div>
         </td>
@@ -224,6 +252,13 @@
                     <td><a href="{{job.get_absolute_delete_url}}"><i class="fa-solid fa-trash mx-2 text-danger"></i></a></td>
                 </tr>
             </table>
+        </td>
+        <td>
+            {% if job.recommended_job == 0 %}
+            <a href="{% url 'dashboard:toggle_recommended_jobs' slug=job.slug %}"class="btn btn-outline-secondary btn-sm add">add</a>
+            {% else %}
+            <a href="{% url 'dashboard:toggle_recommended_jobs' slug=job.slug %}"class="btn btn-primary btn-sm add">remove</a>
+            {% endif %}
         </td>
     </tr>
       {% endfor %}

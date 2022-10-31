@@ -246,3 +246,9 @@ def export_applicant_list(request):
             ws.write(row_num, col_num, row[col_num], font_style)
     wb.save(response)
     return response
+
+@allow_access_to([User.ADMIN, User.MANAGER])
+def toggle_recommended_jobs(request, slug):
+    Job.objects.toggle_recommended_jobs(slug)
+    messages.success(request, "action completed successfully")
+    return redirect(request.META.get('HTTP_REFERER'))

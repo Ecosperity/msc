@@ -44,8 +44,6 @@ class JobQuerySet(models.QuerySet):
     def job_detail(self, slug):
         return self.get(slug=slug)
 
-    def update_job(self, slug):
-        self.search(slug=slug).all()
     
     def get_filtered_data(self, salary, freshness, experience, country):
         today =  date.today()
@@ -82,6 +80,18 @@ class JobQuerySet(models.QuerySet):
         queryset = queryset.order_by('-published_at')
         return queryset
     
+    def recommended_jobs(self):
+        return self.filter(recommended_job=True)[:8]
+    
+    def toggle_recommended_jobs(self, slug):
+        job = self.get(slug=slug)
+        if job.recommended_job == True:
+            job.recommended_job = False
+        else:
+            job.recommended_job = True
+        job.save()
+        return
+
 class JobManager(models.Manager):
     def get_queryset(self):
         return JobQuerySet(self.model, using=self._db)
@@ -100,6 +110,12 @@ class JobManager(models.Manager):
 
     def get_filtered_data(self, salary=None, freshness=None, experience=None, country=[]):
         return self.get_queryset().get_filtered_data(salary, freshness, experience, country)
+
+    def recommended_jobs(self):
+        return self.get_queryset().recommended_jobs()
+
+    def toggle_recommended_jobs(self, slug):
+        return self.get_queryset().toggle_recommended_jobs(slug=slug)
 
 class JobApplicantQuerySet(models.QuerySet):
 

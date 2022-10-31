@@ -17,4 +17,5 @@ urlpatterns=[
     path("update-skillset/<int:pk>/", views.update_skillset, name='update_skillset'),
     path("delete-skillset/<int:pk>/", views.delete_skillset, name='delete_skillset'),
     path("export-applicant-list/", views.export_applicant_list, name='export_applicant_list'),
+    path("toggle-recommended-jobs/<slug>/", views.toggle_recommended_jobs, name='toggle_recommended_jobs'),
 ]

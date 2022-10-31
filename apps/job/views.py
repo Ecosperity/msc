@@ -41,11 +41,7 @@ class HomeView(ListView):
     template_name = 'templates/index.html'
     context_object_name = 'jobs'
     def get_queryset(self, *args, **kwargs):
-        objects = cache.get('objects')
-        if objects is None:
-            objects = Job.objects.published_job_lists().order_by("-published_at", "-id")[:4]
-            cache.set('objects', objects)
-        return objects
+        return Job.objects.recommended_jobs()
 
 class JobList(ListView):
     model = Job
