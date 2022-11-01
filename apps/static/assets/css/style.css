@@ -57,7 +57,15 @@
     border-bottom-left-radius: 0;
   }
   
-  .submit_button:hover {
-    background-color: var(--cretech-secondary,  #0e0b01);
-    color: #fff;
+.submit_button:hover {
+  background-color: var(--cretech-secondary,  #0e0b01);
+  color: #fff;
+}
+.recommended-card{
+  width: 350px;
+}
+@media (max-width: 1200px) {
+  .recommended-card{
+    width: 300px;
   }
+}

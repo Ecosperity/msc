@@ -279,9 +279,10 @@
 		</div><!-- /.owl-carousel -->
 	</div><!-- /.container -->
 </section>
-<section class="service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right ">
+{% comment %}
+<section class="service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right "style="padding:300px!important">
 	<div class="container">
-		<div class="section-title text-center">
+		<div class=" text-center">
 			<p class="section-title__text">Career</p><!-- /.section-title__text -->
 			<h2 class="section-title__title">Explore Latest Opportunities</h2>
 			<p class="text-end"><a href="{% url 'job:job_list' %}" class="thm-btn"><span>Explore all opportunities</span></a></p><!-- /.section-title__text -->
@@ -308,6 +309,64 @@
         </div>
 	</div><!-- /.container -->
 </section>
+{% endcomment %}
+
+{% if jobs %}
+<section class="section-padding--bottom project-one gray-bg">
+	<div class="container">
+		<div class="section-title text-center">
+			<p class="section-title__text">Career</p><!-- /.section-title__text -->
+			<h2 class="section-title__title">Explore Recommended Opportunities</h2>
+			<p class="text-end"><a href="{% url 'job:job_list' %}" class="thm-btn"><span>Explore all opportunities</span></a></p><!-- /.section-title__text -->
+			<!-- /.section-title__title -->
+		</div><!-- /.section-title -->
+		<div class="owl-carousel thm-owl__carousel project-one__carousel thm-owl__carousel--with-shadow"
+			data-owl-options='{"loop": true,
+		"autoplay": true,
+		"autoplayTimeout": 1500,
+		"autoplayHoverPause": true,
+		"nav": true,
+		"navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"],
+		"dots": false,
+		"margin": 0,
+		"items": 1,
+		"smartSpeed": 700,
+		"responsive": {
+			"0": {
+				"margin": 0,
+				"items": 1
+			},
+			"768": {
+				"margin": 30,
+				"items": 2
+			},
+			"992": {
+				"margin": 30,
+				"items": 3
+			}
+		}}'>
+		{% for job in jobs %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="item">
+                <div class="service-card-three recommended-card">
+                    <div class="service-card-three__icon">
+                        <i class="icon-new-product"></i>
+                    </div><!-- /.service-card-three__icon -->
+                    <div class="service-card-three__content">
+                        <h3 class="service-card-three__title"><a href="{% url 'job:job_detail' slug=job.slug %}">{{job.job_title}}</a></h3><!-- /.service-card-three__title -->
+                        <div class="service-card-three__text">No of Position: {{job.no_of_openings}} </div><!-- /.service-card-three__text -->
+                        <div class="service-card-three__text">Place: {{job.place}} </div><!-- /.service-card-three__text -->
+                        <a href="{% url 'job:job_detail' slug=job.slug %}" class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </a><!-- /.service-card-three__text -->
+                    </div><!-- /.service-card-three__content -->
+                </div><!-- /.service-card-three -->
+            </div><!-- /.item -->
+        </div>
+        {% endfor %}
+		</div><!-- /.owl-carousel -->
+	</div><!-- /.container -->
+</section>
+{% endif %}
+
 <section class="funfact-one">
 	<div class="container">
 		<div class="funfact-one__inner wow fadeInUp background-size-cover" data-wow-duration="1500ms"
