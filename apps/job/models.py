@@ -68,7 +68,7 @@ class Job(models.Model):
     def save(self, *args, **kwargs):
         if self.slug:
             if slugify(self.job_title) != self.slug:
-                self.slug = generate_unique_slug(Job, self.job_title)
+                self.slug = generate_unique_slug(Job, self.job_title, self)
         else: 
             self.slug = generate_unique_slug(Job, self.job_title)
         super(Job, self).save(*args, **kwargs)

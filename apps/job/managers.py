@@ -81,7 +81,10 @@ class JobQuerySet(models.QuerySet):
         return queryset
     
     def recommended_jobs(self):
-        return self.filter(recommended_job=True)[:8]
+        jobs = self.filter(recommended_job=True)[:24]
+        if not jobs:
+            jobs = self.published_job_lists()[:8]
+        return jobs
     
     def toggle_recommended_jobs(self, slug):
         job = self.get(slug=slug)
