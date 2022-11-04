@@ -1,52 +1,94 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="slider-one slider-two">
-	<ul class="slider-two__social">
-		<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-		<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-		<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-		<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-	</ul><!-- /.topbar__social -->
+<div class="slider-one slider-three">
 	<div class="slider-one__carousel owl-carousel owl-theme thm-owl__carousel"
-		data-owl-options='{"loop": true, "items": 1, "navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"], "margin": 0, "dots": true, "nav": true, "animateOut": "slideOutDown", "animateIn": "fadeIn", "active": true, "smartSpeed": 1000, "autoplay": true, "autoplayTimeout": 7000, "autoplayHoverPause": false}'>
+		data-owl-options='{"loop": true, "items": 1, "navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"], "margin": 0, "dots": true, "nav": true, "animateOut": "slideOutDown", "animateIn": "fadeIn", "active": true, "smartSpeed": 1000, "autoplay": true, "autoplayTimeout": 8000, "autoplayHoverPause": false}'>
 		<div class="item slider-one__slide-1">
-			<div class="slider-one__bg" style="background-image: url({% static 'assets/images/background/slider-3-2a.jpg' %});">
+			<div class="slider-one__bg" style="background-image: url({% static 'assets/images/background/slider-3-1.jpg' %});">
 			</div><!-- /.slider-one__bg -->
-			<div class="slider-one__shape-1"></div><!-- /.slider-one__shape-1 -->
+			
+			<div class="slider-one__shape-2"></div><!-- /.slider-one__shape-2 -->
 			<div class="container">
-				<div class="slider-one__content ">
+				<div class="slider-one__content text-center">
+					<!-- /.slider-one__floated -->
 					<div class="slider-one__title-wrapper">
-						<h2 class="slider-one__title">EXCLUSIVE IT <br>
-							 SOLUTIONS
-							</h2><!-- /.slider-one__title -->
+						<h2 class="slider-one__title">Agile Corporate Culture Driven By<br>Valued Relations And Recognition</h2>
+						<!-- /.slider-one__title -->
 					</div><!-- /.slider-one__title-wrapper -->
-					<div class="slider-one__btns">
-						<a href="#" class="thm-btn slider-one__btn"><span>Learn More</span></a>
-						<!-- /.thm-btn slider-one__btn -->
-					</div><!-- /.slider-one__btns -->
+					
 				</div><!-- /.slider-one__content -->
 			</div><!-- /.container -->
 		</div><!-- /.item -->
+
+
+
+
+
 		<div class="item slider-one__slide-2">
-			<div class="slider-one__bg" style="background-image: url({% static 'assets/images/background/slider-2-1.jpg' %});">
+			<div class="slider-one__bg" style="background-image: url({% static 'assets/images/background/slider-3-3.jpg' %});">
 			</div><!-- /.slider-one__bg -->
-			<div class="slider-one__shape-1"></div><!-- /.slider-one__shape-1 -->
+			
+			<div class="slider-one__shape-2"></div><!-- /.slider-one__shape-2 -->
 			<div class="container">
-				<div class="slider-one__content ">
+				<div class="slider-one__content text-center">
+					
 					<div class="slider-one__title-wrapper">
-						<h2 class="slider-one__title">MAKE A <br>
-							DIFFERENCE</h2><!-- /.slider-one__title -->
+						<h2 class="slider-one__title">Harnessing Technology<br>To Create Bouyancy And Success For All</h2>
+						<!-- /.slider-one__title -->
 					</div><!-- /.slider-one__title-wrapper -->
-					<div class="slider-one__btns">
-						<a href="#" class="thm-btn slider-one__btn"><span>Learn More</span></a>
-						<!-- /.thm-btn slider-one__btn -->
-					</div><!-- /.slider-one__btns -->
+					
 				</div><!-- /.slider-one__content -->
 			</div><!-- /.container -->
 		</div><!-- /.item -->
+
+
+
+
+
+
+
+
+
+		<div class="item slider-one__slide-2">
+			<div class="slider-one__bg" style="background-image: url({% static 'assets/images/background/slider-3-2.jpg' %});">
+			</div><!-- /.slider-one__bg -->
+			
+			<div class="slider-one__shape-2"></div><!-- /.slider-one__shape-2 -->
+			<div class="container">
+				<div class="slider-one__content text-center">
+					
+					
+					
+					<div class="slider-one__title-wrapper">
+						<h2 class="slider-one__title">Capability To Innovate<br> With A Futuristic Thinking Approach</h2>
+						<!-- /.slider-one__title -->
+					</div><!-- /.slider-one__title-wrapper -->
+					
+				</div><!-- /.slider-one__content -->
+			</div><!-- /.container -->
+		</div><!-- /.item -->
+
+
+
 	</div><!-- /.slider-one__carousel -->
 </div><!-- /.slider-one -->
+<section class="black-bg section-padding-lg--top section-padding-lg--bottom cta-two">
+	<div class="cta-two__bg jarallax" data-jarallax data-speed="0.2" data-imgPosition="70% 0%"
+		style="background-image: url({% static 'assets/images/background/cta-two-bg-1-1a.jpg' %});"></div>
+	<div class="container">
+		<div class="cta-two__inner">
+			<h3 class="cta-two__title">WELCOME TO MSC TECHNOLOGY
+				</h3><!-- /.cta-two__title -->
+			
+			<!-- /.thm-btn cta-two__btn -->
+		</div><!-- /.cta-two__inner -->
+	</div><!-- /.container -->
+</section>
+
+
+
+
 <section class="section-padding--bottom section-padding--top about-five">
 	<div class="container">
 		<div class="row gutter-y-60">
@@ -55,42 +97,33 @@
 					<div class="about-five__images__shape"></div><!-- /.about-five__images__shape -->
 					<img src="{% static 'assets/images/resources/about-five-1-1.jpg' %}" class="wow fadeInUp"
 						data-wow-duration="1500ms" alt="">
-					<img src="{% static 'assets/images/resources/about-five-1-2.jpg' %}" alt="">
+					
 					<div class="about-five__video">
 						<a href="https://www.youtube.com/watch?v=h-ijnNnS1E4" class="video-popup">
 						<i class="fa fa-play"></i>
 						</a>
 					</div><!-- /.about-five__video -->
-					<div class="about-five__images__caption count-box wow fadeInUp" data-wow-duration="1500ms">
-						<span class="count-text" data-stop="15" data-speed="1500">00</span>
-						YEARS <BR>ANNIVERSARY
-					</div><!-- /.about-five__images__caption -->
+					
 				</div><!-- /.about-five__images -->
 			</div><!-- /.col-lg-6 -->
 			<div class="col-lg-6">
 				<div class="about-five__content">
 					<div class="section-title ">
-						<p class="section-title__text">About Company</p><!-- /.section-title__text -->
-						<h2 class="section-title__title">Welcome to MSC Technology</h2>
+						
+						<h2 class="section-title__title">Know More About Us</h2>
 						<!-- /.section-title__title -->
 					</div><!-- /.section-title -->
-					<div class="about-five__text">MSC Technology provides exclusive IT solutions to MSC group worldwide.
-						We believe engaged, talented and ideas-focused individuals are what makes an international business like ours so successful. That’s why, when it comes to our technology offering, we’re always keen to hear from technical professionals who believe they could be a part of our multicultural dynamic working environment. </div>
+					<div class="about-five__text">MSC Technology India is the technology development arm of the largest shipping and logistics titan in the world – the MSC Group with headquarters at Geneva. MSC Technology India, established in the year 2007, provides exclusive maritime software-based services and technology consultancy to MSC globally. 
+						 </div>
 					<!-- /.about-five__text -->
-					<div class="about-five__text">Together, we’ll create some remarkable solutions to technological challenges in the years ahead.</div>
+					<div class="about-five__text">As a technology driven IT services company our focus has been to place our energies on building innovatively advanced and secure IT services, technology infrastructure training, building capabilities and up-skilling our human capital to propel  project efficiencies for timely delivery of projects. We are engaged in the development of unique ERP solutions with two key facets; attending to the technology needs of the principal headquarters and providing are internal stakeholder companies with new-age solutions.
+						And this is has been made possible because we care for our people and our people have been the cornerstone in achieving our strategic goals.
+						</div>
 					<!-- /.about-five__text -->
 					
 					<div class="about-four__meta">
-						<div class="about-four__author">
-							<img src="{% static 'assets/images/resources/about-four-author-1.jpg' %}" alt="">
-							<div class="about-four__author__content">
-								<h3 class="about-four__author__title">Vijai Arun</h3>
-								<!-- /.about-four__author__title -->
-								<div class="about-four__author__designation">Chief Executive Officer, India</div>
-								<!-- /.about-four__author__designation -->
-							</div><!-- /.about-four__author__content -->
-						</div><!-- /.about-four__author -->
-						<a href="#" class="thm-btn about-four__btn"><span>Learn More</span></a>
+						
+						<a href="#" class="thm-btn about-four__btn"><span>Know More</span></a>
 						<!-- /.thm-btn about-four__btn -->
 					</div><!-- /.about-four__meta -->
 				</div><!-- /.about-five__content -->
@@ -98,25 +131,285 @@
 		</div><!-- /.row -->
 	</div><!-- /.container -->
 </section>
-<section class="section-padding--bottom section-padding--top project-one gray-bg">
+
+
+
+<section class="section-padding--bottom section-padding--top project-three gray-bg">
+	<div class="container-fluid">
+		<div class="section-title text-center">
+			
+			<h2 class="section-title__title"><strong>YouPhoria</strong> - Celebrating 15 Years of Togetherness</h2>
+			<!-- /.section-title__title -->
+		</div><!-- /.section-title -->
+
+		<div class="owl-carousel thm-owl__carousel--range owl-theme" data-owl-options='{"loop": false,
+		"nav": false,
+		"autoWidth": true,
+		"navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"],
+		"dots": false,
+		"margin": 10,
+		"items": 1,
+		"smartSpeed": 700,
+		"responsive": {
+			"0": {
+				"margin": 10,
+				"items": 1,
+				"autoWidth": false
+			},
+			"768": {
+				"margin": 10,
+				"items": 2,
+				"autoWidth": false
+			},
+			"992": {
+				"margin": 10,
+				"items": 3
+			},
+			"1200": {
+				"margin": 10,
+				"items": 4
+			}
+		}}'>
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p1.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+				</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg"
+						style="background-image: url({% static 'assets/images/projects/p2.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg"
+						style="background-image: url({% static 'assets/images/projects/p2a.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			
+
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg"
+						style="background-image: url({% static 'assets/images/projects/new2a.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+
+
+
+
+
+			
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg"
+						style="background-image: url({% staitc 'assets/images/projects/p3.jpg' %)};">
+					</div><!-- /.project-card-two__bg -->
+					
+				</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p4.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p4a.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p4aa.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			
+
+
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p4b.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/new2.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+			
+
+
+
+			
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p6.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p13.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p4c.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/new1.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p8a.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+
+
+
+			
+
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg"
+						style="background-image: url({% static 'assets/images/projects/p9.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p10.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p10a.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+
+
+
+
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p11.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+			<div class="item">
+				<div class="project-card-two project-card-two--large">
+					<div class="project-card-two__bg project-card-two--large"
+						style="background-image: url({% static 'assets/images/projects/p12.jpg' %});">
+					</div><!-- /.project-card-two__bg -->
+					</div><!-- /.project-card-two -->
+			</div><!-- /.item -->
+
+			
+			
+
+
+
+
+
+
+
+		</div><!-- /.owl-carousel -->
+		<div class="thm-owl__carousel--range__input"><input type="text" value="" name="range" />
+		</div>
+	</div><!-- /.container-fluid -->
+</section>
+
+
+
+
+
+
+
+<section class="section-padding--bottom section-padding--top project-one">
 	<div class="container">
 		<div class="project-one__top">
 			<div class="row">
 				<div class="col-lg-7">
 					<div class="section-title ">
-						<p class="section-title__text">Latest Project</p><!-- /.section-title__text -->
-						<h2 class="section-title__title">Core <BR>Capabilities</h2>
+						<h2 class="section-title__title">Core Capabilities</h2>
 						<!-- /.section-title__title -->
 					</div><!-- /.section-title -->
 				</div><!-- /.col-lg-7 -->
-				<div class="col-lg-5">
+				<div class="col-lg-12">
 					<div class="project-one__top__content">
-						<p class="project-one__top__text">MSC Technology has a tremendous panel of experts and skilled resources that propels in the smooth functioning of the organization and its deliverables. An amalgamation of Experience & Youth gives the organization a perfect blend that reflects in the success of our company.</p>
-						<div class="project-one__top__btns">
-							<a href="#" class="thm-btn project-one__top__btn">
-								<span>Learn more</span>
-							</a><!-- /.thm-btn project-one__top__btn -->
-						</div><!-- /.project-one__top__btns -->
+						<p>The fundamental competencies of MSC Technology India are spread across its numerous departments, which are crucial in converting business needs into technology solutions for enchanced productivity.
+							Our incredibly capable and responsible teams create systems to handle client relationships, business operations and SAP systems.</p>
+						<p>To ensure that the standards, quality and delivery date are not compromised, rigorous testing is done at different stages to manage the expected outcome. Our team of experts is committed to managing sophisticated servers, developing cutting-edge tools and utilities, and designing technologically advanced applications.</p>
+									
 
 					</div><!-- /.project-one__top__content -->
 				</div><!-- /.col-lg-5 -->
@@ -154,8 +447,8 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
-							<h3 class="project-card-one__title"><a href="#">Finance, Admin & HR Team</a></h3><!-- /.project-card-one__title -->
+							<p class="project-card-one__text">MSC Technology Solutions</p>
+							<h3 class="project-card-one__title"><a href="#">Finance, Admin, & HR Team</a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
 								<i class="fa fa-angle-right"></i>
 							</a><!-- /.project-card-one__more -->
@@ -170,7 +463,7 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
+							<p class="project-card-one__text">MSC Technology Solutions</p>
 							<h3 class="project-card-one__title"><a href="#">
 								Software & Development Team </a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
@@ -187,8 +480,8 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
-							<h3 class="project-card-one__title"><a href="#">Customer Support Department </a></h3><!-- /.project-card-one__title -->
+							<p class="project-card-one__text">MSC Technology Solutions</p>
+							<h3 class="project-card-one__title"><a href="#">Customer Support Team </a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
 								<i class="fa fa-angle-right"></i>
 							</a><!-- /.project-card-one__more -->
@@ -203,7 +496,7 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
+							<p class="project-card-one__text">MSC Technology Solutions</p>
 							<h3 class="project-card-one__title"><a href="#">Implementation Team </a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
 								<i class="fa fa-angle-right"></i>
@@ -219,8 +512,8 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
-							<h3 class="project-card-one__title"><a href="#">Business Process Department </a></h3><!-- /.project-card-one__title -->
+							<p class="project-card-one__text">MSC Technology Solutions</p>
+							<h3 class="project-card-one__title"><a href="#">Business Process Team </a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
 								<i class="fa fa-angle-right"></i>
 							</a><!-- /.project-card-one__more -->
@@ -228,6 +521,8 @@
 					</div><!-- /.project-card-one__content -->
 				</div><!-- /.project-card-one -->
 			</div><!-- /.col-lg-4 col-md-6 col-sm-12 -->
+
+
 			<div class="item">
 				<div class="project-card-one">
 					<div class="project-card-one__image">
@@ -235,7 +530,7 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
+							<p class="project-card-one__text">MSC Technology Solutions</p>
 							<h3 class="project-card-one__title"><a href="#">Testing & QA Team </a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
 								<i class="fa fa-angle-right"></i>
@@ -244,6 +539,8 @@
 					</div><!-- /.project-card-one__content -->
 				</div><!-- /.project-card-one -->
 			</div><!-- /.col-lg-4 col-md-6 col-sm-12 -->
+
+
 			<div class="item">
 				<div class="project-card-one">
 					<div class="project-card-one__image">
@@ -251,7 +548,7 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
+							<p class="project-card-one__text">MSC Technology Solutions</p>
 							<h3 class="project-card-one__title"><a href="#">Enterprise Software & Systems </a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
 								<i class="fa fa-angle-right"></i>
@@ -260,6 +557,8 @@
 					</div><!-- /.project-card-one__content -->
 				</div><!-- /.project-card-one -->
 			</div><!-- /.col-lg-4 col-md-6 col-sm-12 -->
+
+
 			<div class="item">
 				<div class="project-card-one">
 					<div class="project-card-one__image">
@@ -267,7 +566,7 @@
 					</div><!-- /.project-card-one__image -->
 					<div class="project-card-one__content">
 						<div class="project-card-one__content__inner">
-							<p class="project-card-one__text">IT Technology Solution</p>
+							<p class="project-card-one__text">MSC Technology Solutions</p>
 							<h3 class="project-card-one__title"><a href="#">Infrastructure Team </a></h3><!-- /.project-card-one__title -->
 							<a href="#" class="project-card-one__more">
 								<i class="fa fa-angle-right"></i>
@@ -279,53 +578,166 @@
 		</div><!-- /.owl-carousel -->
 	</div><!-- /.container -->
 </section>
-{% comment %}
-<section class="service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right "style="padding:300px!important">
-	<div class="container">
-		<div class=" text-center">
-			<p class="section-title__text">Career</p><!-- /.section-title__text -->
-			<h2 class="section-title__title">Explore Latest Opportunities</h2>
-			<p class="text-end"><a href="{% url 'job:job_list' %}" class="thm-btn"><span>Explore all opportunities</span></a></p><!-- /.section-title__text -->
-			<!-- /.section-title__title -->
-		</div><!-- /.section-title -->
-		<div class="row g-3">
-        {% for job in jobs %}
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="item">
-                <div class="service-card-three">
-                    <div class="service-card-three__icon">
-                        <i class="icon-new-product"></i>
-                    </div><!-- /.service-card-three__icon -->
-                    <div class="service-card-three__content">
-                        <h3 class="service-card-three__title"><a href="{% url 'job:job_detail' slug=job.slug %}">{{job.job_title}}</a></h3><!-- /.service-card-three__title -->
-                        <div class="service-card-three__text">No of Position: {{job.no_of_openings}} </div><!-- /.service-card-three__text -->
-                        <div class="service-card-three__text">Place: {{job.place}} </div><!-- /.service-card-three__text -->
-                        <a href="{% url 'job:job_detail' slug=job.slug %}" class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </a><!-- /.service-card-three__text -->
-                    </div><!-- /.service-card-three__content -->
-                </div><!-- /.service-card-three -->
-            </div><!-- /.item -->
-        </div>
-        {% endfor %}
-        </div>
-	</div><!-- /.container -->
-</section>
-{% endcomment %}
 
-{% if jobs %}
-<section class="section-padding--bottom project-one gray-bg">
+
+
+<section class="section-padding--bottom section-padding--top gray-bg background-size-cover"
+style="background-image: url({% static 'assets/images/shapes/team-home-bg-1-1.jpg' %});">
+<div class="container">
+	<div class="section-title text-center">
+		
+		<h2 class="section-title__title">Leadership Team</h2>
+		<p class="project-one__top__text">When Warren Bennis commented that “leadership is the capacity to translate vision into reality,” we know for sure that he was referring to the likes of the MSC TI stakeholders. The leadership in MSC TI have shown tremendous capability to rally its people on a unified common purpose of transformation and growth. </p>
+
+		<p class="project-one__top__text">With mentorship qualities inbuilt in them, the leaders of MSC TI have provided guidance and inspiration to everyone around them. Their extensive experience has encouraged creativity and innovation within the organization and helped realize an impressive growth trajectory for the company. </p>
+
+		<!-- /.section-title__title -->
+	</div><!-- /.section-title -->
+	<div class="row gutter-y-30">
+
+
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="team-card-one wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
+				<div class="team-card-one__image">
+					<img src="{% static 'assets/images/team/team-1-1.jpg' %}" alt="">
+					<div class="team-card-one__social">
+						<ul class="team-card-one__social__links">
+							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+					<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+					<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+					<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+
+
+						</ul><!-- /.team-card-one__social__links -->
+						<div class="team-card-one__social__icon">
+							<i class="fa fa-share-alt"></i>
+						</div><!-- /.team-card-one__social__icon -->
+					</div><!-- /.team-card-one__social -->
+				</div><!-- /.team-card-one__image -->
+				<div class="team-card-one__content">
+					<h3 class="team-card-one__title"><a href="#">André Simha</a></h3>
+					<!-- /.team-card-one__title -->
+					<p class="team-card-one__designation"> Global Chief Digital & Information Officer</p><!-- /.team-card-one__designation -->
+				</div><!-- /.team-card-one__content -->
+			</div><!-- /.team-card-one -->
+		</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+
+
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="team-card-one wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
+				<div class="team-card-one__image">
+					<img src="{% static 'assets/images/team/team-1-2.jpg' %}" alt="">
+					<div class="team-card-one__social">
+						<ul class="team-card-one__social__links">
+
+
+							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+							<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+
+
+						</ul><!-- /.team-card-one__social__links -->
+						<div class="team-card-one__social__icon">
+							<i class="fa fa-share-alt"></i>
+						</div><!-- /.team-card-one__social__icon -->
+					</div><!-- /.team-card-one__social -->
+				</div><!-- /.team-card-one__image -->
+				<div class="team-card-one__content">
+					<h3 class="team-card-one__title"><a href="#">Fabio Catassi</a></h3>
+					<!-- /.team-card-one__title -->
+					<p class="team-card-one__designation">Global Chief Technology Officer</p><!-- /.team-card-one__designation -->
+				</div><!-- /.team-card-one__content -->
+			</div><!-- /.team-card-one -->
+		</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="team-card-one wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
+				<div class="team-card-one__image">
+					<img src="{% static 'assets/images/team/team-1-3.jpg' %}" alt="">
+					<div class="team-card-one__social">
+						<ul class="team-card-one__social__links">
+
+							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+							<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+
+
+							
+						</ul><!-- /.team-card-one__social__links -->
+						<div class="team-card-one__social__icon">
+							<i class="fa fa-share-alt"></i>
+						</div><!-- /.team-card-one__social__icon -->
+					</div><!-- /.team-card-one__social -->
+				</div><!-- /.team-card-one__image -->
+				<div class="team-card-one__content">
+					<h3 class="team-card-one__title"><a href="#">Vijai Arun</a></h3>
+					<!-- /.team-card-one__title -->
+					<p class="team-card-one__designation">Chief Executive Officer, India</p><!-- /.team-card-one__designation -->
+				</div><!-- /.team-card-one__content -->
+			</div><!-- /.team-card-one -->
+		</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
+
+
+	</div><!-- /.row -->
+</div><!-- /.container -->
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section
+	class=" section-padding--top service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right"
+	style="background-image: url({% static 'assets/images/shapes/service-four-bg-1-1.png' %});">
 	<div class="container">
 		<div class="section-title text-center">
-			<p class="section-title__text">Career</p><!-- /.section-title__text -->
-			<h2 class="section-title__title">Explore Recommended Opportunities</h2>
-			<p class="text-end"><a href="{% url 'job:job_list' %}" class="thm-btn"><span>Explore all opportunities</span></a></p><!-- /.section-title__text -->
+			
+			<h2 class="section-title__title">Current Job Openings</h2>
 			<!-- /.section-title__title -->
 		</div><!-- /.section-title -->
-		<div class="owl-carousel thm-owl__carousel project-one__carousel thm-owl__carousel--with-shadow"
-			data-owl-options='{"loop": true,
-		"autoplay": true,
-		"autoplayTimeout": 1500,
-		"autoplayHoverPause": true,
-		"nav": true,
+		<div class="owl-carousel thm-owl__carousel thm-owl__carousel--with-shadow service-four__carousel"
+			data-owl-options='{"loop": false,
+		"autoplay": false,
+		"nav": false,
 		"navText": ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"],
 		"dots": false,
 		"margin": 0,
@@ -336,289 +748,272 @@
 				"margin": 0,
 				"items": 1
 			},
-			"768": {
+			"576": {
 				"margin": 30,
 				"items": 2
 			},
-			"992": {
+			"768": {
 				"margin": 30,
 				"items": 3
+			},
+			"992": {
+				"margin": 30,
+				"items": 4
+			},
+			"1200": {
+				"margin": 30,
+				"items": 5
 			}
 		}}'>
-		{% for job in jobs %}
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="item">
-                <div class="service-card-three recommended-card">
-                    <div class="service-card-three__icon">
-                        <i class="icon-new-product"></i>
-                    </div><!-- /.service-card-three__icon -->
-                    <div class="service-card-three__content">
-                        <h3 class="service-card-three__title"><a href="{% url 'job:job_detail' slug=job.slug %}">{{job.job_title}}</a></h3><!-- /.service-card-three__title -->
-                        <div class="service-card-three__text">No of Position: {{job.no_of_openings}} </div><!-- /.service-card-three__text -->
-                        <div class="service-card-three__text">Place: {{job.place}} </div><!-- /.service-card-three__text -->
-                        <a href="{% url 'job:job_detail' slug=job.slug %}" class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </a><!-- /.service-card-three__text -->
-                    </div><!-- /.service-card-three__content -->
-                </div><!-- /.service-card-three -->
-            </div><!-- /.item -->
-        </div>
-        {% endfor %}
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-new-product"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a href="#">Senior Network Engineer</a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">No of Position: 1 </div><!-- /.service-card-three__text -->
+						<div class="service-card-three__text">Place: Chennai, India </div><!-- /.service-card-three__text -->
+						<div class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </div><!-- /.service-card-three__text -->
+				
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-new-product"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a href="#">Scrum Master </a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">No of Position: 5 </div><!-- /.service-card-three__text -->
+						<div class="service-card-three__text">Place: Chennai, India </div><!-- /.service-card-three__text -->
+						<div class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </div><!-- /.service-card-three__text -->
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+			
+
+
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-new-product"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a href="#">Senior Developer - PHP </a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">No of Position: 2 </div><!-- /.service-card-three__text -->
+						<div class="service-card-three__text">Place: Chennai, India </div><!-- /.service-card-three__text -->
+						<div class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </div><!-- /.service-card-three__text -->
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+
+
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-new-product"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a href="#">Front End Developer</a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">No of Position: 2 </div><!-- /.service-card-three__text -->
+						<div class="service-card-three__text">Place: USA </div><!-- /.service-card-three__text -->
+						<div class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </div><!-- /.service-card-three__text -->
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+
+
+
+
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-new-product"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a href="#">System Support / Helpdesk</a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">No of Position: 2 </div><!-- /.service-card-three__text -->
+						<div class="service-card-three__text">Place: USA </div><!-- /.service-card-three__text -->
+						<div class="blog-card-one__more">Read More <i class="fa fa-arrow-right"></i> </div><!-- /.service-card-three__text -->
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+
+
+
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-protection"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a
+								href="#">Security <br>
+								System</a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">Providing the solutions for non-IT businesses.
+						</div><!-- /.service-card-three__text -->
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-web-development"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a href="#">UI/UX
+								<br>
+								Designing</a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">Providing the solutions for non-IT businesses.
+						</div><!-- /.service-card-three__text -->
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+
+			<div class="item">
+				<div class="service-card-three">
+					<div class="service-card-three__icon">
+						<i class="icon-analysis"></i>
+					</div><!-- /.service-card-three__icon -->
+					<div class="service-card-three__content">
+						<h3 class="service-card-three__title"><a href="#">Data
+								<br>
+								Analysis</a></h3><!-- /.service-card-three__title -->
+						<div class="service-card-three__text">Providing the solutions for non-IT businesses.
+						</div><!-- /.service-card-three__text -->
+					</div><!-- /.service-card-three__content -->
+				</div><!-- /.service-card-three -->
+			</div><!-- /.item -->
+
+
 		</div><!-- /.owl-carousel -->
 	</div><!-- /.container -->
 </section>
-{% endif %}
 
-<section class="funfact-one">
-	<div class="container">
-		<div class="funfact-one__inner wow fadeInUp background-size-cover" data-wow-duration="1500ms"
-			style="background-image: url({% static 'assets/images/shapes/funfact-one-bg.png' %});">
-			<ul class="funfact-one__list">
-				<li class="funfact-one__list__item">
-					<h3 class="funfact-one__list__title count-box">
-						<span data-stop="2500" data-speed="2500" class="count-text">5000</span>
-					</h3><!-- /.funfact-one__list__title -->
-					<p class="funfact-one__list__text">DEDICATED TEAM</p>
-					<!-- /.funfact-one__list__text -->
-				</li>
-				<li class="funfact-one__list__item">
-					<h3 class="funfact-one__list__title count-box">
-						<span data-stop="15" data-speed="2500" class="count-text">00</span>
-					</h3><!-- /.funfact-one__list__title -->
-					<p class="funfact-one__list__text">YEARS ANNIVERSARY</p>
-					<!-- /.funfact-one__list__text -->
-				</li>
-				<li class="funfact-one__list__item">
-					<h3 class="funfact-one__list__title count-box">
-						<span data-stop="12" data-speed="2500" class="count-text">00</span>
-					</h3><!-- /.funfact-one__list__title -->
-					<p class="funfact-one__list__text">WORLD WIDE PRESENCE</p>
-					<!-- /.funfact-one__list__text -->
-				</li>
-				<li class="funfact-one__list__item">
-					<h3 class="funfact-one__list__title count-box">
-						<span data-stop="10" data-speed="2500" class="count-text">00</span>
-					</h3><!-- /.funfact-one__list__title -->
-					<p class="funfact-one__list__text">CLIENTS </p>
-					<!-- /.funfact-one__list__text -->
-				</li>
-			</ul><!-- /.funfact-one__list -->
-		</div><!-- /.funfact-one__inner -->
-	</div><!-- /.container -->
-</section>
-<section class="black-gold section-padding-lg--top section-padding-lg--bottom cta-two">
-	<div class="cta-two__bg jarallax" data-jarallax data-speed="0.2" data-imgPosition="50% 0%"
-		style="background-image: url({% static 'assets/images/background/cta-two-bg-1-1.jpg' %});"></div>
-	<div class="container">
-		<div class="cta-two__inner">
-			<h3 class="cta-two__title">Better IT Solutions And Services
-				At Your <span>Fingertips</span></h3><!-- /.cta-two__title -->
-			<a href="contact.html" class="thm-btn cta-two__btn"><span>LEarn More</span></a>
-			<!-- /.thm-btn cta-two__btn -->
-		</div><!-- /.cta-two__inner -->
-	</div><!-- /.container -->
-</section>
-<section
-	class="section-padding--bottom section-padding--top testimonials-two background-repeat-no background-position-top-center"
-	style="background-image: url({% static 'assets/images/shapes/testi-bg-1-1.png' %});">
-	<div class="container">
-		<div class="row gutter-y-60">
-			<div class="col-lg-5">
-				<div class="testimonials-two__content">
-					<div class="section-title ">
-						<p class="section-title__text">Our clients</p><!-- /.section-title__text -->
-						<h2 class="section-title__title">We Are Trusted
-							Worldwide Peoples</h2><!-- /.section-title__title -->
-					</div><!-- /.section-title -->
-					<div class="testimonials-two__content__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </div>
-					<!-- /.testimonials-two__content__text -->
-					<div class="testimonials-two__content__text">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing</div><!-- /.testimonials-two__content__text -->
-					<a href="#" class="thm-btn testimonials-two__content__btn"><span>View All
-							feedbacks</span></a><!-- /.thm-btn testimonials-two__content__btn -->
-				</div><!-- /.testimonials-two__content -->
-			</div><!-- /.col-lg-5 -->
-			<div class="col-lg-7">
-				<div class="testimonials-two__items">
-					<div class="row gutter-y-30">
-						<div class="col-lg-12">
-							<div class="testimonials-one-card">
-								<div class="testimonials-one-card__image">
-									<img src="{% static 'assets/images/resources/testi-1-1.jpg' %}" alt="">
-								</div><!-- /.testimonials-one-card__image -->
-								<div class="testimonials-one-card__content">
-									<div class="testimonials-one-card__text">I came to MSC technology with a background of building real-time systems to process financial market data. MSC impressed me by its handling of vast amount of data, reliably and yet cost-effectively. I like the business-casual and flexible-hours work environment here that supports creativities. MSC is fun, and full of challenges too.</div>
-									<!-- /.testimonials-one-card__text -->
-									<h3 class="testimonials-one-card__title">David L </h3>
-									<!-- /.testimonials-one-card__title -->
-									<p class="testimonials-one-card__designation">Senior Developer</p>
-									<!-- /.testimonials-one-card__designation -->
-									<i class="icon-right-quote testimonials-one-card__icon"></i>
-								</div><!-- /.testimonials-one-card__content -->
-							</div><!-- /.testimonials-one-card -->
-						</div><!-- /.col-lg-6 -->
-						<div class="col-lg-12">
-							<div class="testimonials-one-card">
-								<div class="testimonials-one-card__image">
-									<img src="{% static 'assets/images/resources/testi-1-2.jpg' %}" alt="">
-								</div><!-- /.testimonials-one-card__image -->
-								<div class="testimonials-one-card__content">
-									<div class="testimonials-one-card__text">I have been working for MSC Technology in Warren for 16 years. During this time, I grew professionally as MSC Technology grew into a global entity. A job at MSC Technology is not just a job, it's a career. What’s so unique about working at MSC Technology is the problem solving approach. When there is a problem that affects our customers, it is solved very quickly thanks to an exceptional teamwork and collaboration. It is a pleasure to work in this International group surrounded by highly qualified IT professionals that are working together as a “family” with only one goal: Delivering Excellent Service Quality.</div>
-									<!-- /.testimonials-one-card__text -->
-									<h3 class="testimonials-one-card__title">Luca B.</h3>
-									<!-- /.testimonials-one-card__title -->
-									<p class="testimonials-one-card__designation">Chief Opeating Officer</p>
-									<!-- /.testimonials-one-card__designation -->
-									<i class="icon-right-quote testimonials-one-card__icon"></i>
-								</div><!-- /.testimonials-one-card__content -->
-							</div><!-- /.testimonials-one-card -->
-						</div><!-- /.col-lg-6 -->
-					</div><!-- /.row -->
-				</div><!-- /.testimonials-two__items -->
-			</div><!-- /.col-lg-7 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="section-padding--top section-padding--bottom service-three black-bg"
+style="background-image: url({% static 'assets/images/background/service-1-bg-1.png' %});">
+<div class="container">
+	<div class="service-three__block">
+		<div class="row">
+			
+			
 		</div><!-- /.row -->
-	</div><!-- /.container -->
+	</div><!-- /.service-three__block -->
+	<ul class="service-three__list">
+		<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+			data-wow-delay="000ms">
+			<img src="{% static 'assets\images\icons-new\global-network.png' %}" alt="">
+			<h3 class="service-three__list__title"><a href="#">Global locations serviced by MSC TI solutions</a></h3>
+		</li>
+		<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+			data-wow-delay="100ms">
+			
+			
+			<img src="{% static 'assets\images\icons-new\great-place-to-work.png' %}" alt="">
+
+			<h3 class="service-three__list__title"><a href="#">Great Place to Work Award</a></h3>
+		</li>
+		<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+			data-wow-delay="200ms">
+			<img src="{% static 'assets\images\icons-new\reward.png' %}" alt="">
+			<h3 class="service-three__list__title"><a href="#">Tamil Nadu Best Employer Award</a></h3>
+		</li>
+		<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+			data-wow-delay="300ms">
+			
+			<img src="{% static 'assets\images\icons-new\iso.png' %}" alt="">
+			<h3 class="service-three__list__title"><a href="#">ISO certified</a></h3>
+		</li>
+		<li class="service-three__list__item wow fadeInUp" data-wow-duration="1500ms"
+			data-wow-delay="400ms">
+
+			<img src="{% static 'assets\images\icons-new\equality.png' %}" alt="">
+			
+			<h3 class="service-three__list__title"><a href="#">Equal opportunity employer</a></h3>
+		</li>
+		
+
+	</ul><!-- /.service-three__list -->
+</div><!-- /.container -->
 </section>
 
-<section class="section-padding--bottom section-padding--top gray-bg background-size-cover"
-	style="background-image: url({% static 'assets/images/shapes/team-home-bg-1-1.jpg' %});">
-	<div class="container">
-		<div class="section-title text-center">
-			<p class="section-title__text">Our Team members</p><!-- /.section-title__text -->
-			<h2 class="section-title__title">MANAGEMENT & <br> LEADERSHIP</h2>
-			<p class="project-one__top__text">MSC Technology has a tremendous panel of experts and skilled resources that propels in the smooth functioning of the organization and its deliverables. An amalgamation of Experience & Youth gives the organization a perfect blend that reflects in the success of our company.</p>
-			<!-- /.section-title__title -->
-		</div><!-- /.section-title -->
-		<div class="row gutter-y-30">
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="team-card-one wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="000ms">
-					<div class="team-card-one__image">
-						<img src="{% static 'assets/images/team/team-1-1.jpg' %}" alt="">
-						<div class="team-card-one__social">
-							<ul class="team-card-one__social__links">
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-								<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-							</ul><!-- /.team-card-one__social__links -->
-							<div class="team-card-one__social__icon">
-								<i class="fa fa-share-alt"></i>
-							</div><!-- /.team-card-one__social__icon -->
-						</div><!-- /.team-card-one__social -->
-					</div><!-- /.team-card-one__image -->
-					<div class="team-card-one__content">
-						<h3 class="team-card-one__title"><a href="#">André Simha</a></h3>
-						<!-- /.team-card-one__title -->
-						<p class="team-card-one__designation">Global Chief Digital & Information Officer</p><!-- /.team-card-one__designation -->
-					</div><!-- /.team-card-one__content -->
-				</div><!-- /.team-card-one -->
-			</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="team-card-one wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="100ms">
-					<div class="team-card-one__image">
-						<img src="{% static 'assets/images/team/team-1-2.jpg' %}" alt="">
-						<div class="team-card-one__social">
-							<ul class="team-card-one__social__links">
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-								<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-							</ul><!-- /.team-card-one__social__links -->
-							<div class="team-card-one__social__icon">
-								<i class="fa fa-share-alt"></i>
-							</div><!-- /.team-card-one__social__icon -->
-						</div><!-- /.team-card-one__social -->
-					</div><!-- /.team-card-one__image -->
-					<div class="team-card-one__content">
-						<h3 class="team-card-one__title"><a href="#">Fabio Catassi</a></h3>
-						<!-- /.team-card-one__title -->
-						<p class="team-card-one__designation">Global Chief Technology Officer </p><!-- /.team-card-one__designation -->
-					</div><!-- /.team-card-one__content -->
-				</div><!-- /.team-card-one -->
-			</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="team-card-one wow fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
-					<div class="team-card-one__image">
-						<img src="{% static 'assets/images/team/team-1-3.jpg' %}" alt="">
-						<div class="team-card-one__social">
-							<ul class="team-card-one__social__links">
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-								<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-							</ul><!-- /.team-card-one__social__links -->
-							<div class="team-card-one__social__icon">
-								<i class="fa fa-share-alt"></i>
-							</div><!-- /.team-card-one__social__icon -->
-						</div><!-- /.team-card-one__social -->
-					</div><!-- /.team-card-one__image -->
-					<div class="team-card-one__content">
-						<h3 class="team-card-one__title"><a href="#">Vijai Arun</a></h3>
-						<!-- /.team-card-one__title -->
-						<p class="team-card-one__designation">Chief Executive Officer, India</p><!-- /.team-card-one__designation -->
-					</div><!-- /.team-card-one__content -->
-				</div><!-- /.team-card-one -->
-			</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
-		</div><!-- /.row -->
-	</div><!-- /.container -->
-</section>
-<section class=" section-padding--top about-three about-three--home-one">
-	<div class="about-three__shape wow fadeInRight" data-wow-duration="1500ms"
-		style="background-image: url({% static 'assets/images/shapes/about-three-s-1.png' %});">
-	</div><!-- /.about-three__shape -->
-	<div class="container">
-		<div class="row gutter-y-60">
-			<div class="col-lg-6">
-				<div class="about-three__image">
-					<img src="{% static 'assets/images/resources/about-four-1-1.jpg' %}" class="wow fadeInUp"
-						data-wow-duration="1500ms" alt="">
-				</div><!-- /.about-three__image -->
-			</div><!-- /.col-lg-6 -->
-			<div class="col-lg-6">
-				<div class="about-three__content">
-					<div class="section-title ">
-						<p class="section-title__text">Company Benefits</p><!-- /.section-title__text -->
-						<h2 class="section-title__title">Our Uniqueness</h2><!-- /.section-title__title -->
-					</div><!-- /.section-title -->
-					<div class="about-three__text">Being a professional services firm, it’s about creating a workplace where we recruit skilled people able to deliver excellence service but first, a place where people can be inspired and be inspiring. Finally, a workplace where you can grow and feel a sense of belonging and camaraderie. In other words, it’s about putting people first.</div><!-- /.about-three__text -->
-					<ul class="about-three__list">
-						<li class="about-three__list__item">
-							<div class="about-three__list__icon">
-								<i class="icon-cloud"></i>
-							</div><!-- /.about-three__list__icon -->
-							<div class="about-three__list__content">
-								<h3 class="about-three__list__title"><a href="#">International Environment</a></h3><!-- /.about-three__list__title -->
-								<p class="about-three__list__text">You would evolve in an international & multicultural environment in complete mutation.</p><!-- /.about-three__list__text -->
-							</div><!-- /.about-three__list__content -->
-						</li>
-						<li class="about-three__list__item">
-							<div class="about-three__list__icon">
-								<i class="icon-consulting"></i>
-							</div><!-- /.about-three__list__icon -->
-							<div class="about-three__list__content">
-								<h3 class="about-three__list__title"><a href="#">Learning & Development</a>
-								</h3><!-- /.about-three__list__title -->
-								<p class="about-three__list__text">We offer you continuous internal training & workshop, profitable for your internal career path.</p><!-- /.about-three__list__text -->
-							</div><!-- /.about-three__list__content -->
-						</li>
-						<li class="about-three__list__item">
-							<div class="about-three__list__icon">
-								<i class="icon-group"></i>
-							</div><!-- /.about-three__list__icon -->
-							<div class="about-three__list__content">
-								<h3 class="about-three__list__title"><a href="#">Career Path</a>
-								</h3><!-- /.about-three__list__title -->
-								<p class="about-three__list__text">Highly experienced manager help you to enlarge your skills and project participation.</p><!-- /.about-three__list__text -->
-							</div><!-- /.about-three__list__content -->
-						</li>
-					</ul><!-- /.about-three__list -->
-				</div><!-- /.about-three__content -->
-			</div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
-	</div><!-- /.container -->
-</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section class="section-padding--top section-padding--bottom">
 	<div class="container">
 		<div class="section-title text-center">
 			<p class="section-title__text">Direct from the Blog Posts</p><!-- /.section-title__text -->
-			<h2 class="section-title__title">Checkout Our Latest <br>
+			<h2 class="section-title__title">Check Out Our Latest <br>
 				News & Articles</h2><!-- /.section-title__title -->
 		</div><!-- /.section-title -->
 		<div class="row gutter-y-30">
@@ -699,10 +1094,10 @@
 		</div><!-- /.row gutter-y-30 -->
 	</div><!-- /.container -->
 </section>
-{% include 'chatbot/chat.html' %}
-{% endblock %}
+{% comment %}{% include 'chatbot/chat.html' %}{% endcomment %}
+{% endblock %}{% comment %}
 {% block javascript %}
 <script src="{% static 'js/chatbot/popper.min.js' %}"></script>
 <script src="{% static 'js/chatbot/chatterbot.js' %}"></script>
 <script src="{% static 'js/chatbot/speechRecognition.js' %}"></script>
-{% endblock javascript %}
+{% endblock javascript %}{% endcomment %}

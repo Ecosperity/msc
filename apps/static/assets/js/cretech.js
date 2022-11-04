@@ -381,11 +381,11 @@
 					var size = event.page.size;
 					var curItem = event.item.index + 1;
 					var dragLength = 100 / (itemCount / curItem);
-					console.log(event);
+					// console.log(event);
 					range.find("input").data("ionRangeSlider").update({
 						from: curItem
 					});
-					console.log(dragLength);
+					// console.log(dragLength);
 					range.find('.irs-bar').css('width', dragLength + "%");
 					range.find('.irs-handle.single').css('left', dragLength + "%");
 					range.find('.irs-single').css('left', dragLength + "%");
