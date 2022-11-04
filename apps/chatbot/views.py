@@ -33,8 +33,8 @@ def BotConversation(request):
     if request.is_ajax:  
         q = request.GET.get('text')
         if q=='':
-            speak("Hi, My name is Mia. How can I help you ?")        
-            return JsonResponse("Hi, My name is Mia, How can I help you ?", safe=False)
+            speak("Hi, my name is Mia. How may I help you?")        
+            return JsonResponse("Hi, my name is Mia. How may I help you?", safe=False)
         else:
             all_skills = SkillSet.objects.all().order_by('name')[:10]
             speak("You said " + q)

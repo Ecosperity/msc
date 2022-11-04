@@ -95,9 +95,9 @@ function ChattingData(text) {
     }else{
       $('.chat-body').append('<div class="chat-bubble you">' + data + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
       $('.chat-body').append(`<div class="form-group border border-2 text-center">                    
-      <input type="button" id="btnmscTechnology" onclick="menubar_btn_event('mscTechnology')" value="I want know about MSC Technology" class="btn btn-sm btn-outline-secondary my-1 rounded-pill">
-      <input type="button" id="btnmscNewsroom" onclick="menubar_btn_event('mscNewsroom')" value="I want know about MSC Newsroom" class="btn btn-sm btn-outline-info my-1 rounded-pill">
-      <input type="button" id="btnJobs" onclick="menubar_btn_event('jobs')" value="I am looking for Jobs" class="btn btn-sm btn-outline-success my-1 rounded-pill">
+      <input type="button" id="btnmscTechnology" onclick="menubar_btn_event('mscTechnology')" value="I would like to know about MSC Technology." class="btn btn-sm btn-outline-secondary my-1 rounded-pill">
+      <input type="button" id="btnmscNewsroom" onclick="menubar_btn_event('mscNewsroom')" value="I would like to know about MSC Newsroom." class="btn btn-sm btn-outline-info my-1 rounded-pill">
+      <input type="button" id="btnJobs" onclick="menubar_btn_event('jobs')" value="I am looking for jobs." class="btn btn-sm btn-outline-success my-1 rounded-pill">
                 </div>`).animate({scrollTop: $('.chat-body').prop("scrollHeight")}, 400);
     }
     $('#txtmessage').removeAttr('disabled');
@@ -152,7 +152,7 @@ function menubar_btn_event(val){
     $('#btnJobs').removeClass("btn-outline-success").addClass("btn-success").attr('disabled',true);;
     $('#btnmscTechnology').attr('disabled',true);  
     $('#btnmscNewsroom').attr('disabled',true);  
-    ChattingData("I am looking for jobs");    
+    ChattingData("I am looking for jobs.");    
       
   }
 }
