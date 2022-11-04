@@ -1,7 +1,6 @@
-{% load static i18n compress%}<!DOCTYPE html>
+{% load static i18n compress %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
-<!--THEME CREATED FOR MSCTECHNOLOGY -->
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +10,16 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 	<link
-		href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap"
-		rel="stylesheet">
+	href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap"
+	rel="stylesheet">
 	<!-- favicons Icons -->
 	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicons/apple-touch-icon.png' %}" />
 	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicons/favicon-32x32.png' %}" />
 	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicons/favicon-16x16.png' %}" />
 	<link rel="manifest" href="{% static 'assets/images/favicons/site.webmanifest' %}" />
-    {% block css %}{% endblock %}
+	{% block css %}{% endblock %}
 	<!-- plugins css -->
-    {% compress css %}
+	{% compress css %}
 	<link rel="stylesheet" href="{% static 'assets/vendors/bootstrap/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/vendors/fontawesome/css/all.min.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/vendors/jarallax/jarallax.css' %}">
@@ -33,7 +32,7 @@
 	<!-- templates css -->
 	<link rel="stylesheet" href="{% static 'assets/css/cretech.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    {% endcompress %}
+	{% endcompress %}
 </head>
 <body class="custom-cursor">
 	<div class="custom-cursor__cursor"></div>
@@ -43,19 +42,16 @@
 	</div>
 	<div class="page-wrapper">
 		<div class="header-three">
-			
 			<nav class="main-menu sticky-header">
 				<div class="container-fluid">
 					<div class="main-menu__logo">
-						<a href="index-2.html">
+						<a href="/">
 							<img src="{% static 'assets/images/logo-light.png' %}" width="98" height="33" alt="Cretech">
 						</a>
 					</div><!-- /.main-menu__logo -->
-
 					<ul class="main-menu__list">
 						<li class="menu-item-has-children">
 							<a href="#">Home</a>
-							
 						</li>
 						<li class="menu-item-has-children">
 							<a href="#">About us</a>
@@ -70,8 +66,6 @@
 						</li>
 						<li class="menu-item-has-children">
 							<a href="#">Expertise</a></li>
-
-							
 						<li class="menu-item-has-children">
 							<a href="#">News Center</a>
 							<ul>
@@ -88,8 +82,16 @@
 							</ul>
 						</li>
 						<li><a href="#">Contact</a></li>
+						{% if not request.user.is_authenticated %}
+						<li><a href="{% url 'account_login' %}">Login</a></li>
+						<li><a href="{% url 'account_signup' %}">Register</a></li>
+						{% else %}
+						<li><a href="{% url 'account_logout' %}">Logout</a></li>
+						{% endif %}
+						{% if request.user.role == 0 or request.user.role == 1%}
+						<li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+						{% endif %}
 					</ul><!-- /.main-menu__list -->
-
 					<div class="main-menu__right">
 						<a href="#" class="mobile-nav__toggler">
 							<span></span>
@@ -99,13 +101,11 @@
 						<a href="#" class="search-toggler">
 							<i class="icon-magnifying-glass"></i>
 						</a><!-- /.search-toggler -->
-						
 					</div><!-- /.main-menu__right -->
-
 				</div><!-- /.container-fluid -->
 			</nav><!-- /.main-menu -->
 		</div><!-- /.header-three -->
-        {% block message %}
+		{% block message %}
 		{% if messages %}
             {% for message in messages %}
             <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
@@ -116,7 +116,6 @@
         {% endif %}
 		{% endblock message %}
 		{% block content %}{% endblock %}
-
 		<div class="footer-main section-padding--top section-padding--bottom">
 			<div class="container">
 				<div class="row gutter-y-30">
@@ -128,7 +127,6 @@
 							<div class="socialmedia-top"></div>
 							<!-- /.footer-widget__text -->
 							<ul class="footer-widget__social">
-
 								<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fab fa-youtube"></i></a></li>
 								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -139,10 +137,6 @@
 					<div class="col-lg-3 col-md-6 col-sm-12">
 						<div class="footer-widget footer-widget--newsletter">
 							<h3 class="footer-widget__title">Quick link</h3><!-- /.footer-widget__title -->
-							
-							
-							
-							
 							<ul class="footer-widget__links">
 								<li>
 									<a href="#">About Us</a>
@@ -161,48 +155,38 @@
 								</li>
 							</ul><!-- /.footer-widget__links -->
 							<!-- /.footer-widget__text -->
-
-							
-							
 						</div><!-- /.footer-widget -->
 					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
 					<div class="col-lg-6 col-md-6 col-sm-12">
 						<div class="footer-widget footer-widget--contact">
 							<h3 class="footer-widget__title">Contact</h3><!-- /.footer-widget__title -->
-							
 							<p class="footer-widget__links">INDIA<br>
 								MSC Technology (India) pvt. Ltd<BR>
 								Kosmo One, Tower-B,
 								11th Floor, Plot No.14, III Main Road,<BR>
 								Ambattur Industrial Estate, Chennai,
 								TN, India <BR>Tel.: (+91) 44 7104 1700
-							
-						</p>
-								
-								<P class="footer-widget__links">
-									
-									ITALY <br>
-									MSC Technology (Italia),<BR>
-									Via Nizza, 262/Int.27,
-									10125 Torino, Italia<BR>
-									Tel.: (+39) 011 754 7200
-								</P>
-
-									<p class="footer-widget__links">SWITZERLAND<br>
-									MSC Technology (Switzerland)<BR>
-									Avenue Eugène-Pittard 16,
-									1206 Genève, Switzerland<BR>
-									Tel.: (+41) 22 703 88 88
-								
-									</P>
-							
-									<P class="footer-widget__links">USA<br>
-									MSC Technology (North America)<BR>
-									Corporate Headquarters<BR>
-									160 Mount Bethel Road Warren,
-									NJ 07059-5147<BR>
-									Tel.: +1 (908) 605-4100
-								</p>
+							</p>
+							<P class="footer-widget__links">
+								ITALY <br>
+								MSC Technology (Italia),<BR>
+								Via Nizza, 262/Int.27,
+								10125 Torino, Italia<BR>
+								Tel.: (+39) 011 754 7200
+							</P>
+							<p class="footer-widget__links">SWITZERLAND<br>
+								MSC Technology (Switzerland)<BR>
+								Avenue Eugène-Pittard 16,
+								1206 Genève, Switzerland<BR>
+								Tel.: (+41) 22 703 88 88
+							</P>
+							<P class="footer-widget__links">USA<br>
+								MSC Technology (North America)<BR>
+								Corporate Headquarters<BR>
+								160 Mount Bethel Road Warren,
+								NJ 07059-5147<BR>
+								Tel.: +1 (908) 605-4100
+							</p>
 							<!-- /.footer-widget__contact -->
 						</div><!-- /.footer-widget -->
 					</div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
@@ -216,8 +200,6 @@
 			</div><!-- /.container -->
 		</div><!-- /.footer-bottom -->
 	</div><!-- /.page-wrapper -->
-
-
 	<div class="mobile-nav__wrapper">
 		<div class="mobile-nav__overlay mobile-nav__toggler"></div>
 		<!-- /.mobile-nav__overlay -->
@@ -226,7 +208,6 @@
 				<span></span>
 				<span></span>
 			</a>
-
 			<div class="logo-box">
 				<a href="#" aria-label="logo image"><img src="{% static 'assets/images/logo-light.png' %}" width="98"
 						height="33" alt="MSC TECHNOLOGY"></a>
@@ -234,7 +215,6 @@
 			<!-- /.logo-box -->
 			<div class="mobile-nav__container"></div>
 			<!-- /.mobile-nav__container -->
-
 			<ul class="mobile-nav__contact list-unstyled">
 				<li>
 					<i class="fa fa-phone"></i>
@@ -247,23 +227,19 @@
 				<li>
 					<i class="fa fa-map-marker-alt"></i>
 					Kosmo One, Tower-B, 11th Floor, Plot No.14, III Main Road<br>
-Ambattur Industrial Estate, <br> Chennai, TN, India
+  					Ambattur Industrial Estate, <br> Chennai, TN, India
 				</li>
 			</ul><!-- /.mobile-nav__contact -->
 			<ul class="mobile-nav__social">
 				<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+				<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+				<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+				<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 			</ul><!-- /.mobile-nav__social -->
-
-
-
 		</div>
 		<!-- /.mobile-nav__content -->
 	</div>
 	<!-- /.mobile-nav__wrapper -->
-
 	<div class="search-popup">
 		<div class="search-popup__overlay search-toggler"></div>
 		<!-- /.search-popup__overlay -->
@@ -279,11 +255,9 @@ Ambattur Industrial Estate, <br> Chennai, TN, India
 		<!-- /.search-popup__content -->
 	</div>
 	<!-- /.search-popup -->
-
 	<a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
-
 	<!-- plugins js -->
-    {% compress js %}
+	{% compress js %}
 	<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'assets/vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 	<script src="{% static 'assets/vendors/jquery-validation/jquery.validate.min.js' %}"></script>
@@ -297,7 +271,7 @@ Ambattur Industrial Estate, <br> Chennai, TN, India
 	<script src="{% static 'assets/vendors/youtube-popup/youtube-popup.jquery.js' %}"></script>
 	<!-- template js -->
 	<script src="{% static 'assets/js/cretech.js' %}"></script>
-    {% endcompress %}
+	{% endcompress %}
     {% block javascript %}{% endblock javascript %}
 </body>
 </html>
