@@ -152,7 +152,7 @@ function menubar_btn_event(val){
     $('#btnJobs').removeClass("btn-outline-success").addClass("btn-success").attr('disabled',true);;
     $('#btnmscTechnology').attr('disabled',true);  
     $('#btnmscNewsroom').attr('disabled',true);  
-    ChattingData("I am looking for jobs.");    
+    ChattingData("I am looking for jobs");    
       
   }
 }
