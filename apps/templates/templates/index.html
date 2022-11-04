@@ -545,8 +545,14 @@ style="background-image: url({% static 'assets/images/shapes/team-home-bg-1-1.jp
 <section class="section-padding--bottom project-one gray-bg">
 	<div class="container">
 		<div class="section-title text-center">
-			<h2 class="section-title__title">Current Job Openings</h2>
-			<p class="text-end"><a href="{% url 'job:job_list' %}" class="thm-btn"><span>Explore all opportunities</span></a></p><!-- /.section-title__text -->
+			<div class="home_job">
+				<div>
+					<h2 class="section-title__title">Current Job Openings</h2>
+				</div>
+				<div>
+				<a href="{% url 'job:job_list' %}" class="thm-btn"><span>Explore all opportunities</span></a><!-- /.section-title__text -->
+				</div>
+			</div>
 			<!-- /.section-title__title -->
 		</div><!-- /.section-title -->
 		<div class="owl-carousel thm-owl__carousel project-one__carousel thm-owl__carousel--with-shadow"

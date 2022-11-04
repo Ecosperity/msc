@@ -63,6 +63,7 @@
 }
 .recommended-card{
   width: 350px;
+  margin: 0 auto;
 }
 @media (max-width: 1200px) {
   .recommended-card{
@@ -72,4 +73,16 @@
 .scroll-to-top {
   bottom: 22px;
   right: 62px;
+}
+.home_job{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media (max-width: 991px) {
+  .home_job{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
