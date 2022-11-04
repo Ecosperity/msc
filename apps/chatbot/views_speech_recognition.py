@@ -37,8 +37,8 @@ def BotConversation(request):
     q = request.POST.get('text')    
     # voice = recognize_speech().lower()
     if q=='':        
-        speak("Hi, My name is Mia. How can I help you ?") 
-        return JsonResponse("Hi, My name is Mia, How can I help you ?", safe=False)
+        speak("Hi, my name is Mia. How may I help you?") 
+        return JsonResponse("Hi, my name is Mia. How may I help you?", safe=False)
     else:        
         if "jobs" in q: 
             context = {                
