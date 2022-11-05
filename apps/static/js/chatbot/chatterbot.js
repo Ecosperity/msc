@@ -95,8 +95,9 @@ function ChattingData(text) {
     }else{
       $('.chat-body').append('<div class="chat-bubble you">' + data + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
       $('.chat-body').append(`<div class="form-group border border-2 text-center">                    
-      <input type="button" id="btnmscTechnology" onclick="menubar_btn_event('mscTechnology')" value="I would like to know about MSC Technology." class="btn btn-sm btn-outline-secondary my-1 rounded-pill">
-      <input type="button" id="btnmscNewsroom" onclick="menubar_btn_event('mscNewsroom')" value="I would like to know about MSC Newsroom." class="btn btn-sm btn-outline-info my-1 rounded-pill">
+      <input type="button" id="btnmscTechnology" onclick="menubar_btn_event('mscTechnology')" value="I would like to know about MSC Technology." class="btn btn-sm btn-outline-secondary my-1 rounded-pill text-wrap">
+      <input type="button" id="btnmscTechnologyIndia" onclick="menubar_btn_event('mscTechnologyIndia')" value="I would like to know news about MSC Technology India." class="btn btn-sm btn-outline-warning my-1 rounded-pill text-wrap">
+      <input type="button" id="btnmscTechnologyManagement" onclick="menubar_btn_event('mscTechnologyManagement')" value="I would like know more about the management." class="btn btn-sm btn-outline-info my-1 rounded-pill text-wrap">
       <input type="button" id="btnJobs" onclick="menubar_btn_event('jobs')" value="I am looking for jobs." class="btn btn-sm btn-outline-success my-1 rounded-pill">
                 </div>`).animate({scrollTop: $('.chat-body').prop("scrollHeight")}, 400);
     }
@@ -137,22 +138,32 @@ function skills_btn_event(val){
 
 function menubar_btn_event(val){
   if(val=='mscTechnology'){     
-      ChattingData("More About MSC Technology");     
+      ChattingData("I would like to know about MSC Technology.");     
       $('#btnmscTechnology').removeClass("btn-outline-secondary").addClass("btn-success").attr('disabled',true);;
       $('#btnJobs').attr('disabled',true);   
-      $('#btnmscNewsroom').attr('disabled',true);   
+      $('#btnmscTechnologyIndia').attr('disabled',true);   
+      $('#btnmscTechnologyManagement').attr('disabled',true);   
       }
-  if(val=='mscNewsroom'){     
-      ChattingData("More About MSC Newsroom");     
-      $('#btnmscNewsroom').removeClass("btn-outline-info").addClass("btn-info").attr('disabled',true);
+  if(val=='mscTechnologyIndia'){     
+      ChattingData("I would like to know news about MSC Technology India.");     
+      $('#btnmscTechnologyIndia').removeClass("btn-outline-info").addClass("btn-info").attr('disabled',true);
       $('#btnJobs').attr('disabled',true);   
       $('#btnmscTechnology').attr('disabled',true);   
+      $('#btnmscTechnologyManagement').attr('disabled',true); 
+      }
+  if(val=='mscTechnologyManagement'){     
+      ChattingData("I would like know more about the management.");     
+      $('#btnmscTechnologyManagement').removeClass("btn-outline-info").addClass("btn-info").attr('disabled',true);
+      $('#btnJobs').attr('disabled',true);   
+      $('#btnmscTechnology').attr('disabled',true);
+      $('#btnmscTechnologyIndia').attr('disabled',true);      
       }
   if(val=='jobs'){  
     $('#btnJobs').removeClass("btn-outline-success").addClass("btn-success").attr('disabled',true);;
     $('#btnmscTechnology').attr('disabled',true);  
-    $('#btnmscNewsroom').attr('disabled',true);  
-    ChattingData("I am looking for jobs");    
+    $('#btnmscTechnologyIndia').attr('disabled',true);  
+    $('#btnmscTechnologyManagement').attr('disabled',true);  
+    ChattingData("I am looking for jobs.");    
       
   }
 }
