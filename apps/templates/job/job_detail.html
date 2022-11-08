@@ -21,8 +21,32 @@
   font-size: 14px!important;
   font-weight: 100;
   line-height: 1.4;
-
 }
+td:nth-child(1) {
+    padding:0;
+    min-width: 150px;
+  }
+  td:nth-child(2) {
+    padding:0;
+    min-width: 350px;
+  }
+  @media (min-width: 768px) {
+  td:nth-child(1) {
+    padding:0;
+    min-width: 235px;
+  }
+}
+@media (max-width: 991px) {
+  .all_job{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+.all_job{
+    align-items: center;
+    width: auto;
+  }
 </style>
 {% endblock %}
 {% block content %}
@@ -46,106 +70,61 @@
         <div class="card-body">
           <h4 class="card-title job_detail_title">{{job.job_title}}</h4>
           <div class="job_descroption">{{job.job_description|safe}}{{job.media}}</div>
-          <div class="specification">
-            <div class="row">
-              <div class="col-sm-3">
-                Role
+            <div class="specification">
+              <div style="overflow-x:auto; padding-bottom: 20px;">
+                <table>
+                  <thead>
+                    <tr>
+                      <td>Role</td>
+                      <td>: {{job.role|title}}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Place</td>
+                      <td>: {{job.place}}</td>
+                    </tr>
+                    <tr>
+                      <td>Country</td>
+                      <td>: {{job.country}}</td>
+                    </tr>
+                    <tr>
+                      <td>Salary</td>
+                      <td>: {{job.salary}}</td>
+                    </tr>
+                    <tr>
+                      <td>Required skills</td>
+                      <td> : {% for skill in job.skill_set.all %}<div class="badge bg-primary rounded-pill me-2">{{skill.name}}</div>{% endfor %}</td>
+                    </tr>
+                    <tr>
+                      <td>Experience required</td>
+                      <td>: {{job.experience}}</td>
+                    </tr>
+                    <tr>
+                      <td>Industry</td>
+                      <td>: {{job.industry}}</td>
+                    </tr>
+                    <tr>
+                      <td>Functional area</td>
+                      <td>: {{job.functional_area}}</td>
+                    </tr>
+                    <tr>
+                      <td>Published at</td>
+                      <td>: {{job.published_at}}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="col-sm-9">
-               : {{job.role|title}}
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Place
-              </div>
-              <div class="col-sm-9">
-                : {{job.place}}
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Country
-              </div>
-              <div class="col-sm-9">
-                : {{job.country}}
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Employement type
-              </div>
-              <div class="col-sm-9">
-                : {{job.employement_type}}
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Salary
-              </div>
-              <div class="col-sm-9">
-                : {{job.salary}}
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Required skills
-              </div>
-              <div class="col-sm-9">
-                : {% for skill in job.skill_set.all %}<div class="badge bg-primary rounded-pill me-2">{{skill.name}}</div>{% endfor %}
+              <div class="all_job">
+                <a href="{% url 'job:job_list' %}" class="thm-btn float-end mt-2"><span>All jobs</span></a>
               </div>
             </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Experience required
-              </div>
-              <div class="col-sm-9">
-                : {{job.experience}}
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-sm-3">
-                Industry
-              </div>
-              <div class="col-sm-9">
-                : {{job.industry}} 
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Functional area
-              </div>
-              <div class="col-sm-9">
-                : {{job.functional_area}}
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-3">
-                Published at
-              </div>
-              <div class="col-sm-5">
-                : {{job.published_at|naturaltime}}
-              </div>
-              <div class="col-sm-4">
-                <a href="{% url 'job:job_list' %}" class="thm-btn float-end"><span>All jobs</span></a>
-              </div>
-            </div>
-          </div>
         </div>
         <button type="submit" class="thm-btn w-100"data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob"><span>Apply Now</span></button>
         <!-- <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseApplyJob" role="button" aria-expanded="false" aria-controls="collapseApplyJob">Apply Now </a> -->
       </div>
-      
-      <div class="row">
+    </div>
+    <div class="row">
         <div class="col">
           <div class="collapse multi-collapse" id="collapseApplyJob">
             <div class="card">
@@ -191,6 +170,7 @@
                           <label for="id_resume" class="form-label">Upload your resume (pdf format)</label><br>
                           {{applicant_form.resume}}
                       </div>
+                      
                       <button type="submit" class="thm-btn w-100"{% if check_applied_condition %}disabled{% endif %}><span>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</span></button>
                       <!-- <button type="submit"class="btn btn-primary w-100" {% if check_applied_condition %}disabled{% endif %}>{% if  check_applied_condition %}You have already applied for this job{% else %}Apply{% endif %}</button> -->
                   </form>
@@ -198,9 +178,8 @@
           </div>
           </div>
         </div>
-      </div>
-    </div>
   </div>
+</div>
 </div>
 {% if similar_jobs %}
 <section class="service-four gray-bg section-padding-xl--bottom section-has-bottom-margin background-repeat-no background-position-top-right section-padding--top">

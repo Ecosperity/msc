@@ -22,8 +22,3 @@ django-extensions==3.2.0  # https://github.com/django-extensions/django-extensio
 django-coverage-plugin==2.0.3  # https://github.com/nedbat/django_coverage_plugin
 pytest-django==4.5.2  # https://github.com/pytest-dev/pytest-django
 
-django-import-export==2.8.0  # https://github.com/django-import-export/django-import-export/
-
-##My local
-pip install pyttsx3
-pip install nltk

@@ -53,13 +53,6 @@ INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 # https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
 INSTALLED_APPS += ["django_extensions"]  # noqa F405
 
-# https://django-import-export.readthedocs.io/en/stable/installation.html
-INSTALLED_APPS += ["import_export"]  # noqa F405
-
-
-
-
-
 # Sentry
 # ------------------------------------------------------------------------------
 import sentry_sdk
