@@ -82,15 +82,6 @@
 							</ul>
 						</li>
 						<li><a href="#">Contact</a></li>
-						{% if not request.user.is_authenticated %}
-						<li><a href="{% url 'account_login' %}">Login</a></li>
-						<li><a href="{% url 'account_signup' %}">Register</a></li>
-						{% else %}
-						<li><a href="{% url 'account_logout' %}">Logout</a></li>
-						{% endif %}
-						{% if request.user.role == 0 or request.user.role == 1%}
-						<li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
-						{% endif %}
 					</ul><!-- /.main-menu__list -->
 					<div class="main-menu__right">
 						<a href="#" class="mobile-nav__toggler">

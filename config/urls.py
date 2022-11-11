@@ -7,23 +7,6 @@ from django.views.generic import TemplateView
         
 urlpatterns = [
     path("", include("apps.job.urls", namespace="job")),
-    path('tinymce/', include('tinymce.urls')),
-    path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
-    path("who-we-are/", TemplateView.as_view(template_name="templates/about.html"), name="who_we_are"),
-    path("group-profile/", TemplateView.as_view(template_name="templates/team.html"), name="group_profile"),
-    path("our-values/", TemplateView.as_view(template_name="templates/team.html"), name="our_values"),
-    path("top-management/", TemplateView.as_view(template_name="templates/team.html"), name="top_management"),
-    path("corporate-culture/", TemplateView.as_view(template_name="templates/team.html"), name="corporate_culture"),
-    path("certification/", TemplateView.as_view(template_name="templates/team.html"), name="certification"),
-    path("contact-us/", TemplateView.as_view(template_name="templates/contact.html"), name="contact_us"),
-    path("current-opening/", TemplateView.as_view(template_name="templates/services-1.html"), name="current_opening"),
-    path("latest-insite/", TemplateView.as_view(template_name="templates/projects.html"), name="latest_insite"),
-    path("media-coverage/", TemplateView.as_view(template_name="templates/project-details.html"), name="media_coverage"),
-    path('hitcount/', include('hitcount.urls', namespace='hitcount')),
-    path(settings.ADMIN_URL, admin.site.urls),
-    path("users/", include("apps.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
-    path("dashboard/", include("apps.dashboard.urls", namespace="dashboard")),
     path("chatbot/", include("apps.chatbot.urls", namespace="chatbot")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -102,7 +102,7 @@ COMPRESS_FILTERS = {
 # https://docs.sentry.io/clients/python/integrations/django/
 INSTALLED_APPS += ['raven.contrib.django.raven_compat']  # noqa F405
 MIDDLEWARE = [
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware'] + MIDDLEWARE  # noqa F405
+    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware', 'common.middleware.AjaxMiddleware', ] + MIDDLEWARE  # noqa F405
 
 RAVEN_CONFIG = {
     'dsn': config("SENTRY_DSN"),

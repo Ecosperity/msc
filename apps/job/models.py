@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
-from .utils import generate_unique_slug
 from django.urls import reverse
 from job.managers import JobApplicantManager, JobManager
 from tinymce.models import HTMLField

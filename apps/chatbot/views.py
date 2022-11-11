@@ -30,7 +30,7 @@ def speak(text):
         pass
 
 def BotConversation(request):
-    if request.is_ajax:  
+    # if request.is_ajax:  
         q = request.GET.get('text')
         if q=='':
             speak("Hi, my name is Mia. How may I help you?")        

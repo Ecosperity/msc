@@ -35,9 +35,9 @@ USE_TZ = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_NAME', default='newton'),
-        'USER': config('DATABASE_USER', default='admin'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
+        'NAME': 'newton',
+        'USER': 'root',
+        'PASSWORD': 'mypass',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
