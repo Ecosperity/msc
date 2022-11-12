@@ -34,14 +34,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'newton',
-        'USER': 'root',
-        'PASSWORD': 'mypass',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'msc-db',
+        'USER': 'msc-db',
+        'PASSWORD': 'AVNS_mHPRGL2xlnPN_awrEWD',
+        'HOST': 'app-cf134713-fbbb-4cfc-b047-b411a2be558d-do-user-12301848-0.b.db.ondigitalocean.com',
+        'PORT': '25060',
         'OPTIONS': {
-            'sql_mode': 'traditional',
+            'sql_mode': 'require',
         }
     }
 }
