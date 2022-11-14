@@ -40,9 +40,9 @@ DATABASES = {
         'PASSWORD': 'AVNS_mHPRGL2xlnPN_awrEWD',
         'HOST': 'app-cf134713-fbbb-4cfc-b047-b411a2be558d-do-user-12301848-0.b.db.ondigitalocean.com',
         'PORT': '25060',
-        'OPTIONS': {
-            'sql_mode': 'require',
-        }
+        # 'OPTIONS': {
+        #     'sql_mode': 'require',
+        # }
     }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
