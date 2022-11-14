@@ -6,7 +6,7 @@ from datetime import date, timedelta
 
 class JobQuerySet(models.QuerySet):
 
-    def search(self, query, queryset, start_response):
+    def search(self, query, queryset):
         if isinstance(query, list):
             query = (Q(reduce(operator.or_, (Q(place__icontains=option) for option in query))) | \
                      Q(reduce(operator.or_, (Q(country__icontains=option) for option in query)))) & \
@@ -21,37 +21,25 @@ class JobQuerySet(models.QuerySet):
                                     Q(country__icontains=query)|
                                     Q(place__icontains=query)
                                     )
-        status = '200 OK'
-        response_headers = [('Content-type', 'text/plain')]
-        start_response(status, response_headers)
         return queryset
     
-    def all_job_lists(self, query, sorting_value, start_response):
+    def all_job_lists(self, query, sorting_value):
         queryset = self.all().order_by("-id")
         if sorting_value is not None:
             queryset=queryset.order_by(sorting_value)
-        status = '200 OK'
-        response_headers = [('Content-type', 'text/plain')]
-        start_response(status, response_headers)
         if query is None:
             return queryset
         else:
             return self.search(query, queryset)
         
-    def published_job_lists(self, query=None, start_response):
+    def published_job_lists(self, query=None):
         queryset = self.filter(publish=True).order_by("-id")
-        status = '200 OK'
-        response_headers = [('Content-type', 'text/plain')]
-        start_response(status, response_headers)
         if query is None:
             return queryset
         else:
             return self.search(query, queryset)
 
-    def unpublished_job_lists(self, start_response):
-        status = '200 OK'
-        response_headers = [('Content-type', 'text/plain')]
-        start_response(status, response_headers)
+    def unpublished_job_lists(self):
         return self.filter(publish=False)
 
     def job_detail(self, slug):
