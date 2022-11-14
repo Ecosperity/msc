@@ -29,7 +29,7 @@ def speak(text):
     except Exception as e:
         pass
 
-def BotConversation(request):
+def BotConversation(request, start_response):
     # if request.is_ajax:  
         q = request.GET.get('text')
         if q=='':
@@ -127,6 +127,10 @@ def BotConversation(request):
                 'q':"Thank you!!"            
                 }
                 return JsonResponse(context, safe=False)
-            q = "Not find it please select below"    
+            q = "Not find it please select below"
+
+            status = '200 OK'
+            response_headers = [('Content-type', 'text/plain')]
+            start_response(status, response_headers)    
             return JsonResponse(q, safe=False)
             

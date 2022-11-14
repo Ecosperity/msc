@@ -8,7 +8,7 @@ from django.http import JsonResponse
 
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
-def recognize_speech():
+def recognize_speech(start_response):
     with microphone as source:
         audio = recognizer.listen(source, phrase_time_limit=5)
     response = ""
@@ -17,6 +17,9 @@ def recognize_speech():
         response = recognizer.recognize_google(audio)
     except:
         response = "Error"
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)
     return response
 # time.sleep(3)
 
@@ -33,7 +36,7 @@ def speak(text):
     # engine.stop()
     
 
-def BotConversation(request): 
+def BotConversation(request, start_response): 
     q = request.POST.get('text')    
     # voice = recognize_speech().lower()
     if q=='':        
@@ -46,12 +49,21 @@ def BotConversation(request):
                 'q':"Which Location"
                 }
             speak("Which Location")
-            return JsonResponse(context, safe=False)      
+            return JsonResponse(context, safe=False)
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)      
     return JsonResponse(q, safe=False)
 
 
-def jobssearch(request):  
+def jobssearch(request, start_response):
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)
     return render(request, 'chatbot/jobsearch.html')
 
-def msc_technology(request):  
+def msc_technology(request, start_response):
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)  
     return render(request, 'chatbot/msc_technology.html')
