@@ -6,6 +6,7 @@ import pygame
 import webbrowser
 from django.http import JsonResponse
 from dashboard.models import SkillSet
+import urllib.request
 
 location = 'india'
 
@@ -39,7 +40,8 @@ def BotConversation(request):
             speak("You said " + q)
             if "msc technology india" in q.lower():                
                 speak("please wait...")
-                os.system("xdg-open \"\" https://www.msc.com/en/local-information")
+                # os.system("xdg-open \"\" https://www.msc.com/en/local-information")
+                webUrl = urllib.request.urlopen('https://www.msc.com/en/local-information')  
                 # webbrowser.open("https://www.msc.com/en/local-information")   
                 q =  "Opened MSC Technology India Page <br> Anything else?"
                 speak('Opened MSC Technology India Page')
