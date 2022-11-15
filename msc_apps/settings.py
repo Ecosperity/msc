@@ -122,24 +122,24 @@ WSGI_APPLICATION = 'msc_apps.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'msc-db',
-        'USER': 'msc-db',
-        'PASSWORD': 'AVNS_qGlq-cbApLSsBX9AJm3',
-        'HOST': 'app-7a518e31-3ad0-42e5-aaf1-cb51919a8cf9-do-user-12301848-0.b.db.ondigitalocean.com',
-        'PORT': '25060',
-        'SSLMODE': 'require'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'msc-db',
+#         'USER': 'msc-db',
+#         'PASSWORD': 'AVNS_qGlq-cbApLSsBX9AJm3',
+#         'HOST': 'app-7a518e31-3ad0-42e5-aaf1-cb51919a8cf9-do-user-12301848-0.b.db.ondigitalocean.com',
+#         'PORT': '25060',
+#         'SSLMODE': 'require'
+#     }
+# }
 
 
 # Password validation

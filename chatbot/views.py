@@ -1,12 +1,11 @@
 from django.shortcuts import render
-import time
+import time, os
 from gtts import gTTS
 from io import BytesIO
 import pygame
 import webbrowser
 from django.http import JsonResponse
 from dashboard.models import SkillSet
-
 
 location = 'india'
 
@@ -39,8 +38,9 @@ def BotConversation(request):
             all_skills = SkillSet.objects.all().order_by('name')[:10]
             speak("You said " + q)
             if "msc technology india" in q.lower():                
-                speak("please wait...")  
-                webbrowser.open("https://www.msc.com/en/local-information")   
+                speak("please wait...")
+                os.system("start \"\" https://www.msc.com/en/local-information")
+                # webbrowser.open("https://www.msc.com/en/local-information")   
                 q =  "Opened MSC Technology India Page <br> Anything else?"
                 speak('Opened MSC Technology India Page')
                 return JsonResponse(q, safe=False)
