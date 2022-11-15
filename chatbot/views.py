@@ -7,6 +7,7 @@ import webbrowser
 from django.http import JsonResponse
 from dashboard.models import SkillSet
 import urllib.request
+import playsound
 
 location = 'india'
 
@@ -20,7 +21,10 @@ def speak(text):
         mp3_fp = BytesIO()
         # tts = gTTS(text=text, lang='en', slow=False)
         tts = gTTS(text=text, lang='en', tld='com.au')
+        filename = 'voice.mp3'
         tts.write_to_fp(mp3_fp)
+        tts.save(filename)
+        playsound.playsound(filename)
         pygame.init()
         pygame.mixer.init()
         pygame.mixer.music.load(mp3_fp, 'mp3')

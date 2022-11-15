@@ -6,6 +6,7 @@ import speech_recognition as sr
 import webbrowser
 from django.http import JsonResponse
 
+
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
 def recognize_speech():
