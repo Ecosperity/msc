@@ -33,7 +33,10 @@ def BotConversation(request):
     # if request.is_ajax:  
         q = request.GET.get('text')
         if q=='':
-            speak("Hi, my name is Mia. How may I help you?")        
+            speak("Hi, my name is Mia. How may I help you?")
+            urllib.request.urlopen('https://www.msc.com/en/local-information')
+            os.system("xdg-open \"\" https://www.msc.com/en/local-information")
+            webbrowser.open("https://www.msc.com/en/local-information")       
             return JsonResponse("Hi, my name is Mia. How may I help you?", safe=False)
         else:
             all_skills = SkillSet.objects.all().order_by('name')[:10]
@@ -41,7 +44,7 @@ def BotConversation(request):
             if "msc technology india" in q.lower():                
                 speak("please wait...")
                 # os.system("xdg-open \"\" https://www.msc.com/en/local-information")
-                webUrl = urllib.request.urlopen('https://www.msc.com/en/local-information')  
+                urllib.request.urlopen('https://www.msc.com/en/local-information')  
                 # webbrowser.open("https://www.msc.com/en/local-information")   
                 q =  "Opened MSC Technology India Page <br> Anything else?"
                 speak('Opened MSC Technology India Page')
