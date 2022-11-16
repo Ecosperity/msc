@@ -104,7 +104,7 @@ function ChattingData(text) {
     $('#txtmessage').removeAttr('disabled');
     $('#txtmessage').focus();
     $(".divTyping").remove();
-    Speak("I am listening you")
+    // Speak("I am listening you")
     recognition.start();
     mic.style.background= '#eed484';
     mic.style.borderRadius= '50%';

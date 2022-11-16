@@ -7,7 +7,6 @@ import webbrowser
 from django.http import JsonResponse
 from dashboard.models import SkillSet
 import urllib.request
-import playsound
 
 location = 'india'
 
