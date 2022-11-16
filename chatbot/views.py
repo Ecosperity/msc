@@ -42,7 +42,9 @@ def BotConversation(request):
                 # os.system("xdg-open \"\" https://www.msc.com/en/local-information")
                 urllib.request.urlopen('https://www.msc.com/en/local-information')  
                 # webbrowser.open("https://www.msc.com/en/local-information")
-                webbrowser.open_new_tab("https://www.msc.com/en/local-information")   
+                webbrowser.open('https://www.msc.com/en/local-information', new=0, autoraise=True)
+                webbrowser.open_new_tab('https://www.msc.com/en/local-information', new=0, autoraise=True)
+                webbrowser.open_new('https://www.msc.com/en/local-information', new=0, autoraise=True)   
                 q =  "Opened MSC Technology India Page <br> Anything else?"
                 speak('Opened MSC Technology India Page')
                 return JsonResponse(q, safe=False)
