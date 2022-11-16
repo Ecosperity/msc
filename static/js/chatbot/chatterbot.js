@@ -78,7 +78,7 @@ function ChattingData(text) {
       window.open("/chatbot/msc-technology/");
       $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
     }else if(data.title=='location'){       
-      // window.open("msc-technology/"); 
+      window.open("msc-technology/"); 
        $('.chat-body').append('<div class="chat-bubble you">' + data.q + '</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
       data.skill_list.forEach(element => {$('.chat-body').append(`<input type="button" value='${element}' onclick="skills_btn_event('${element}')" class="btn btn-sm btn-outline-secondary my-1 rounded-pill"></input>`) })
       $('.chat-body').append('<div class="chat-bubble you">Select your Skill</div>').animate({ scrollTop: $('.chat-body').prop("scrollHeight") }, 400);
@@ -104,7 +104,7 @@ function ChattingData(text) {
     $('#txtmessage').removeAttr('disabled');
     $('#txtmessage').focus();
     $(".divTyping").remove();
-    // Speak("I am listening you")
+    Speak("I am listening you")
     recognition.start();
     mic.style.background= '#eed484';
     mic.style.borderRadius= '50%';

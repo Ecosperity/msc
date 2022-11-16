@@ -23,7 +23,7 @@ def speak(text):
         pygame.init()
         pygame.mixer.init()
         pygame.mixer.music.load(mp3_fp, 'mp3')
-        pygame.mixer.music.play()    
+        pygame.mixer.music.play()
         # time.sleep(4)
     except Exception as e:
         pass
@@ -43,8 +43,8 @@ def BotConversation(request):
                 urllib.request.urlopen('https://www.msc.com/en/local-information')  
                 # webbrowser.open("https://www.msc.com/en/local-information")
                 webbrowser.open('https://www.msc.com/en/local-information', new=0, autoraise=True)
-                webbrowser.open_new_tab('https://www.msc.com/en/local-information', new=0, autoraise=True)
-                webbrowser.open_new('https://www.msc.com/en/local-information', new=0, autoraise=True)   
+                webbrowser.open_new_tab('https://www.msc.com/en/local-information', new=1, autoraise=True)
+                webbrowser.open_new('https://www.msc.com/en/local-information', new=3, autoraise=True)   
                 q =  "Opened MSC Technology India Page <br> Anything else?"
                 speak('Opened MSC Technology India Page')
                 return JsonResponse(q, safe=False)
