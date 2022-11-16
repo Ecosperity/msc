@@ -19,17 +19,12 @@ def jobssearch(request):
 def speak(text):
     try:            
         mp3_fp = BytesIO()
-        # tts = gTTS(text=text, lang='en', slow=False)
         tts = gTTS(text=text, lang='en', tld='com.au')
-        filename = 'voice.mp3'
-        tts.write_to_fp(mp3_fp)
-        tts.save(filename)
-        playsound.playsound(filename)
         pygame.init()
         pygame.mixer.init()
         pygame.mixer.music.load(mp3_fp, 'mp3')
         pygame.mixer.music.play()    
-        time.sleep(4)
+        # time.sleep(4)
     except Exception as e:
         pass
 
@@ -38,9 +33,6 @@ def BotConversation(request):
         q = request.GET.get('text')
         if q=='':
             speak("Hi, my name is Mia. How may I help you?")
-            urllib.request.urlopen('https://www.msc.com/en/local-information')
-            os.system("xdg-open \"\" https://www.msc.com/en/local-information")
-            webbrowser.open("https://www.msc.com/en/local-information")       
             return JsonResponse("Hi, my name is Mia. How may I help you?", safe=False)
         else:
             all_skills = SkillSet.objects.all().order_by('name')[:10]
@@ -49,7 +41,8 @@ def BotConversation(request):
                 speak("please wait...")
                 # os.system("xdg-open \"\" https://www.msc.com/en/local-information")
                 urllib.request.urlopen('https://www.msc.com/en/local-information')  
-                # webbrowser.open("https://www.msc.com/en/local-information")   
+                # webbrowser.open("https://www.msc.com/en/local-information")
+                webbrowser.open_new_tab("https://www.msc.com/en/local-information")   
                 q =  "Opened MSC Technology India Page <br> Anything else?"
                 speak('Opened MSC Technology India Page')
                 return JsonResponse(q, safe=False)
