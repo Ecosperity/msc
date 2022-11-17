@@ -1,3 +1,6 @@
+let voices = getVoices();
+let rate = 1, pitch = 2, volume = 1;
+
 $(document).ready(function () {
   let d = new Date();
   let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -104,26 +107,43 @@ function ChattingData(text) {
     $('#txtmessage').removeAttr('disabled');
     $('#txtmessage').focus();
     $(".divTyping").remove();
-    // Speak("I am listening you")
+    speak("I am listening you",  voices[5], rate, pitch, volume)
+    setTimeout(()=>{ // speak after 2 seconds 
+      rate = 0.5; pitch = 1.5, volume = 0.5;
+      text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
+      speak(text, voices[10], rate, pitch, volume );
+    }, 2000);
     recognition.start();
     mic.style.background= '#eed484';
     mic.style.borderRadius= '50%';
   });
 }
 
-function Speak(text) {
-  $('.chat-body').append(`<div class="divTyping chat-bubble you" id="divTyping"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;display: block;shape-rendering: auto;width: 43px;height: 20px;" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-                <circle cx="0" cy="44.1678" r="15" fill="#ffffff">
-                    <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.6s"></animate>
-                </circle> <circle cx="45" cy="43.0965" r="15" fill="#ffffff">
-                <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.39999999999999997s"></animate>
-            </circle> <circle cx="90" cy="52.0442" r="15" fill="#ffffff">
-                <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.19999999999999998s"></animate>
-            </circle></svg></div>`);
+function speak(text, voice, rate, pitch, volume) {
+  // create a SpeechSynthesisUtterance to configure the how text to be spoken 
+  let speakData = new SpeechSynthesisUtterance();
+  speakData.volume = volume; // From 0 to 1
+  speakData.rate = rate; // From 0.1 to 10
+  speakData.pitch = pitch; // From 0 to 2
+  speakData.text = text;
+  speakData.lang = 'en';
+  speakData.voice = voice;
+  
+  // pass the SpeechSynthesisUtterance to speechSynthesis.speak to start speaking 
+  speechSynthesis.speak(speakData);
 
-    recognition.start();
-    mic.style.background= '#eed484';
-    mic.style.borderRadius= '50%';
+}
+
+function getVoices() {
+  let voices = speechSynthesis.getVoices();
+  if(!voices.length){
+    // some time the voice will not be initialized so we can call spaek with empty string
+    // this will initialize the voices 
+    let utterance = new SpeechSynthesisUtterance("");
+    speechSynthesis.speak(utterance);
+    voices = speechSynthesis.getVoices();
+  }
+  return voices;
 }
 
 function location_btn_event(val){
