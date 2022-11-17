@@ -107,12 +107,23 @@ function ChattingData(text) {
     $('#txtmessage').removeAttr('disabled');
     $('#txtmessage').focus();
     $(".divTyping").remove();
-    speak("I am listening you",  voices[5], rate, pitch, volume)
-    setTimeout(()=>{ // speak after 2 seconds 
-      rate = 0.5; pitch = 1.5, volume = 0.5;
-      text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
-      speak(text, voices[10], rate, pitch, volume );
-    }, 2000);
+    // speak("I am listening you",  voices[5], rate, pitch, volume)
+    if ('speechSynthesis' in window) {
+
+      let voices = getVoices();
+      let rate = 1, pitch = 2, volume = 1;
+      let text = "Spaecking with volume = 1 rate =1 pitch =2 ";
+    
+      speak(text, voices[5], rate, pitch, volume);
+    
+      setTimeout(()=>{ // speak after 2 seconds 
+        rate = 0.5; pitch = 1.5, volume = 0.5;
+        text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
+        speak(text, voices[10], rate, pitch, volume );
+      }, 2000);
+    }else{
+      console.log(' Speech Synthesis Not Supported 😞'); 
+    }
     recognition.start();
     mic.style.background= '#eed484';
     mic.style.borderRadius= '50%';
